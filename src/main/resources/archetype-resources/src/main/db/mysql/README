@@ -1,0 +1,199 @@
+
+ :: Instruction for the use of MySQL with jAPS2 ::
+
+
+Last update Friday, March 19 2010
+
+
+This instructions apply to jAPS2 Framework with MySQL database version 5.0
+
+1) Install MySQL database server version 5.0
+
+2) Install MySQL Query Browser
+
+3) Using MySQL Query Browser, restore the db jAPS2Port and jAPS2Serv through 
+the script into folder /db/msql 
+
+4) Insert into folder "/toolslib" the last release of mysql-connector jar
+
+5) Insert the mysql-connector jar into the classpath
+
+6) Insert into folder "<TOMCAT_HOME>/lib" the same release of mysql-connector jar
+
+7) into file /META-INF/context.xml, substitute the definition of the jndi resources 
+of the portDataSource and the servDataSource with the following:
+
+-------------
+	<Resource name="jdbc/portDataSource" auth="Container"
+		type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver"
+		maxActive="8" maxIdle="4"
+		username="agile" password="agile"
+		url="jdbc:mysql://localhost:3306/jAPS2Port" />
+	
+	<Resource name="jdbc/servDataSource" auth="Container"
+		type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver"
+		maxActive="8" maxIdle="4"
+		username="agile" password="agile"
+		url="jdbc:mysql://localhost:3306/jAPS2Serv" />
+------------
+
+#######################################################################
+
+If you want to test jAPS2 with MySQL db, you have also to:
+
+1) Using MySQL Query Browser restore the db jAPS2testPort and jAPS2testServ through
+ the script into folder /db/msql/test
+
+2) in the file "/admin/test/contextTestParams.properties" substitute the jdbc parameters 
+of the portDataSource and the servDataSource definitions with the following:
+
+-----------
+jdbc.portDb.beanName=portDataSource
+jdbc.portDb.driverClassName=com.mysql.jdbc.Driver
+jdbc.portDb.url=jdbc:mysql://localhost:3306/jAPS2testPort
+jdbc.portDb.username=agile
+jdbc.portDb.password=agile
+
+jdbc.servDb.beanName=servDataSource
+jdbc.servDb.driverClassName=com.mysql.jdbc.Driver
+jdbc.servDb.url=jdbc:mysql://localhost:3306/jAPS2testServ
+jdbc.servDb.username=agile
+jdbc.servDb.password=agile
+-----------
+
+Now you can execute the junit test as usual.
+
+#######################################################################
+
+You can update the ANT scripts whit the following instructions, for simplify the managing
+of the jAPS databases on MySQL rdbms:
+
+add to the file buildProperties.xml the following rows 
+
+	<property name="mysql.hostname" value="localhost" />
+	<property name="mysql.port" value="3306" />
+	<property name="mysql.username" value="agile" />
+	<property name="mysql.password" value="agile" />
+		
+	<property name="mysql.bin.path" location="/usr/bin" />
+	<property name="mysql.bin.dump" value="mysqldump" />
+	<property name="mysql.bin" value="mysql" />
+
+
+add to the file buildTasks.xml the following targets: 
+
+	<!-- MySQL :: Start -->
+	<target name="MySQL db backup" description="MySQL db backup">
+		<echo message="Dumping ${webappname}${test.marker}Port" />
+		<exec executable="${mysql.bin.path}/${mysql.bin.dump}">
+			<arg line=" -hlocalhost"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>	
+			<arg line=" -p${mysql.password}"/>
+			<arg line="--database" />
+			<arg line=' "${webappname}${test.marker}Port" '/>
+			<arg line="-r"/>
+			<arg path="${basedir}/db/mysql/${test.marker}/${webappname}${test.marker}Port.sql" />
+		</exec>
+		<echo message="Dumping ${webappname}${test.marker}Serv" />
+		<exec executable="${mysql.bin.path}/${mysql.bin.dump}">
+			<arg line=" -hlocalhost"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>	
+			<arg line=" -p${mysql.password}"/>
+			<arg line="--database" />
+			<arg line=' "${webappname}${test.marker}Serv" '/>
+			<arg line="-r"/>
+			<arg path="${basedir}/db/mysql/${test.marker}/${webappname}${test.marker}Serv.sql" />
+		</exec>
+	</target>
+			
+	<target name="MySQL db restore" description="MySQL db restore" depends="MySQL db create">
+		<echo message="Restoring ${webappname}${test.marker}Port" />
+		<exec executable="${mysql.bin.path}/${mysql.bin}" >		
+			<arg line=" -hlocalhost"/>
+			<arg line=" -P${mysql.port}"/>			
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "source ${basedir}/db/mysql/${test.marker}/${webappname}${test.marker}Port.sql" '/>				
+		</exec>
+		<echo message="Restoring ${webappname}${test.marker}Serv" />
+		<exec executable="${mysql.bin.path}/${mysql.bin}" >		
+			<arg line=" -hlocalhost"/>
+			<arg line=" -P${mysql.port}"/>			
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "source ${basedir}/db/mysql/${test.marker}/${webappname}${test.marker}Serv.sql" '/>				
+		</exec>
+	</target>
+
+	<target name="MySQL db create">
+		<echo message="Creating ${webappname}${test.marker}Serv" />
+		<exec executable="${mysql.bin.path}/${mysql.bin}">
+			<arg line=" -hlocalhost"/>
+			<arg line=" -P${mysql.port}"/>			
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>	
+			<arg line=' "create database ${webappname}${test.marker}Serv;" '/>	
+		</exec>
+		<echo message="Creating ${webappname}${test.marker}Port" />
+		<exec executable="${mysql.bin.path}/${mysql.bin}">
+			<arg line=" -hlocalhost"/>
+			<arg line=" -P${mysql.port}"/>			
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>	
+			<arg line=' "create database ${webappname}${test.marker}Port;" '/>	
+		</exec>
+	</target>
+	
+	<target name="MySQL db drop">
+			<echo message="Dropping ${webappname}${test.marker}Serv" />
+			<exec executable="${mysql.bin.path}/${mysql.bin}">
+				<arg line=" -hlocalhost"/>
+				<arg line=" -P${mysql.port}"/>			
+				<arg line=" -u${mysql.username}"/>
+				<arg line=" -p${mysql.password}"/>
+				<arg line=" -e"/>	
+				<arg line=' "drop database ${webappname}${test.marker}Serv;" '/>	
+			</exec>
+			<echo message="Dropping ${webappname}${test.marker}Port" />
+			<exec executable="${mysql.bin.path}/${mysql.bin}">
+				<arg line=" -hlocalhost"/>
+				<arg line=" -P${mysql.port}"/>			
+				<arg line=" -u${mysql.username}"/>
+				<arg line=" -p${mysql.password}"/>
+				<arg line=" -e"/>	
+				<arg line=' "drop database ${webappname}${test.marker}Port;" '/>	
+			</exec>
+	</target>
+
+	<target name="MySQL db full update" description="MySQL db update " depends="MySQL db drop, MySQL db restore">
+		<echo message="Databases full update [done]" />
+	</target>
+	
+	<target name="MySQL - Test - init" depends="Test - clean, compile" description="initializes the test environment">
+		<mkdir dir="${test.path}" />
+		<mkdir dir="${test-results.path}" />
+		<antcall target="MySQL db full update">
+			<param name="test.marker" value="test" />		
+		</antcall>
+	</target>
+		
+	<target name="MySQL - Test - db backup" description="Test - MySQL db backup for test">
+		<antcall target="MySQL db backup">
+			<param name="test.marker" value="test" />	
+		</antcall>		
+	</target>
+	
+	<!-- MySQL :: End -->
+
+#######################################################################
+
+
+Have a Good Luck!!!
+
+The jAPS2 Team
