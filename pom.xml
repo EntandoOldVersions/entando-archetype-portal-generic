@@ -2,12 +2,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>	
 	<groupId>org.entando.entando</groupId>
 	<artifactId>entando-archetype-portal-generic</artifactId>
 	<version>2.4.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>Entando: Archetype for Generic Portal</name>
 	<description>Generic Portal Archetype for Entando: an agile, modern and user-centric open source Portal platform.</description>
+	<url>http://www.entando.com/</url>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License, version 2.1</name>
+			<url>http://www.gnu.org/licenses/lgpl-2.1.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git://github.com/entando/entando-archetype-portal-generic.git</connection>
+		<developerConnection>scm:git:git@github.com:entando/entando-archetype-portal-generic.git</developerConnection>
+		<url>https://github.com/entando/entando-archetype-portal-generic</url>
+	</scm>	
+	<developers>
+		<developer>
+			<id>e.santoboni</id>
+			<name>Eugenio Santoboni</name>
+			<email>e.santoboni@agiletec.it</email>
+		</developer>
+		<developer>
+			<id>w.ghelfi</id>
+			<name>William Ghelfi</name>
+			<email>w.ghelfi@tzente.it</email>		
+		</developer>
+	</developers>
+	<organization>
+		<name>Tzente S.r.l.</name>
+		<url>http://www.tzente.com/</url>
+	</organization>	
+	<!--
 	<distributionManagement>
 		<snapshotRepository>
 			<id>entando-snapshots</id>
@@ -18,6 +53,7 @@
 			<url>dav:http://localhost/nexus/content/repositories/entando-releases</url>
 		</repository>
 	</distributionManagement>
+	-->
 	<build>
 		<extensions>
 			<extension>
