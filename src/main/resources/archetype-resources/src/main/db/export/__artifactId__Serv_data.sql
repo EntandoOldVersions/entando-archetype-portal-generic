@@ -54,15 +54,6 @@ INSERT INTO authpermissions (permissionname, descr) VALUES ('editContents', 'Con
 
 
 --
--- TOC entry 1787 (class 0 OID 9150474)
--- Dependencies: 1487
--- Data for Name: authrolepermissions; Type: TABLE DATA; Schema: public; Owner: agile
---
-
-INSERT INTO authrolepermissions (rolename, permissionname) VALUES ('admin', 'superuser');
-
-
---
 -- TOC entry 1788 (class 0 OID 9150477)
 -- Dependencies: 1488
 -- Data for Name: authroles; Type: TABLE DATA; Schema: public; Owner: agile
@@ -70,6 +61,14 @@ INSERT INTO authrolepermissions (rolename, permissionname) VALUES ('admin', 'sup
 
 INSERT INTO authroles (rolename, descr) VALUES ('admin', 'Administrator');
 
+
+--
+-- TOC entry 1787 (class 0 OID 9150474)
+-- Dependencies: 1487
+-- Data for Name: authrolepermissions; Type: TABLE DATA; Schema: public; Owner: agile
+--
+
+INSERT INTO authrolepermissions (rolename, permissionname) VALUES ('admin', 'superuser');
 
 --
 -- TOC entry 1789 (class 0 OID 9150480)
