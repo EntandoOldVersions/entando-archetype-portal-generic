@@ -21,6 +21,7 @@ html {
 	min-height: 100%;
 	background-color: #f1f2f1;
 	text-align: center;
+	background-image: url("<wp:imgURL />/square_bg.png");		
 }
 
 body {
@@ -32,6 +33,8 @@ body {
 	font-size: 100.01%;
 	background-color: #ffffff;
 	border: 1px solid #dedede;
+	background-image: url("<wp:imgURL />/px_by_Gre3g.png");	
+	color: #dedede;
 }
 
 h1 {
@@ -39,7 +42,7 @@ h1 {
 	text-align: left;
 	margin: 1em 0 0.5em 0;
 	padding: 0 0 0 1em;
-	color: #aa3300;
+	color: #B2DF27;
 	border-bottom: 0.1em solid #dedede;
 }
 
@@ -49,7 +52,7 @@ h2 {
 
 h2.version {
 	font-weight: bold;
-	color: #000000;		
+	color: #dedede;		
 	text-align: left;
 	margin-bottom: 2em;
 	text-align: right;
@@ -70,6 +73,7 @@ li li, li p {
 
 ul {
 	list-style-type: square;
+	color: #dedede;
 }
 
 li {
@@ -87,8 +91,8 @@ img.right {
 }
 
 a:link, a:visited {
-	color: #aa3300;
-	border-bottom: 0.1em solid #aa3300;
+	color: #008ED5;
+	border-bottom: 0.1em solid #008ED5;
 	text-decoration: none; 
 }
 
@@ -109,7 +113,8 @@ body {
 }
 
 h1 {
-
+	text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.9);
+	filter: dropshadow(color=#000000, offx=1, offy=0);
 }
 
 /* END CSS3 */
@@ -184,8 +189,8 @@ Have a good time with <strong>Entando</strong>!<br />
 <h2>Links:</h2>
 <ul>
 	<li><a href="http://www.entando.com">Home of the <strong>Entando</strong> project</a></li>
-	<li><a href="http://sourceforge.net/projects/japs"><strong>Entando</strong> at SourceForge</a></li>
 	<li><a href="http://github.com/entando/">Source code and online docs at GitHub</a></li>
+	<li><a href="http://sourceforge.net/projects/japs"><strong>Entando</strong> at SourceForge</a></li>
 </ul>
 <!-- END WELCOME -->
 
