@@ -8,6 +8,31 @@
 	<version>${version}</version>
 	<name>${artifactId}</name>
 	<url>http://maven.apache.org/</url>
+	<repositories>
+		<repository>
+			<id>Apache Snapshots</id>
+			<url>https://repository.apache.org/content/groups/snapshots-group</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>Apache Snapshots</id>
+			<name>Apache Snapshots</name>
+			<url>https://repository.apache.org/content/groups/snapshots-group</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	<profiles>
 		<profile>
 			<id>production</id>
@@ -41,6 +66,18 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>exewar</id>
+			<activation>
+				<property>
+					<name>env.MAVEN_WORKING_MODE</name>
+					<value>exewar</value>
+				</property>
+			</activation>
+			<properties>
+				<env>exewar</env>
+			</properties>
+		</profile>		
+		<profile>
 			<id>windows</id>
 			<activation>
 				<os>
@@ -51,12 +88,14 @@
 				<env>windows</env>
 			</properties>
 		</profile>
-	</profiles>	
+	</profiles>
 	<properties>
 		<test.database.hostname>localhost</test.database.hostname>
 		<test.database.port>5432</test.database.port>
 		<test.database.username>agile</test.database.username>
 		<test.database.password>agile</test.database.password>
+		<test.database.basename>entando-core-engine</test.database.basename>
+		<test.database.basepath>${project.build.directory}/test/sql</test.database.basepath>	
 	</properties>
 	<build>
 		<finalName>${artifactId}</finalName>
@@ -69,7 +108,7 @@
 				<includes>
 					<include>**/*.properties</include>
 					<include>**/*.xml</include>
-					<include>**/*.xsd</include>					
+					<include>**/*.xsd</include>
 				</includes>
 			</resource>
 		</resources>
@@ -99,7 +138,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>			
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -146,7 +185,7 @@
 							<includeGroupIds>org.entando.entando.plugins</includeGroupIds>
 							<includeClassifiers>misc-test</includeClassifiers>
 							<includeTypes>zip</includeTypes>
-							<excludeTypes>war,jar</excludeTypes>							
+							<excludeTypes>war,jar</excludeTypes>
 							<includeScope>test</includeScope>
 						</configuration>
 					</execution>
@@ -276,9 +315,145 @@
 								</resource>
 							</resources>
 						</configuration>
+					</execution>
+					<execution>
+						<id>derby-copy-sql</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/derby/sql</outputDirectory>
+							<encoding>UTF-8</encoding>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/db/export/</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
 					</execution>					
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.6</version><!--$NO-MVN-MAN-VER$ -->
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<configuration>
+							<target>
+								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
+									classpathref="maven.plugin.classpath" />
+								<if>
+									<available file="${project.build.directory}/derby/sql" type="dir" />
+									<then>
+										<replaceregexp byline="true">
+										  <regexp pattern="^SET.*$"/>
+										  <substitution expression=""/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="^REVOKE.*$"/>
+										  <substitution expression=""/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="^GRANT.*$"/>
+										  <substitution expression=""/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>																	
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="ALTER TABLE ONLY"/>
+										  <substitution expression="ALTER TABLE"/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="CREATE PROCEDURAL LANGUAGE plpgsql;"/>
+										  <substitution expression=""/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="character varying "/>
+										  <substitution expression="LONG VARCHAR "/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="character varying,"/>
+										  <substitution expression="LONG VARCHAR,"/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="character varying$"/>
+										  <substitution expression="LONG VARCHAR"/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern=" USING btree"/>
+										  <substitution expression=""/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="timestamp without time zone"/>
+										  <substitution expression="timestamp"/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>
+										
+										<replaceregexp byline="true">
+										  <regexp pattern="DEFAULT ''::LONG VARCHAR NOT NULL"/>
+										  <substitution expression="NOT NULL WITH DEFAULT ''"/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>										
+										
+									</then>
+								</if>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>ant-contrib</groupId>
+						<artifactId>ant-contrib</artifactId>
+						<version>20020829</version>
+					</dependency>
+				</dependencies>
+			</plugin>				
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sql-maven-plugin</artifactId>
@@ -289,15 +464,12 @@
 						<artifactId>postgresql</artifactId>
 						<version>9.1-901.jdbc4</version>
 					</dependency>
+					<dependency>
+						<groupId>org.apache.derby</groupId>
+						<artifactId>derby</artifactId>
+						<version>10.8.2.2</version>
+					</dependency>
 				</dependencies>
-				<configuration>
-					<driver>org.postgresql.Driver</driver>
-					<username>${test.database.username}</username>
-					<password>${test.database.password}</password>
-					<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/template1</url>
-					<skip>${skipTests}</skip>
-					<keepFormat>false</keepFormat>
-				</configuration>
 				<executions>
 					<execution>
 						<id>drop-db-before-test-if-any-port</id>
@@ -306,6 +478,12 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/template1</url>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>
 							<autocommit>true</autocommit>
 							<sqlCommand>drop database "${project.artifactId}testPort"</sqlCommand>
 							<onError>continue</onError>
@@ -318,6 +496,12 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/template1</url>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>
 							<autocommit>true</autocommit>
 							<sqlCommand>drop database "${project.artifactId}testServ"</sqlCommand>
 							<onError>continue</onError>
@@ -330,6 +514,12 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/template1</url>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>						
 							<autocommit>true</autocommit>
 							<sqlCommand>create database "${project.artifactId}testPort"</sqlCommand>
 						</configuration>
@@ -341,6 +531,12 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/template1</url>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>						
 							<autocommit>true</autocommit>
 							<sqlCommand>create database "${project.artifactId}testServ"</sqlCommand>
 						</configuration>
@@ -352,11 +548,16 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>						
 							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/${project.artifactId}testPort</url>
 							<onError>continue</onError>
 							<autocommit>true</autocommit>
 							<srcFiles>
-								<srcFile>${project.build.directory}/test/sql/entando-core-enginetestPort_schema.sql</srcFile>
+								<srcFile>${test.database.basepath}/${test.database.basename}testPort_schema.sql</srcFile>
 							</srcFiles>
 						</configuration>
 					</execution>
@@ -367,11 +568,16 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>						
 							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/${project.artifactId}testServ</url>
 							<onError>continue</onError>
 							<autocommit>true</autocommit>
 							<srcFiles>
-								<srcFile>${project.build.directory}/test/sql/entando-core-enginetestServ_schema.sql</srcFile>
+								<srcFile>${test.database.basepath}/${test.database.basename}testServ_schema.sql</srcFile>
 							</srcFiles>
 						</configuration>
 					</execution>
@@ -382,13 +588,18 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>						
 							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/${project.artifactId}testPort</url>
 							<escapeProcessing>false</escapeProcessing>
 							<enableBlockMode>true</enableBlockMode>
 							<printResultSet>true</printResultSet>
 							<outputFile />
 							<srcFiles>
-								<srcFile>${project.build.directory}/test/sql/entando-core-enginetestPort_data.sql</srcFile>
+								<srcFile>${test.database.basepath}/${test.database.basename}testPort_data.sql</srcFile>
 							</srcFiles>
 						</configuration>
 					</execution>
@@ -399,13 +610,18 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>						
 							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/${project.artifactId}testServ</url>
 							<escapeProcessing>false</escapeProcessing>
 							<enableBlockMode>true</enableBlockMode>
 							<printResultSet>true</printResultSet>
 							<outputFile />
 							<srcFiles>
-								<srcFile>${project.build.directory}/test/sql/entando-core-enginetestServ_data.sql</srcFile>
+								<srcFile>${test.database.basepath}/${test.database.basename}testServ_data.sql</srcFile>
 							</srcFiles>
 						</configuration>
 					</execution>
@@ -416,6 +632,11 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>						
 							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/${project.artifactId}testPort</url>
 							<escapeProcessing>false</escapeProcessing>
 							<enableBlockMode>true</enableBlockMode>
@@ -437,6 +658,11 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<driver>org.postgresql.Driver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>
+							<skip>${skipTests}</skip>
+							<keepFormat>false</keepFormat>						
 							<url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/${project.artifactId}testServ</url>
 							<escapeProcessing>false</escapeProcessing>
 							<enableBlockMode>true</enableBlockMode>
@@ -451,6 +677,87 @@
 							</fileset>
 						</configuration>
 					</execution>
+					<!-- Derby, for Tomcat Executable War -->
+					<execution>
+						<id>derby-create-schema-port</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>							
+							<keepFormat>false</keepFormat>			
+							<url>jdbc:derby:${project.build.directory}/${project.artifactId}/WEB-INF/derby/${project.artifactId}Port;create=true</url>
+							<skipOnConnectionError>true</skipOnConnectionError>
+							<onError>abort</onError>
+							<autocommit>true</autocommit>
+							<srcFiles>
+								<srcFile>${project.build.directory}/derby/sql/${project.artifactId}Port_schema.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>
+					<execution>
+						<id>derby-create-data-port</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>							
+							<keepFormat>false</keepFormat>			
+							<url>jdbc:derby:${project.build.directory}/${project.artifactId}/WEB-INF/derby/${project.artifactId}Port</url>
+							<skipOnConnectionError>true</skipOnConnectionError>
+							<onError>abort</onError>
+							<autocommit>true</autocommit>
+							<srcFiles>
+								<srcFile>${project.build.directory}/derby/sql/${project.artifactId}Port_data.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>					
+					<execution>
+						<id>derby-create-schema-serv</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>							
+							<keepFormat>false</keepFormat>			
+							<url>jdbc:derby:${project.build.directory}/${project.artifactId}/WEB-INF/derby/${project.artifactId}Serv;create=true</url>
+							<skipOnConnectionError>true</skipOnConnectionError>
+							<onError>abort</onError>
+							<autocommit>true</autocommit>
+							<srcFiles>
+								<srcFile>${project.build.directory}/derby/sql/${project.artifactId}Serv_schema.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>
+					<execution>
+						<id>derby-create-data-serv</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+							<username>${test.database.username}</username>
+							<password>${test.database.password}</password>							
+							<keepFormat>false</keepFormat>			
+							<url>jdbc:derby:${project.build.directory}/${project.artifactId}/WEB-INF/derby/${project.artifactId}Serv</url>
+							<skipOnConnectionError>true</skipOnConnectionError>
+							<onError>abort</onError>
+							<autocommit>true</autocommit>
+							<srcFiles>
+								<srcFile>${project.build.directory}/derby/sql/${project.artifactId}Serv_data.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>														
 				</executions>
 			</plugin>
 			<plugin>
@@ -467,26 +774,7 @@
 					<!-- <includes> <include>**/AllTests.java</include> </includes -->
 				</configuration>
 			</plugin>
-			<!-- 
-				mvn tomcat:run-war
-				(sorry, not hot-redeploy) 
-			-->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.1</version>
-				<dependencies>
-					<dependency>
-						<groupId>postgresql</groupId>
-						<artifactId>postgresql</artifactId>
-						<version>9.1-901.jdbc4</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<!-- 
-				mvn jetty:run
-				(with hot-redeploy) 
-			-->			
+			<!-- mvn jetty:run (with hot-redeploy) -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -496,9 +784,9 @@
 					<scanIntervalSeconds>5</scanIntervalSeconds>
 					<webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
 					<webAppConfig>
-							<defaultsDescriptor>${basedir}/src/main/config/webdefault.xml</defaultsDescriptor>
-							<contextPath>/${project.artifactId}</contextPath>
-							<jettyEnvXml>${project.build.directory}/jetty/jetty-env.xml</jettyEnvXml>
+						<defaultsDescriptor>${basedir}/src/main/config/webdefault.xml</defaultsDescriptor>
+						<contextPath>/${project.artifactId}</contextPath>
+						<jettyEnvXml>${project.build.directory}/jetty/jetty-env.xml</jettyEnvXml>
 					</webAppConfig>
 				</configuration>
 				<dependencies>
@@ -512,7 +800,35 @@
 						<artifactId>commons-dbcp</artifactId>
 						<version>1.2.2</version>
 					</dependency>
-				</dependencies>				
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.0-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<id>tomcat-run</id>
+						<goals>
+							<goal>exec-war-only</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<path>/${project.artifactId}</path>
+							<!-- Not working... waiting for the plugin...
+							<tomcatWebXml>${basedir}/src/main/config/tomcat-exewar-web.xml</tomcatWebXml> 
+							-->
+							<enableNaming>true</enableNaming>
+							<extraDependencies>
+								<extraDependency>
+									<groupId>org.apache.derby</groupId>
+									<artifactId>derby</artifactId>
+									<version>10.8.2.2</version>
+								</extraDependency>
+							</extraDependencies>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -566,6 +882,25 @@
 										<ignore></ignore>
 									</action>
 								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-antrun-plugin
+										</artifactId>
+										<versionRange>
+											[1.6,)
+										</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
@@ -586,7 +921,7 @@
 			<version>2.4.0</version>
 			<type>jar</type>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.entando.entando</groupId>
 			<artifactId>entando-core-engine</artifactId>
@@ -631,6 +966,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.8.2</version>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
 	</dependencies>
 </project>

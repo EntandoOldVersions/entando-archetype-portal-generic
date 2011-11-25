@@ -21,15 +21,15 @@
 	<Environment name="cacheDiskRootFolder" value="${profile.cache.path}" type="java.lang.String" override="false" />
 	
 	<Resource name="jdbc/portDataSource" auth="Container" 
-		type="javax.sql.DataSource" driverClassName="org.postgresql.Driver" 
+		type="javax.sql.DataSource" driverClassName="${profile.database.driverClassName}" 
 		maxActive="8" maxIdle="4" 
 		username="${profile.database.username}" password="${profile.database.password}" 
-		url="jdbc:postgresql://${profile.database.hostname}:${profile.database.port}/${profile.application.name}Port" />
+		url="${profile.database.url.portdb}" />
 	
 	<Resource name="jdbc/servDataSource" auth="Container" 
-		type="javax.sql.DataSource" driverClassName="org.postgresql.Driver" 
+		type="javax.sql.DataSource" driverClassName="${profile.database.driverClassName}" 
 		maxActive="8" maxIdle="4" 
 		username="${profile.database.username}" password="${profile.database.password}" 
-		url="jdbc:postgresql://${profile.database.hostname}:${profile.database.port}/${profile.application.name}Serv" />
+		url="${profile.database.url.servdb}" />
 	
 </Context>

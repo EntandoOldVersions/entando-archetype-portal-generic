@@ -71,7 +71,13 @@
 				<include>**/placeholder.txt</include>
 				<include>**/*.xml</include>
 			</includes>
-		</fileSet>		
+		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>src/test/db</directory>
+			<includes>
+				<include>**/*</include>
+			</includes>
+		</fileSet>			
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>.settings</directory>
 			<includes>
