@@ -111,6 +111,13 @@
 					<include>**/*.xsd</include>
 				</includes>
 			</resource>
+			<resource>
+				<directory>src/main/tld</directory>
+				<targetPath>META-INF</targetPath>
+				<includes>
+					<include>**/*.tld</include>
+				</includes>
+			</resource>			
 		</resources>
 		<filters>
 			<filter>src/main/filters/filter-${env}.properties</filter>
@@ -690,6 +697,7 @@
 							<password>${test.database.password}</password>							
 							<keepFormat>false</keepFormat>			
 							<url>jdbc:derby:${project.build.directory}/${project.artifactId}/WEB-INF/derby/${project.artifactId}Port;create=true</url>
+							<skip>${skipDerby}</skip>
 							<skipOnConnectionError>true</skipOnConnectionError>
 							<onError>abort</onError>
 							<autocommit>true</autocommit>
@@ -710,6 +718,7 @@
 							<password>${test.database.password}</password>							
 							<keepFormat>false</keepFormat>			
 							<url>jdbc:derby:${project.build.directory}/${project.artifactId}/WEB-INF/derby/${project.artifactId}Port</url>
+							<skip>${skipDerby}</skip>							
 							<skipOnConnectionError>true</skipOnConnectionError>
 							<onError>abort</onError>
 							<autocommit>true</autocommit>
@@ -730,6 +739,7 @@
 							<password>${test.database.password}</password>							
 							<keepFormat>false</keepFormat>			
 							<url>jdbc:derby:${project.build.directory}/${project.artifactId}/WEB-INF/derby/${project.artifactId}Serv;create=true</url>
+							<skip>${skipDerby}</skip>							
 							<skipOnConnectionError>true</skipOnConnectionError>
 							<onError>abort</onError>
 							<autocommit>true</autocommit>
@@ -750,6 +760,7 @@
 							<password>${test.database.password}</password>							
 							<keepFormat>false</keepFormat>			
 							<url>jdbc:derby:${project.build.directory}/${project.artifactId}/WEB-INF/derby/${project.artifactId}Serv</url>
+							<skip>${skipDerby}</skip>							
 							<skipOnConnectionError>true</skipOnConnectionError>
 							<onError>abort</onError>
 							<autocommit>true</autocommit>
