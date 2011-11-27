@@ -45,7 +45,8 @@
 		<exec executable="mvn" dir="${basedir}">
 			<env key="MAVEN_WORKING_MODE" value="production"/>
 			<arg value="package"/>
-			<arg line="-DskipTests"/>			
+			<arg line="-DskipTests"/>
+			<arg line="-DskipDerby"/>			
 		</exec>
 	</target>
 
