@@ -95,7 +95,8 @@
 		<test.database.username>agile</test.database.username>
 		<test.database.password>agile</test.database.password>
 		<test.database.basename>entando-core-engine</test.database.basename>
-		<test.database.basepath>${project.build.directory}/test/sql</test.database.basepath>	
+		<test.database.basepath>${project.build.directory}/test/sql</test.database.basepath>
+		<skipDerby>true</skipDerby>	
 	</properties>
 	<build>
 		<finalName>${artifactId}</finalName>
