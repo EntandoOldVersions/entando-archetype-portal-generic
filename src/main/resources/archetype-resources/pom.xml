@@ -221,7 +221,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.5</version>
 				<executions>
 					<execution>
 						<id>prepare-config-test</id>
@@ -240,6 +240,27 @@
 							</resources>
 						</configuration>
 					</execution>
+					<execution>
+						<id>prepare-config-test-override-config</id>
+						<phase>process-test-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/test/conf</outputDirectory>
+							<encoding>UTF-8</encoding>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<directory>src/test/config</directory>
+									<includes>
+										<include>contextTestParams.properties</include>
+									</includes>									
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>					
 					<execution>
 						<id>copy-resources-conf</id>
 						<!-- here the phase you need -->
