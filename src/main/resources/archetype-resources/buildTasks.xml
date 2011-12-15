@@ -291,6 +291,43 @@
 		</exec>
 	</target>
 
+	<target name="PG-db-restore-bundles" description="Execute the SQL queries necessary to properly install a Bundle">
+		<foreach target="PG-db-restore-bundles-helper" param="pluginDir">
+			<path>
+				<dirset dir="${dist.path}/dependencies-unpacked/misc">
+					<include name="entando-content-*"/>
+					<include name="entando-page-*"/>
+					<include name="entando-showlet-*"/>					
+				</dirset>
+			</path>
+		</foreach>
+	</target>
+
+	<target name="PG-db-restore-bundles-helper">
+		<echo message="Restoring SQL for Bundles.... - Port" />
+		<echo message="${pluginDir}" />
+		<exec executable="${postgres.bin.path}/${postgres.bin.psql}" dir="${pluginDir}/sql/postgresql">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-d ${webappname}Port"/>
+			<arg line="-f port.sql"/>
+		</exec>
+
+		<echo message="Restoring SQL for Bundles.... - Serv" />
+		<echo message="${pluginDir}" />		
+		<exec executable="${postgres.bin.path}/${postgres.bin.psql}" dir="${pluginDir}/sql/postgresql">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-d ${webappname}Serv"/>
+			<arg line="-f serv.sql"/>
+		</exec>
+	</target>
+
+
     <target name="Test-db-resources-check">
 		<taskdef resource="net/sf/antcontrib/antcontrib.properties">
 			<classpath>

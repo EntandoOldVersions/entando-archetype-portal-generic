@@ -173,7 +173,7 @@
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
 							<appendOutput>true</appendOutput>
-							<includeGroupIds>org.entando.entando.plugins</includeGroupIds>
+							<includeGroupIds>org.entando.entando.plugins,org.entando.entando.bundles</includeGroupIds>
 							<includeClassifiers>misc</includeClassifiers>
 							<excludeTypes>war,jar</excludeTypes>
 							<includeTypes>zip</includeTypes>

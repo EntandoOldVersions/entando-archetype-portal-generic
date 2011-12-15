@@ -6,9 +6,9 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>
 		classpath:spring/systemConfig.xml 
-		classpath:spring/aps/managers/**/**.xml 
-		classpath:spring/apsadmin/**/**.xml 
-		classpath*:spring/plugins/**/aps/managers/**/**.xml 
+		classpath*:spring/aps/**/**.xml 
+		classpath*:spring/apsadmin/**/**.xml 
+		classpath*:spring/plugins/**/aps/**/**.xml 
 		classpath*:spring/plugins/**/apsadmin/**/**.xml 
 	</param-value>
   </context-param>
@@ -22,7 +22,7 @@
   </context-param>
   <filter>
     <filter-name>struts2</filter-name>
-    <filter-class>com.agiletec.apsadmin.system.dispatcher.FilterDispatcher</filter-class>
+    <filter-class>com.agiletec.apsadmin.system.dispatcher.StrutsPrepareAndExecuteFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>struts2</filter-name>
@@ -51,9 +51,19 @@
     <servlet-name>Struts2ExtServlet</servlet-name>
     <servlet-class>com.agiletec.apsadmin.system.dispatcher.Struts2ServletDispatcher</servlet-class>
   </servlet>
+  <servlet>
+	<display-name>API Servlet</display-name>
+	<servlet-name>APIServlet</servlet-name>
+	<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+	<load-on-startup>1</load-on-startup>
+  </servlet>
   <servlet-mapping>
     <servlet-name>ControllerServlet</servlet-name>
     <url-pattern>*.wp</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ControllerServlet</servlet-name>
+    <url-pattern>*.page</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ControllerServlet</servlet-name>
@@ -66,6 +76,10 @@
   <servlet-mapping>
     <servlet-name>ResourceControllerServlet</servlet-name>
     <url-pattern>/protected/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	<servlet-name>APIServlet</servlet-name>
+	<url-pattern>/api/*</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>30</session-timeout>
@@ -86,26 +100,4 @@
     <exception-type>java.lang.Exception</exception-type>
     <location>/error.jsp</location>
   </error-page>
-  <jsp-config>
-    <taglib>
-      <taglib-uri>aps-core.tld</taglib-uri>
-      <taglib-location>/WEB-INF/aps/tld/aps-core.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>c.tld</taglib-uri>
-      <taglib-location>/WEB-INF/aps/tld/c.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>fmt.tld</taglib-uri>
-      <taglib-location>/WEB-INF/aps/tld/fmt.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>apsadmin-core.tld</taglib-uri>
-      <taglib-location>/WEB-INF/apsadmin/tld/apsadmin-core.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>apsadmin-form.tld</taglib-uri>
-      <taglib-location>/WEB-INF/apsadmin/tld/apsadmin-form.tld</taglib-location>
-    </taglib>
-  </jsp-config>
 </web-app>
