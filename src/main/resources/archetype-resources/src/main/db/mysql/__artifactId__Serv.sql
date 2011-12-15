@@ -15,12 +15,12 @@
 
 
 --
--- Create schema EntandoServ
+-- Create schema ${artifactId}Serv
 --
 
-CREATE DATABASE IF NOT EXISTS EntandoServ;
-USE EntandoServ;
-CREATE TABLE  `EntandoServ`.`apicatalog_services` (
+CREATE DATABASE IF NOT EXISTS ${artifactId}Serv;
+USE ${artifactId}Serv;
+CREATE TABLE  `${artifactId}Serv`.`apicatalog_services` (
   `servicekey` varchar(100) NOT NULL,
   `parentapi` varchar(100) DEFAULT NULL,
   `description` longtext NOT NULL,
@@ -32,31 +32,31 @@ CREATE TABLE  `EntandoServ`.`apicatalog_services` (
   `myentando` tinyint(4) NOT NULL,
   PRIMARY KEY (`servicekey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE  `EntandoServ`.`apicatalog_status` (
+CREATE TABLE  `${artifactId}Serv`.`apicatalog_status` (
   `method` varchar(100) NOT NULL,
   `isactive` tinyint(4) NOT NULL,
   PRIMARY KEY (`method`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE  `EntandoServ`.`authgroups` (
+CREATE TABLE  `${artifactId}Serv`.`authgroups` (
   `groupname` varchar(20) NOT NULL,
   `descr` varchar(50) NOT NULL,
   PRIMARY KEY (`groupname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `EntandoServ`.`authgroups` VALUES  ('administrators','Administrators'),
+INSERT INTO `${artifactId}Serv`.`authgroups` VALUES  ('administrators','Administrators'),
  ('free','Free Access');
-CREATE TABLE  `EntandoServ`.`authpermissions` (
+CREATE TABLE  `${artifactId}Serv`.`authpermissions` (
   `permissionname` varchar(30) NOT NULL,
   `descr` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`permissionname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `EntandoServ`.`authpermissions` VALUES  ('editContents','Content Editing'),
+INSERT INTO `${artifactId}Serv`.`authpermissions` VALUES  ('editContents','Content Editing'),
  ('enterBackend','Access to Administration Area'),
  ('manageCategories','Operations on Categories'),
  ('managePages','Operations on Pages'),
  ('manageResources','Operations on Resources'),
  ('superuser','All functions'),
  ('validateContents','Supervision of contents');
-CREATE TABLE  `EntandoServ`.`authrolepermissions` (
+CREATE TABLE  `${artifactId}Serv`.`authrolepermissions` (
   `rolename` varchar(30) NOT NULL,
   `permissionname` varchar(30) NOT NULL,
   PRIMARY KEY (`rolename`,`permissionname`),
@@ -64,30 +64,30 @@ CREATE TABLE  `EntandoServ`.`authrolepermissions` (
   CONSTRAINT `authrolepermissions_permissionname_fkey` FOREIGN KEY (`permissionname`) REFERENCES `authpermissions` (`permissionname`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `authrolepermissions_rolename_fkey` FOREIGN KEY (`rolename`) REFERENCES `authroles` (`rolename`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `EntandoServ`.`authrolepermissions` VALUES  ('admin','superuser');
-CREATE TABLE  `EntandoServ`.`authroles` (
+INSERT INTO `${artifactId}Serv`.`authrolepermissions` VALUES  ('admin','superuser');
+CREATE TABLE  `${artifactId}Serv`.`authroles` (
   `rolename` varchar(30) NOT NULL,
   `descr` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`rolename`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `EntandoServ`.`authroles` VALUES  ('admin','Administrator');
-CREATE TABLE  `EntandoServ`.`authusergroups` (
+INSERT INTO `${artifactId}Serv`.`authroles` VALUES  ('admin','Administrator');
+CREATE TABLE  `${artifactId}Serv`.`authusergroups` (
   `username` varchar(40) NOT NULL,
   `groupname` varchar(20) NOT NULL,
   PRIMARY KEY (`username`,`groupname`),
   KEY `new_fk_constraint` (`groupname`),
   CONSTRAINT `new_fk_constraint` FOREIGN KEY (`groupname`) REFERENCES `authgroups` (`groupname`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `EntandoServ`.`authusergroups` VALUES  ('admin','administrators');
-CREATE TABLE  `EntandoServ`.`authuserroles` (
+INSERT INTO `${artifactId}Serv`.`authusergroups` VALUES  ('admin','administrators');
+CREATE TABLE  `${artifactId}Serv`.`authuserroles` (
   `username` varchar(40) NOT NULL,
   `rolename` varchar(30) NOT NULL,
   PRIMARY KEY (`username`,`rolename`),
   KEY `authuserroles_rolename_fkey` (`rolename`),
   CONSTRAINT `authuserroles_rolename_fkey` FOREIGN KEY (`rolename`) REFERENCES `authroles` (`rolename`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `EntandoServ`.`authuserroles` VALUES  ('admin','admin');
-CREATE TABLE  `EntandoServ`.`authusers` (
+INSERT INTO `${artifactId}Serv`.`authuserroles` VALUES  ('admin','admin');
+CREATE TABLE  `${artifactId}Serv`.`authusers` (
   `username` varchar(40) NOT NULL,
   `passwd` varchar(40) DEFAULT NULL,
   `registrationdate` date NOT NULL,
@@ -96,13 +96,13 @@ CREATE TABLE  `EntandoServ`.`authusers` (
   `active` tinyint(4) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `EntandoServ`.`authusers` VALUES  ('admin','adminadmin','2008-10-10','2009-07-09',NULL,1);
-CREATE TABLE  `EntandoServ`.`authusershortcuts` (
+INSERT INTO `${artifactId}Serv`.`authusers` VALUES  ('admin','adminadmin','2008-10-10','2009-07-09',NULL,1);
+CREATE TABLE  `${artifactId}Serv`.`authusershortcuts` (
   `username` varchar(40) NOT NULL,
   `config` longtext NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `EntandoServ`.`authusershortcuts` VALUES  ('admin','<shortcuts>\n	<box pos=\"0\">core.component.user.list</box>\n	<box pos=\"1\">core.component.categories</box>\n	<box pos=\"2\">core.component.labels.list</box>\n	<box pos=\"3\">jacms.content.new</box>\n	<box pos=\"4\">jacms.content.list</box>\n	<box pos=\"5\">jacms.contentType</box>\n	<box pos=\"6\">core.portal.pageTree</box>\n	<box pos=\"7\">core.portal.showletType</box>\n	<box pos=\"8\">core.tools.entities</box>\n	<box pos=\"9\">core.tools.setting</box>\n</shortcuts>');
+INSERT INTO `${artifactId}Serv`.`authusershortcuts` VALUES  ('admin','<shortcuts>\n	<box pos=\"0\">core.component.user.list</box>\n	<box pos=\"1\">core.component.categories</box>\n	<box pos=\"2\">core.component.labels.list</box>\n	<box pos=\"3\">jacms.content.new</box>\n	<box pos=\"4\">jacms.content.list</box>\n	<box pos=\"5\">jacms.contentType</box>\n	<box pos=\"6\">core.portal.pageTree</box>\n	<box pos=\"7\">core.portal.showletType</box>\n	<box pos=\"8\">core.tools.entities</box>\n	<box pos=\"9\">core.tools.setting</box>\n</shortcuts>');
 
 
 

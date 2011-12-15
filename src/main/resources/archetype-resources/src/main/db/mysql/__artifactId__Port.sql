@@ -15,18 +15,18 @@
 
 
 --
--- Create schema EntandoPort
+-- Create schema ${artifactId}Port
 --
 
-CREATE DATABASE IF NOT EXISTS EntandoPort;
-USE EntandoPort;
+CREATE DATABASE IF NOT EXISTS ${artifactId}Port;
+USE ${artifactId}Port;
 
 --
--- Definition of table `EntandoPort`.`categories`
+-- Definition of table `${artifactId}Port`.`categories`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`categories`;
-CREATE TABLE  `EntandoPort`.`categories` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`categories`;
+CREATE TABLE  `${artifactId}Port`.`categories` (
   `catcode` varchar(30) NOT NULL,
   `parentcode` varchar(30) NOT NULL,
   `titles` longtext NOT NULL,
@@ -34,22 +34,22 @@ CREATE TABLE  `EntandoPort`.`categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`categories`
+-- Dumping data for table `${artifactId}Port`.`categories`
 --
 
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 LOCK TABLES `categories` WRITE;
-INSERT INTO `EntandoPort`.`categories` VALUES  ('home','home','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Generale</property>\n<property key=\"en\">All</property>\n</properties>\n\n');
+INSERT INTO `${artifactId}Port`.`categories` VALUES  ('home','home','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Generale</property>\n<property key=\"en\">All</property>\n</properties>\n\n');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 
 --
--- Definition of table `EntandoPort`.`contentmodels`
+-- Definition of table `${artifactId}Port`.`contentmodels`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`contentmodels`;
-CREATE TABLE  `EntandoPort`.`contentmodels` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`contentmodels`;
+CREATE TABLE  `${artifactId}Port`.`contentmodels` (
   `modelid` int(11) NOT NULL,
   `contenttype` varchar(30) NOT NULL,
   `descr` varchar(50) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE  `EntandoPort`.`contentmodels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`contentmodels`
+-- Dumping data for table `${artifactId}Port`.`contentmodels`
 --
 
 /*!40000 ALTER TABLE `contentmodels` DISABLE KEYS */;
@@ -69,11 +69,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`contentrelations`
+-- Definition of table `${artifactId}Port`.`contentrelations`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`contentrelations`;
-CREATE TABLE  `EntandoPort`.`contentrelations` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`contentrelations`;
+CREATE TABLE  `${artifactId}Port`.`contentrelations` (
   `contentid` varchar(16) NOT NULL,
   `refpage` varchar(30) DEFAULT NULL,
   `refcontent` varchar(16) DEFAULT NULL,
@@ -93,7 +93,7 @@ CREATE TABLE  `EntandoPort`.`contentrelations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`contentrelations`
+-- Dumping data for table `${artifactId}Port`.`contentrelations`
 --
 
 /*!40000 ALTER TABLE `contentrelations` DISABLE KEYS */;
@@ -103,11 +103,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`contents`
+-- Definition of table `${artifactId}Port`.`contents`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`contents`;
-CREATE TABLE  `EntandoPort`.`contents` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`contents`;
+CREATE TABLE  `${artifactId}Port`.`contents` (
   `contentid` varchar(16) NOT NULL,
   `contenttype` varchar(30) NOT NULL,
   `descr` varchar(260) NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE  `EntandoPort`.`contents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`contents`
+-- Dumping data for table `${artifactId}Port`.`contents`
 --
 
 /*!40000 ALTER TABLE `contents` DISABLE KEYS */;
@@ -133,11 +133,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`contentsearch`
+-- Definition of table `${artifactId}Port`.`contentsearch`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`contentsearch`;
-CREATE TABLE  `EntandoPort`.`contentsearch` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`contentsearch`;
+CREATE TABLE  `${artifactId}Port`.`contentsearch` (
   `contentid` varchar(16) NOT NULL,
   `attrname` varchar(30) NOT NULL,
   `textvalue` varchar(255) DEFAULT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE  `EntandoPort`.`contentsearch` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`contentsearch`
+-- Dumping data for table `${artifactId}Port`.`contentsearch`
 --
 
 /*!40000 ALTER TABLE `contentsearch` DISABLE KEYS */;
@@ -159,11 +159,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`localstrings`
+-- Definition of table `${artifactId}Port`.`localstrings`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`localstrings`;
-CREATE TABLE  `EntandoPort`.`localstrings` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`localstrings`;
+CREATE TABLE  `${artifactId}Port`.`localstrings` (
   `keycode` varchar(50) NOT NULL,
   `langcode` varchar(2) NOT NULL,
   `stringvalue` longtext NOT NULL,
@@ -171,12 +171,12 @@ CREATE TABLE  `EntandoPort`.`localstrings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`localstrings`
+-- Dumping data for table `${artifactId}Port`.`localstrings`
 --
 
 /*!40000 ALTER TABLE `localstrings` DISABLE KEYS */;
 LOCK TABLES `localstrings` WRITE;
-INSERT INTO `EntandoPort`.`localstrings` VALUES  ('ADMINISTRATION_BASIC','en','Normal'),
+INSERT INTO `${artifactId}Port`.`localstrings` VALUES  ('ADMINISTRATION_BASIC','en','Normal'),
  ('ADMINISTRATION_BASIC','it','Normale'),
  ('ADMINISTRATION_BASIC_GOTO','en','Go to the administration with normal client'),
  ('ADMINISTRATION_BASIC_GOTO','it','Accedi con client normale'),
@@ -237,11 +237,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`pagemodels`
+-- Definition of table `${artifactId}Port`.`pagemodels`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`pagemodels`;
-CREATE TABLE  `EntandoPort`.`pagemodels` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`pagemodels`;
+CREATE TABLE  `${artifactId}Port`.`pagemodels` (
   `code` varchar(40) NOT NULL,
   `descr` varchar(50) NOT NULL,
   `frames` longtext,
@@ -250,23 +250,23 @@ CREATE TABLE  `EntandoPort`.`pagemodels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`pagemodels`
+-- Dumping data for table `${artifactId}Port`.`pagemodels`
 --
 
 /*!40000 ALTER TABLE `pagemodels` DISABLE KEYS */;
 LOCK TABLES `pagemodels` WRITE;
-INSERT INTO `EntandoPort`.`pagemodels` VALUES  ('home','Home Page',NULL,NULL),
+INSERT INTO `${artifactId}Port`.`pagemodels` VALUES  ('home','Home Page',NULL,NULL),
  ('service','Service Page','<frames>\n	<frame pos=\"0\">\n		<descr>Sample Frame</descr>\n	</frame>	\n</frames>',NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `pagemodels` ENABLE KEYS */;
 
 
 --
--- Definition of table `EntandoPort`.`pages`
+-- Definition of table `${artifactId}Port`.`pages`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`pages`;
-CREATE TABLE  `EntandoPort`.`pages` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`pages`;
+CREATE TABLE  `${artifactId}Port`.`pages` (
   `code` varchar(30) NOT NULL,
   `parentcode` varchar(30) DEFAULT NULL,
   `pos` int(11) NOT NULL,
@@ -281,12 +281,12 @@ CREATE TABLE  `EntandoPort`.`pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`pages`
+-- Dumping data for table `${artifactId}Port`.`pages`
 --
 
 /*!40000 ALTER TABLE `pages` DISABLE KEYS */;
 LOCK TABLES `pages` WRITE;
-INSERT INTO `EntandoPort`.`pages` VALUES  ('errorpage','service',5,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Error page</property>\n<property key=\"it\">Pagina di errore</property>\n</properties>\n\n','free',1,NULL),
+INSERT INTO `${artifactId}Port`.`pages` VALUES  ('errorpage','service',5,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Error page</property>\n<property key=\"it\">Pagina di errore</property>\n</properties>\n\n','free',1,NULL),
  ('homepage','homepage',-1,'home','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Home</property>\n<property key=\"it\">Home</property>\n</properties>\n\n','free',1,NULL),
  ('login','service',6,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Pagina di login</property>\n<property key=\"en\">Login</property>\n</properties>','free',1,NULL),
  ('notfound','service',4,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Page not found</property>\n<property key=\"it\">Pagina non trovata</property>\n</properties>\n\n','free',1,NULL),
@@ -296,11 +296,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`resourcerelations`
+-- Definition of table `${artifactId}Port`.`resourcerelations`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`resourcerelations`;
-CREATE TABLE  `EntandoPort`.`resourcerelations` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`resourcerelations`;
+CREATE TABLE  `${artifactId}Port`.`resourcerelations` (
   `resid` varchar(16) NOT NULL,
   `refcategory` varchar(30) DEFAULT NULL,
   KEY `resourcerelations_refcategory_fkey` (`refcategory`),
@@ -310,7 +310,7 @@ CREATE TABLE  `EntandoPort`.`resourcerelations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`resourcerelations`
+-- Dumping data for table `${artifactId}Port`.`resourcerelations`
 --
 
 /*!40000 ALTER TABLE `resourcerelations` DISABLE KEYS */;
@@ -320,11 +320,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`resources`
+-- Definition of table `${artifactId}Port`.`resources`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`resources`;
-CREATE TABLE  `EntandoPort`.`resources` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`resources`;
+CREATE TABLE  `${artifactId}Port`.`resources` (
   `resid` varchar(16) NOT NULL,
   `restype` varchar(30) NOT NULL,
   `descr` varchar(260) NOT NULL,
@@ -335,7 +335,7 @@ CREATE TABLE  `EntandoPort`.`resources` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`resources`
+-- Dumping data for table `${artifactId}Port`.`resources`
 --
 
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
@@ -345,11 +345,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`showletcatalog`
+-- Definition of table `${artifactId}Port`.`showletcatalog`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`showletcatalog`;
-CREATE TABLE  `EntandoPort`.`showletcatalog` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`showletcatalog`;
+CREATE TABLE  `${artifactId}Port`.`showletcatalog` (
   `code` varchar(40) NOT NULL,
   `titles` longtext NOT NULL,
   `parameters` longtext,
@@ -362,12 +362,12 @@ CREATE TABLE  `EntandoPort`.`showletcatalog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`showletcatalog`
+-- Dumping data for table `${artifactId}Port`.`showletcatalog`
 --
 
 /*!40000 ALTER TABLE `showletcatalog` DISABLE KEYS */;
 LOCK TABLES `showletcatalog` WRITE;
-INSERT INTO `EntandoPort`.`showletcatalog` VALUES  ('content_viewer','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Contents - Publish a Content</property>\n<property key=\"it\">Contenuti - Pubblica un Contenuto</property>\n</properties>','<config>\n	<parameter name=\"contentId\">Content ID</parameter>\n	<parameter name=\"modelId\">Content Model ID</parameter>\n	<action name=\"viewerConfig\"/>\n</config>','jacms',NULL,NULL,1,''),
+INSERT INTO `${artifactId}Port`.`showletcatalog` VALUES  ('content_viewer','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Contents - Publish a Content</property>\n<property key=\"it\">Contenuti - Pubblica un Contenuto</property>\n</properties>','<config>\n	<parameter name=\"contentId\">Content ID</parameter>\n	<parameter name=\"modelId\">Content Model ID</parameter>\n	<action name=\"viewerConfig\"/>\n</config>','jacms',NULL,NULL,1,''),
  ('content_viewer_list','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Contents - Publish a List of Contents</property>\n<property key=\"it\">Contenuti - Pubblica una Lista di Contenuti</property>\n</properties>','<config>\n	<parameter name=\"contentType\">Content Type (mandatory)</parameter>\n	<parameter name=\"modelId\">Content Model</parameter>\n	<parameter name=\"userFilters\">Front-End user filter options</parameter>\n	<parameter name=\"category\">Content Category **deprecated**</parameter>\n	<parameter name=\"categories\">Content Category codes (comma separeted)</parameter>\n	<parameter name=\"maxElemForItem\">Contents for each page</parameter>\n	<parameter name=\"filters\" />\n	<parameter name=\"title_{lang}\">Showlet Title in lang {lang}</parameter>\n	<parameter name=\"pageLink\">The code of the Page to link</parameter>\n	<parameter name=\"linkDescr_{lang}\">Link description in lang {lang}</parameter>\n	<action name=\"listViewerConfig\"/>\n</config>','jacms',NULL,NULL,1,''),
  ('formAction','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Internal Servlet</property>\n<property key=\"it\">Invocazione di una Servlet Interna</property>\n</properties>','<config>\n	<parameter name=\"actionPath\">\n		Path to an action or to a JSP. You must prepend \'/ExtStr2\' to any Struts2 action path\n	</parameter>\n	<action name=\"configSimpleParameter\"/>\n</config>',NULL,NULL,NULL,1,''),
  ('login_form','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Login Form</property>\n<property key=\"it\">Form di Login</property>\n</properties>',NULL,NULL,NULL,NULL,1,''),
@@ -378,11 +378,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`showletconfig`
+-- Definition of table `${artifactId}Port`.`showletconfig`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`showletconfig`;
-CREATE TABLE  `EntandoPort`.`showletconfig` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`showletconfig`;
+CREATE TABLE  `${artifactId}Port`.`showletconfig` (
   `pagecode` varchar(30) NOT NULL,
   `framepos` int(11) NOT NULL,
   `showletcode` varchar(40) NOT NULL,
@@ -395,7 +395,7 @@ CREATE TABLE  `EntandoPort`.`showletconfig` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`showletconfig`
+-- Dumping data for table `${artifactId}Port`.`showletconfig`
 --
 
 /*!40000 ALTER TABLE `showletconfig` DISABLE KEYS */;
@@ -405,11 +405,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`sysconfig`
+-- Definition of table `${artifactId}Port`.`sysconfig`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`sysconfig`;
-CREATE TABLE  `EntandoPort`.`sysconfig` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`sysconfig`;
+CREATE TABLE  `${artifactId}Port`.`sysconfig` (
   `version` varchar(10) NOT NULL,
   `item` varchar(40) NOT NULL,
   `descr` varchar(100) DEFAULT NULL,
@@ -418,12 +418,12 @@ CREATE TABLE  `EntandoPort`.`sysconfig` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`sysconfig`
+-- Dumping data for table `${artifactId}Port`.`sysconfig`
 --
 
 /*!40000 ALTER TABLE `sysconfig` DISABLE KEYS */;
 LOCK TABLES `sysconfig` WRITE;
-INSERT INTO `EntandoPort`.`sysconfig` VALUES  ('production','contentTypes','Definition of the Content Types','<contenttypes>\n</contenttypes>'),
+INSERT INTO `${artifactId}Port`.`sysconfig` VALUES  ('production','contentTypes','Definition of the Content Types','<contenttypes>\n</contenttypes>'),
  ('production','imageDimensions','Definition of the resized image dimensions','<Dimensions>\n	<Dimension>\n		<id>1</id>\n		<dimx>90</dimx>\n		<dimy>90</dimy>\n	</Dimension>\n	<Dimension>\n		<id>2</id>\n		<dimx>130</dimx>\n		<dimy>130</dimy>\n	</Dimension>\n	<Dimension>\n		<id>3</id>\n		<dimx>150</dimx>\n		<dimy>150</dimy>\n	</Dimension>\n</Dimensions>\n'),
  ('production','langs','Definition of the system languages','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Langs>\n	<Lang>\n		<code>it</code>\n		<descr>Italiano</descr>\n	</Lang>\n	<Lang>\n		<code>en</code>\n		<descr>English</descr>\n		<default>true</default>\n	</Lang>\n</Langs>\n\n'),
  ('production','params','Configuration params. Tags other than \"Param\" are ignored','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<Params>\r\n	<Param name=\"urlStyle\">classic</Param>\r\n	<Param name=\"hypertextEditor\">none</Param>\r\n	<Param name=\"treeStyle_page\">classic</Param>\r\n	<Param name=\"treeStyle_category\">classic</Param>\r\n	<Param name=\"startLangFromBrowser\">false</Param>\r\n	<SpecialPages>\r\n		<Param name=\"notFoundPageCode\">notfound</Param>\r\n		<Param name=\"homePageCode\">homepage</Param>\r\n		<Param name=\"errorPageCode\">errorpage</Param>\r\n		<Param name=\"loginPageCode\">login</Param>\r\n	</SpecialPages>\r\n	<ExtendendPrivacyModule>\r\n		<Param name=\"extendedPrivacyModuleEnabled\">false</Param>\r\n		<Param name=\"maxMonthsSinceLastAccess\">6</Param>\r\n		<Param name=\"maxMonthsSinceLastPasswordChange\">3</Param>        \r\n	</ExtendendPrivacyModule>\r\n</Params>\r\n'),
@@ -433,33 +433,33 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`uniquekeys`
+-- Definition of table `${artifactId}Port`.`uniquekeys`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`uniquekeys`;
-CREATE TABLE  `EntandoPort`.`uniquekeys` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`uniquekeys`;
+CREATE TABLE  `${artifactId}Port`.`uniquekeys` (
   `id` int(11) NOT NULL DEFAULT '0',
   `keyvalue` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`uniquekeys`
+-- Dumping data for table `${artifactId}Port`.`uniquekeys`
 --
 
 /*!40000 ALTER TABLE `uniquekeys` DISABLE KEYS */;
 LOCK TABLES `uniquekeys` WRITE;
-INSERT INTO `EntandoPort`.`uniquekeys` VALUES  (1,1);
+INSERT INTO `${artifactId}Port`.`uniquekeys` VALUES  (1,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `uniquekeys` ENABLE KEYS */;
 
 
 --
--- Definition of table `EntandoPort`.`workcontentrelations`
+-- Definition of table `${artifactId}Port`.`workcontentrelations`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`workcontentrelations`;
-CREATE TABLE  `EntandoPort`.`workcontentrelations` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`workcontentrelations`;
+CREATE TABLE  `${artifactId}Port`.`workcontentrelations` (
   `contentid` varchar(16) NOT NULL,
   `refcategory` varchar(30) DEFAULT NULL,
   KEY `workcontentrelations_contentid_fkey` (`contentid`),
@@ -468,7 +468,7 @@ CREATE TABLE  `EntandoPort`.`workcontentrelations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`workcontentrelations`
+-- Dumping data for table `${artifactId}Port`.`workcontentrelations`
 --
 
 /*!40000 ALTER TABLE `workcontentrelations` DISABLE KEYS */;
@@ -478,11 +478,11 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `EntandoPort`.`workcontentsearch`
+-- Definition of table `${artifactId}Port`.`workcontentsearch`
 --
 
-DROP TABLE IF EXISTS `EntandoPort`.`workcontentsearch`;
-CREATE TABLE  `EntandoPort`.`workcontentsearch` (
+DROP TABLE IF EXISTS `${artifactId}Port`.`workcontentsearch`;
+CREATE TABLE  `${artifactId}Port`.`workcontentsearch` (
   `contentid` varchar(16) DEFAULT NULL,
   `attrname` varchar(30) NOT NULL,
   `textvalue` varchar(255) DEFAULT NULL,
@@ -494,7 +494,7 @@ CREATE TABLE  `EntandoPort`.`workcontentsearch` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `EntandoPort`.`workcontentsearch`
+-- Dumping data for table `${artifactId}Port`.`workcontentsearch`
 --
 
 /*!40000 ALTER TABLE `workcontentsearch` DISABLE KEYS */;
