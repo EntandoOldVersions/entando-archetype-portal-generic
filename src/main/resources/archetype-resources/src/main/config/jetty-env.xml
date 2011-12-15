@@ -97,8 +97,8 @@
 		<Arg>java:comp/env/jdbc/portDataSource</Arg>
 		<Arg>
 			<New class="org.apache.commons.dbcp.BasicDataSource">
-				<Set name="driverClassName">org.postgresql.Driver</Set>
-				<Set name="url">jdbc:postgresql://${profile.database.hostname}:${profile.database.port}/${profile.application.name}Port</Set>
+				<Set name="driverClassName">${profile.database.driverClassName}</Set>
+				<Set name="url">${profile.database.url.portdb}</Set>
 				<Set name="username">${profile.database.username}</Set>
 				<Set name="password">${profile.database.password}</Set>
 			</New>
@@ -108,8 +108,8 @@
 		<Arg>java:comp/env/jdbc/servDataSource</Arg>
 		<Arg>
 			<New class="org.apache.commons.dbcp.BasicDataSource">
-				<Set name="driverClassName">org.postgresql.Driver</Set>
-				<Set name="url">jdbc:postgresql://${profile.database.hostname}:${profile.database.port}/${profile.application.name}Serv</Set>
+				<Set name="driverClassName">${profile.database.driverClassName}</Set>
+				<Set name="url">${profile.database.url.servdb}</Set>
 				<Set name="username">${profile.database.username}</Set>
 				<Set name="password">${profile.database.password}</Set>
 			</New>
