@@ -295,6 +295,7 @@
 		<foreach target="PG-db-restore-bundles-helper" param="pluginDir">
 			<path>
 				<dirset dir="${dist.path}/dependencies-unpacked/misc">
+					<include name="entando-misc-*"/>
 					<include name="entando-content-*"/>
 					<include name="entando-page-*"/>
 					<include name="entando-showlet-*"/>					
