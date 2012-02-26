@@ -6,6 +6,7 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>
 		classpath:spring/systemConfig.xml 
+		classpath:spring/restServerConfig.xml 
 		classpath*:spring/aps/**/**.xml 
 		classpath*:spring/apsadmin/**/**.xml 
 		classpath*:spring/plugins/**/aps/**/**.xml 
