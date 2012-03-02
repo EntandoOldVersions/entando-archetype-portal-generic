@@ -86,6 +86,15 @@ img.right {
 	margin: 0 0 0.5em 0.5em;
 }
 
+img.logo {
+	-moz-box-shadow: 3px 3px 6px 0 #585858;
+	-webkit-box-shadow: 3px 3px 6px 0 #585858;
+	box-shadow: 3px 3px 6px 0 #585858;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+}
+
 .clear {
 	clear: both;
 }
@@ -166,7 +175,7 @@ h2.version {
 <h2 class="version">Version <wp:info key="systemParam" paramName="version" /></h2>
 
 <p>
-	<img class="right" src="<wp:imgURL />/entando-logo_badge.png" alt="" />
+	<img class="right logo" src="<wp:imgURL />/entando-logo_badge.png" alt="" />
 	If you can see this page, then the people who own this host have just installed <strong>Entando</strong> successfully.<br/>
 	They now have to replace this placeholder page or just its contents.
 </p>
