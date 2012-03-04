@@ -96,7 +96,8 @@
 		<test.database.password>agile</test.database.password>
 		<test.database.basename>entando-core-engine</test.database.basename>
 		<test.database.basepath>${project.build.directory}/test/sql</test.database.basepath>
-		<skipDerby>true</skipDerby>	
+		<skipDerby>true</skipDerby>
+		<entando.version>2.4.1-SNAPSHOT</entando.version>
 	</properties>
 	<build>
 		<finalName>${artifactId}</finalName>
@@ -950,27 +951,27 @@
 		<dependency>
 			<groupId>org.entando.entando</groupId>
 			<artifactId>entando-core-webapp</artifactId>
-			<version>2.4.1-SNAPSHOT</version>
+			<version>${entando.version}</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>org.entando.entando</groupId>
 			<artifactId>entando-core-engine</artifactId>
-			<version>2.4.1-SNAPSHOT</version>
+			<version>${entando.version}</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.entando.entando</groupId>
 			<artifactId>entando-core-engine</artifactId>
-			<version>2.4.1-SNAPSHOT</version>
+			<version>${entando.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.entando.entando</groupId>
 			<artifactId>entando-core-engine</artifactId>
-			<version>2.4.1-SNAPSHOT</version>
+			<version>${entando.version}</version>
 			<type>zip</type>
 			<classifier>misc-test</classifier>
 			<scope>test</scope>
