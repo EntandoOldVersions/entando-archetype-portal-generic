@@ -42,7 +42,7 @@ h1 {
 	text-align: left;
 	margin: 1em 0 0.5em 0;
 	padding: 0 0 0 1em;
-	color: #B2DF27;
+	color: #B2E02E;
 	border-bottom: 0.1em solid #dedede;
 }
 
@@ -87,9 +87,9 @@ img.right {
 }
 
 img.logo {
-	-moz-box-shadow: 3px 3px 6px 0 #585858;
-	-webkit-box-shadow: 3px 3px 6px 0 #585858;
-	box-shadow: 3px 3px 6px 0 #585858;
+	-moz-box-shadow: 0 0 0 0.5em rgba(255, 255, 255, 0.2);
+	-webkit-box-shadow: 0 0 0 0.5em rgba(255, 255, 255, 0.2);
+	box-shadow: 0 0 0 0.5em rgba(255, 255, 255, 0.2);
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
@@ -100,8 +100,8 @@ img.logo {
 }
 
 a:link, a:visited {
-	color: #008ED5;
-	border-bottom: 0.1em solid #008ED5;
+	color: #B2E02E;
+	border-bottom: 0.1em solid #B2E02E;
 	text-decoration: none; 
 }
 
