@@ -347,6 +347,27 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>copy-resources-tld</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/main/webapp/WEB-INF</outputDirectory>
+							<encoding>UTF-8</encoding>
+							<resources>
+								<resource>
+									<directory>src/main/tld</directory>
+									<includes>
+										<include>**/*.tld</include>
+									</includes>                                 
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution> 
+					<execution>
 						<id>derby-copy-sql</id>
 						<phase>prepare-package</phase>
 						<goals>
@@ -868,6 +889,14 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<packagingExcludes>WEB-INF/**.tld</packagingExcludes>
+				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
