@@ -488,6 +488,14 @@
 										  </fileset>
 										</replaceregexp>										
 										
+										<replaceregexp byline="true">
+										  <regexp pattern='"char",'/>
+										  <substitution expression="CHAR(2),"/>
+										  <fileset dir="${project.build.directory}/derby/sql">
+										    <include name="*.sql"/>
+										  </fileset>
+										</replaceregexp>										
+										
 									</then>
 								</if>
 							</target>
