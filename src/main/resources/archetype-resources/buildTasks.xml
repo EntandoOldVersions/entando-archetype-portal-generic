@@ -469,5 +469,83 @@
 			<arg value="site"/>
 		</exec>
 	</target>
+	
+	<!-- MySQL -->
+	<target name="MySql-db-backup" description="MySQL db backup">
+		<echo message="Dumping ${webappname}${test.marker}Port" />
+		<exec executable="${mysql.bin.path}/${mysql.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line="--database" />
+			<arg line="${webappname}${test.marker}Port"/>
+			<arg line="-r"/>
+			<arg path="${basedir}/src/${project.src.branch}/db/mysql/${webappname}${test.marker}Port.sql" />
+		</exec>
+		<echo message="${webappname}${test.marker}Port dumped." />
+		<echo message="Dumping ${webappname}${test.marker}Serv" />
+		<exec executable="${mysql.bin.path}/${mysql.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line="--database" />
+			<arg line="${webappname}${test.marker}Serv"/>
+			<arg line="-r"/>
+			<arg path="${basedir}/src/${project.src.branch}/db/mysql/${webappname}${test.marker}Serv.sql" />
+		</exec>
+		<echo message="${webappname}${test.marker}Serv dumped." />
+	</target>
 
+	<target name="MySql-db-restore" description="MySQL db restore">
+		<echo message="Restoring ${webappname}${test.marker}Port..." />
+		<exec executable="${mysql.bin.path}/${mysql.bin.restore}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "source ${basedir}/src/${project.src.branch}/db/mysql/${webappname}${test.marker}Port.sql" '/>
+		</exec>
+		<echo message="...${webappname}${test.marker}Port Restored." />
+		<echo message="Restoring ${webappname}${test.marker}Serv..." />
+		<exec executable="${mysql.bin.path}/${mysql.bin.restore}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "source ${basedir}/src/${project.src.branch}/db/mysql/${webappname}${test.marker}Serv.sql" '/>
+		</exec>
+		<echo message="...${webappname}${test.marker}Serv Restored." />
+	</target>
+
+	<target name="MySql-db-drop" description="MySql db drop">
+		<echo message="Dropping ${webappname}${test.marker}Port..." />
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "drop database ${webappname}${test.marker}Port;" '/>
+		</exec>
+		<echo message="... ${webappname}${test.marker}Port dropped." />
+		<echo message="Dropping ${webappname}${test.marker}Serv" />
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "drop database ${webappname}${test.marker}Serv;" '/>
+		</exec>
+		<echo message="... ${webappname}${test.marker}Serv dropped." />
+	</target>
+
+	<target name="MySql-db-full-update" description="MySql db update" depends="MySql-db-drop, MySql-db-restore">
+		<echo message="Databases full update [done]" />
+	</target>
+	
 </project>

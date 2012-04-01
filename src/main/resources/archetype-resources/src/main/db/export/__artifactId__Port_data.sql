@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2011-09-29 13:07:51 CEST
+-- Started on 2012-04-01 11:25:20 CEST
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -13,8 +13,8 @@ SET escape_string_warning = off;
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 1823 (class 0 OID 10715369)
--- Dependencies: 1503
+-- TOC entry 1839 (class 0 OID 583805)
+-- Dependencies: 127
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
@@ -28,40 +28,40 @@ INSERT INTO categories (catcode, parentcode, titles) VALUES ('home', 'home', '<?
 
 
 --
--- TOC entry 1824 (class 0 OID 10715375)
--- Dependencies: 1504
+-- TOC entry 1840 (class 0 OID 583811)
+-- Dependencies: 128
 -- Data for Name: contentmodels; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
 
 
 --
--- TOC entry 1825 (class 0 OID 10715381)
--- Dependencies: 1505
+-- TOC entry 1841 (class 0 OID 583817)
+-- Dependencies: 129
 -- Data for Name: contentrelations; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
 
 
 --
--- TOC entry 1826 (class 0 OID 10715384)
--- Dependencies: 1506
+-- TOC entry 1842 (class 0 OID 583820)
+-- Dependencies: 130
 -- Data for Name: contents; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
 
 
 --
--- TOC entry 1827 (class 0 OID 10715390)
--- Dependencies: 1507
+-- TOC entry 1843 (class 0 OID 583826)
+-- Dependencies: 131
 -- Data for Name: contentsearch; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
 
 
 --
--- TOC entry 1828 (class 0 OID 10715393)
--- Dependencies: 1508
+-- TOC entry 1844 (class 0 OID 583829)
+-- Dependencies: 132
 -- Data for Name: localstrings; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
@@ -100,8 +100,8 @@ INSERT INTO localstrings (keycode, langcode, stringvalue) VALUES ('NUMBER_TO', '
 
 
 --
--- TOC entry 1829 (class 0 OID 10715399)
--- Dependencies: 1509
+-- TOC entry 1845 (class 0 OID 583835)
+-- Dependencies: 133
 -- Data for Name: pagemodels; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
@@ -114,8 +114,8 @@ INSERT INTO pagemodels (code, descr, frames, plugincode) VALUES ('home', 'Home P
 
 
 --
--- TOC entry 1830 (class 0 OID 10715405)
--- Dependencies: 1510
+-- TOC entry 1846 (class 0 OID 583841)
+-- Dependencies: 134
 -- Data for Name: pages; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
@@ -153,24 +153,24 @@ INSERT INTO pages (code, parentcode, pos, modelcode, titles, groupcode, showinme
 
 
 --
--- TOC entry 1831 (class 0 OID 10715411)
--- Dependencies: 1511
+-- TOC entry 1847 (class 0 OID 583847)
+-- Dependencies: 135
 -- Data for Name: resourcerelations; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
 
 
 --
--- TOC entry 1832 (class 0 OID 10715414)
--- Dependencies: 1512
+-- TOC entry 1848 (class 0 OID 583850)
+-- Dependencies: 136
 -- Data for Name: resources; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
 
 
 --
--- TOC entry 1833 (class 0 OID 10715420)
--- Dependencies: 1513
+-- TOC entry 1849 (class 0 OID 583856)
+-- Dependencies: 137
 -- Data for Name: showletcatalog; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
@@ -222,6 +222,7 @@ INSERT INTO showletcatalog (code, titles, parameters, plugincode, parenttypecode
 	<parameter name="userFilters">Front-End user filter options</parameter>
 	<parameter name="category">Content Category **deprecated**</parameter>
 	<parameter name="categories">Content Category codes (comma separeted)</parameter>
+    <parameter name="orClauseCategoryFilter" />
 	<parameter name="maxElemForItem">Contents for each page</parameter>
 	<parameter name="filters" />
 	<parameter name="title_{lang}">Showlet Title in lang {lang}</parameter>
@@ -229,11 +230,21 @@ INSERT INTO showletcatalog (code, titles, parameters, plugincode, parenttypecode
 	<parameter name="linkDescr_{lang}">Link description in lang {lang}</parameter>
 	<action name="listViewerConfig"/>
 </config>', 'jacms', NULL, NULL, 1, NULL);
+INSERT INTO showletcatalog (code, titles, parameters, plugincode, parenttypecode, defaultconfig, locked, maingroup) VALUES ('entando_apis', '<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+<property key="en">APIs</property>
+<property key="it">APIs</property>
+</properties>
+', NULL, NULL, 'formAction', '<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+<property key="actionPath">/ExtStr2/do/Front/Api/Resource/list.action</property>
+</properties>
+', 1, 'free');
 
 
 --
--- TOC entry 1834 (class 0 OID 10715426)
--- Dependencies: 1514
+-- TOC entry 1850 (class 0 OID 583862)
+-- Dependencies: 138
 -- Data for Name: showletconfig; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
@@ -241,8 +252,8 @@ INSERT INTO showletconfig (pagecode, framepos, showletcode, config, publishedcon
 
 
 --
--- TOC entry 1835 (class 0 OID 10715432)
--- Dependencies: 1515
+-- TOC entry 1851 (class 0 OID 583868)
+-- Dependencies: 139
 -- Data for Name: sysconfig; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
@@ -304,8 +315,8 @@ INSERT INTO sysconfig (version, item, descr, config) VALUES ('production', 'para
 
 
 --
--- TOC entry 1836 (class 0 OID 10715438)
--- Dependencies: 1516
+-- TOC entry 1852 (class 0 OID 583874)
+-- Dependencies: 140
 -- Data for Name: uniquekeys; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
@@ -313,22 +324,22 @@ INSERT INTO uniquekeys (id, keyvalue) VALUES (1, 1);
 
 
 --
--- TOC entry 1837 (class 0 OID 10715441)
--- Dependencies: 1517
+-- TOC entry 1853 (class 0 OID 583877)
+-- Dependencies: 141
 -- Data for Name: workcontentrelations; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
 
 
 --
--- TOC entry 1838 (class 0 OID 10715444)
--- Dependencies: 1518
+-- TOC entry 1854 (class 0 OID 583880)
+-- Dependencies: 142
 -- Data for Name: workcontentsearch; Type: TABLE DATA; Schema: public; Owner: agile
 --
 
 
 
--- Completed on 2011-09-29 13:07:52 CEST
+-- Completed on 2012-04-01 11:25:21 CEST
 
 --
 -- PostgreSQL database dump complete

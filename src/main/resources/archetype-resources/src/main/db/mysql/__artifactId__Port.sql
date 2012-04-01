@@ -1,55 +1,61 @@
--- MySQL Administrator dump 1.4
+-- MySQL dump 10.13  Distrib 5.1.61, for debian-linux-gnu (i686)
 --
+-- Host: localhost    Database: entandoPort
 -- ------------------------------------------------------
--- Server version	5.1.58-1ubuntu1
-
+-- Server version	5.1.61-0ubuntu0.11.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
-
---
--- Create schema ${artifactId}Port
---
-
-CREATE DATABASE IF NOT EXISTS ${artifactId}Port;
-USE ${artifactId}Port;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Definition of table `${artifactId}Port`.`categories`
+-- Current Database: `${artifactId}Port`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`categories`;
-CREATE TABLE  `${artifactId}Port`.`categories` (
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `${artifactId}Port` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `${artifactId}Port`;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories` (
   `catcode` varchar(30) NOT NULL,
   `parentcode` varchar(30) NOT NULL,
   `titles` longtext NOT NULL,
   PRIMARY KEY (`catcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`categories`
+-- Dumping data for table `categories`
 --
 
-/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 LOCK TABLES `categories` WRITE;
-INSERT INTO `${artifactId}Port`.`categories` VALUES  ('home','home','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Generale</property>\n<property key=\"en\">All</property>\n</properties>\n\n');
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES ('home','home','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Generale</property>\n<property key=\"en\">All</property>\n</properties>\n\n');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`contentmodels`
+-- Table structure for table `contentmodels`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`contentmodels`;
-CREATE TABLE  `${artifactId}Port`.`contentmodels` (
+DROP TABLE IF EXISTS `contentmodels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contentmodels` (
   `modelid` int(11) NOT NULL,
   `contenttype` varchar(30) NOT NULL,
   `descr` varchar(50) NOT NULL,
@@ -57,23 +63,25 @@ CREATE TABLE  `${artifactId}Port`.`contentmodels` (
   `stylesheet` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`modelid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`contentmodels`
+-- Dumping data for table `contentmodels`
 --
 
-/*!40000 ALTER TABLE `contentmodels` DISABLE KEYS */;
 LOCK TABLES `contentmodels` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `contentmodels` DISABLE KEYS */;
 /*!40000 ALTER TABLE `contentmodels` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`contentrelations`
+-- Table structure for table `contentrelations`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`contentrelations`;
-CREATE TABLE  `${artifactId}Port`.`contentrelations` (
+DROP TABLE IF EXISTS `contentrelations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contentrelations` (
   `contentid` varchar(16) NOT NULL,
   `refpage` varchar(30) DEFAULT NULL,
   `refcontent` varchar(16) DEFAULT NULL,
@@ -91,23 +99,25 @@ CREATE TABLE  `${artifactId}Port`.`contentrelations` (
   CONSTRAINT `contentrelations_refpage_fkey` FOREIGN KEY (`refpage`) REFERENCES `pages` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `contentrelations_refresource_fkey` FOREIGN KEY (`refresource`) REFERENCES `resources` (`resid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`contentrelations`
+-- Dumping data for table `contentrelations`
 --
 
-/*!40000 ALTER TABLE `contentrelations` DISABLE KEYS */;
 LOCK TABLES `contentrelations` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `contentrelations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `contentrelations` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`contents`
+-- Table structure for table `contents`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`contents`;
-CREATE TABLE  `${artifactId}Port`.`contents` (
+DROP TABLE IF EXISTS `contents`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contents` (
   `contentid` varchar(16) NOT NULL,
   `contenttype` varchar(30) NOT NULL,
   `descr` varchar(260) NOT NULL,
@@ -121,23 +131,25 @@ CREATE TABLE  `${artifactId}Port`.`contents` (
   `lasteditor` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`contentid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`contents`
+-- Dumping data for table `contents`
 --
 
-/*!40000 ALTER TABLE `contents` DISABLE KEYS */;
 LOCK TABLES `contents` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `contents` DISABLE KEYS */;
 /*!40000 ALTER TABLE `contents` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`contentsearch`
+-- Table structure for table `contentsearch`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`contentsearch`;
-CREATE TABLE  `${artifactId}Port`.`contentsearch` (
+DROP TABLE IF EXISTS `contentsearch`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contentsearch` (
   `contentid` varchar(16) NOT NULL,
   `attrname` varchar(30) NOT NULL,
   `textvalue` varchar(255) DEFAULT NULL,
@@ -147,126 +159,76 @@ CREATE TABLE  `${artifactId}Port`.`contentsearch` (
   KEY `contentsearch_contentid_fkey` (`contentid`),
   CONSTRAINT `contentsearch_contentid_fkey` FOREIGN KEY (`contentid`) REFERENCES `contents` (`contentid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`contentsearch`
+-- Dumping data for table `contentsearch`
 --
 
-/*!40000 ALTER TABLE `contentsearch` DISABLE KEYS */;
 LOCK TABLES `contentsearch` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `contentsearch` DISABLE KEYS */;
 /*!40000 ALTER TABLE `contentsearch` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`localstrings`
+-- Table structure for table `localstrings`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`localstrings`;
-CREATE TABLE  `${artifactId}Port`.`localstrings` (
+DROP TABLE IF EXISTS `localstrings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `localstrings` (
   `keycode` varchar(50) NOT NULL,
   `langcode` varchar(2) NOT NULL,
   `stringvalue` longtext NOT NULL,
   PRIMARY KEY (`keycode`,`langcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`localstrings`
+-- Dumping data for table `localstrings`
 --
 
-/*!40000 ALTER TABLE `localstrings` DISABLE KEYS */;
 LOCK TABLES `localstrings` WRITE;
-INSERT INTO `${artifactId}Port`.`localstrings` VALUES  ('ADMINISTRATION_BASIC','en','Normal'),
- ('ADMINISTRATION_BASIC','it','Normale'),
- ('ADMINISTRATION_BASIC_GOTO','en','Go to the administration with normal client'),
- ('ADMINISTRATION_BASIC_GOTO','it','Accedi con client normale'),
- ('ADMINISTRATION_MINT','en','Advanced'),
- ('ADMINISTRATION_MINT','it','Avanzata'),
- ('ADMINISTRATION_MINT_GOTO','en','Go to the administration with advanced client'),
- ('ADMINISTRATION_MINT_GOTO','it','Accedi con client avanzato'),
- ('ALL','en','All'),
- ('ALL','it','Tutte'),
- ('BOTH','en','Both'),
- ('BOTH','it','Entrambi'),
- ('CATEGORY','en','Category'),
- ('CATEGORY','it','Categoria'),
- ('DATE_FROM','en','From'),
- ('DATE_FROM','it','Da'),
- ('DATE_TO','en','To'),
- ('DATE_TO','it','A'),
- ('END','en','To'),
- ('END','it','Fino a'),
- ('ERRORS','en','Errors'),
- ('ERRORS','it','Errori'),
- ('GENERIC_ERROR','en','Generic Error'),
- ('GENERIC_ERROR','it','Errore Generico'),
- ('IGNORE','en','Ignore this field'),
- ('IGNORE','it','Ignora questo campo'),
- ('jacms_LIST_VIEWER_FIELD','en','The field'),
- ('jacms_LIST_VIEWER_FIELD','it','Il campo'),
- ('jacms_LIST_VIEWER_INVALID_FORMAT','en','has a format that is not valid.'),
- ('jacms_LIST_VIEWER_INVALID_FORMAT','it','ha un formato che risulta non valido.'),
- ('jacms_LIST_VIEWER_INVALID_RANGE','en','has a value not consistent. Check and start a new search.'),
- ('jacms_LIST_VIEWER_INVALID_RANGE','it','ha un valore non coerente. Ricontrolla ed effettua una nuova ricerca.'),
- ('LIST_VIEWER_EMPTY','en','No results found. Check your search filters.'),
- ('LIST_VIEWER_EMPTY','it','Nessun risultato trovato. Controlla i tuoi filtri di ricerca.'),
- ('NO','en','No'),
- ('NO','it','No'),
- ('NUMBER_FROM','en','From'),
- ('NUMBER_FROM','it','Da'),
- ('NUMBER_TO','en','To'),
- ('NUMBER_TO','it','A'),
- ('PAGE','en','page'),
- ('PAGE','it','pagina'),
- ('PAGE_MODEL','en','page model'),
- ('PAGE_MODEL','it','modello pagina'),
- ('PAGE_NOT_FOUND','en','Page not found'),
- ('PAGE_NOT_FOUND','it','Pagina non trovata'),
- ('PAGE_TITLE','en','page title'),
- ('PAGE_TITLE','it','titolo pagina'),
- ('START','en','From'),
- ('START','it','Da'),
- ('TEXT','en','Text'),
- ('TEXT','it','Testo'),
- ('USER_NOT_ALLOWED','en','User not allowed'),
- ('USER_NOT_ALLOWED','it','Utente non autorizzato'),
- ('YES','en','Yes'),
- ('YES','it','Si');
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `localstrings` DISABLE KEYS */;
+INSERT INTO `localstrings` VALUES ('ADMINISTRATION_BASIC','en','Normal'),('ADMINISTRATION_BASIC','it','Normale'),('ADMINISTRATION_BASIC_GOTO','en','Go to the administration with normal client'),('ADMINISTRATION_BASIC_GOTO','it','Accedi con client normale'),('ADMINISTRATION_MINT','en','Advanced'),('ADMINISTRATION_MINT','it','Avanzata'),('ADMINISTRATION_MINT_GOTO','en','Go to the administration with advanced client'),('ADMINISTRATION_MINT_GOTO','it','Accedi con client avanzato'),('ALL','en','All'),('ALL','it','Tutte'),('BOTH','en','Both'),('BOTH','it','Entrambi'),('CATEGORY','en','Category'),('CATEGORY','it','Categoria'),('DATE_FROM','en','From'),('DATE_FROM','it','Da'),('DATE_TO','en','To'),('DATE_TO','it','A'),('END','en','To'),('END','it','Fino a'),('ERRORS','en','Errors'),('ERRORS','it','Errori'),('GENERIC_ERROR','en','Generic Error'),('GENERIC_ERROR','it','Errore Generico'),('IGNORE','en','Ignore this field'),('IGNORE','it','Ignora questo campo'),('jacms_LIST_VIEWER_FIELD','en','The field'),('jacms_LIST_VIEWER_FIELD','it','Il campo'),('jacms_LIST_VIEWER_INVALID_FORMAT','en','has a format that is not valid.'),('jacms_LIST_VIEWER_INVALID_FORMAT','it','ha un formato che risulta non valido.'),('jacms_LIST_VIEWER_INVALID_RANGE','en','has a value not consistent. Check and start a new search.'),('jacms_LIST_VIEWER_INVALID_RANGE','it','ha un valore non coerente. Ricontrolla ed effettua una nuova ricerca.'),('LIST_VIEWER_EMPTY','en','No results found. Check your search filters.'),('LIST_VIEWER_EMPTY','it','Nessun risultato trovato. Controlla i tuoi filtri di ricerca.'),('NO','en','No'),('NO','it','No'),('NUMBER_FROM','en','From'),('NUMBER_FROM','it','Da'),('NUMBER_TO','en','To'),('NUMBER_TO','it','A'),('PAGE','en','page'),('PAGE','it','pagina'),('PAGE_MODEL','en','page model'),('PAGE_MODEL','it','modello pagina'),('PAGE_NOT_FOUND','en','Page not found'),('PAGE_NOT_FOUND','it','Pagina non trovata'),('PAGE_TITLE','en','page title'),('PAGE_TITLE','it','titolo pagina'),('START','en','From'),('START','it','Da'),('TEXT','en','Text'),('TEXT','it','Testo'),('USER_NOT_ALLOWED','en','User not allowed'),('USER_NOT_ALLOWED','it','Utente non autorizzato'),('YES','en','Yes'),('YES','it','Si');
 /*!40000 ALTER TABLE `localstrings` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`pagemodels`
+-- Table structure for table `pagemodels`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`pagemodels`;
-CREATE TABLE  `${artifactId}Port`.`pagemodels` (
+DROP TABLE IF EXISTS `pagemodels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pagemodels` (
   `code` varchar(40) NOT NULL,
   `descr` varchar(50) NOT NULL,
   `frames` longtext,
   `plugincode` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`pagemodels`
+-- Dumping data for table `pagemodels`
 --
 
-/*!40000 ALTER TABLE `pagemodels` DISABLE KEYS */;
 LOCK TABLES `pagemodels` WRITE;
-INSERT INTO `${artifactId}Port`.`pagemodels` VALUES  ('home','Home Page',NULL,NULL),
- ('service','Service Page','<frames>\n	<frame pos=\"0\">\n		<descr>Sample Frame</descr>\n	</frame>	\n</frames>',NULL);
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `pagemodels` DISABLE KEYS */;
+INSERT INTO `pagemodels` VALUES ('home','Home Page',NULL,NULL),('service','Service Page','<frames>\n	<frame pos=\"0\">\n		<descr>Sample Frame</descr>\n	</frame>	\n</frames>',NULL);
 /*!40000 ALTER TABLE `pagemodels` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`pages`
+-- Table structure for table `pages`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`pages`;
-CREATE TABLE  `${artifactId}Port`.`pages` (
+DROP TABLE IF EXISTS `pages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pages` (
   `code` varchar(30) NOT NULL,
   `parentcode` varchar(30) DEFAULT NULL,
   `pos` int(11) NOT NULL,
@@ -279,28 +241,26 @@ CREATE TABLE  `${artifactId}Port`.`pages` (
   KEY `pages_modelcode_fkey` (`modelcode`),
   CONSTRAINT `pages_modelcode_fkey` FOREIGN KEY (`modelcode`) REFERENCES `pagemodels` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`pages`
+-- Dumping data for table `pages`
 --
 
-/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
 LOCK TABLES `pages` WRITE;
-INSERT INTO `${artifactId}Port`.`pages` VALUES  ('errorpage','service',5,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Error page</property>\n<property key=\"it\">Pagina di errore</property>\n</properties>\n\n','free',1,NULL),
- ('homepage','homepage',-1,'home','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Home</property>\n<property key=\"it\">Home</property>\n</properties>\n\n','free',1,NULL),
- ('login','service',6,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Pagina di login</property>\n<property key=\"en\">Login</property>\n</properties>','free',1,NULL),
- ('notfound','service',4,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Page not found</property>\n<property key=\"it\">Pagina non trovata</property>\n</properties>\n\n','free',1,NULL),
- ('service','homepage',5,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Pagine di Servizio</property>\n<property key=\"en\">Service</property>\n</properties>','free',0,NULL);
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
+INSERT INTO `pages` VALUES ('errorpage','service',5,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Error page</property>\n<property key=\"it\">Pagina di errore</property>\n</properties>\n\n','free',1,NULL),('homepage','homepage',-1,'home','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Home</property>\n<property key=\"it\">Home</property>\n</properties>\n\n','free',1,NULL),('login','service',6,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Pagina di login</property>\n<property key=\"en\">Login</property>\n</properties>','free',1,NULL),('notfound','service',4,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Page not found</property>\n<property key=\"it\">Pagina non trovata</property>\n</properties>\n\n','free',1,NULL),('service','homepage',5,'service','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"it\">Pagine di Servizio</property>\n<property key=\"en\">Service</property>\n</properties>','free',0,NULL);
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`resourcerelations`
+-- Table structure for table `resourcerelations`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`resourcerelations`;
-CREATE TABLE  `${artifactId}Port`.`resourcerelations` (
+DROP TABLE IF EXISTS `resourcerelations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resourcerelations` (
   `resid` varchar(16) NOT NULL,
   `refcategory` varchar(30) DEFAULT NULL,
   KEY `resourcerelations_refcategory_fkey` (`refcategory`),
@@ -308,23 +268,25 @@ CREATE TABLE  `${artifactId}Port`.`resourcerelations` (
   CONSTRAINT `resourcerelations_refcategory_fkey` FOREIGN KEY (`refcategory`) REFERENCES `categories` (`catcode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `resourcerelations_resid_fkey` FOREIGN KEY (`resid`) REFERENCES `resources` (`resid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`resourcerelations`
+-- Dumping data for table `resourcerelations`
 --
 
-/*!40000 ALTER TABLE `resourcerelations` DISABLE KEYS */;
 LOCK TABLES `resourcerelations` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `resourcerelations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `resourcerelations` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`resources`
+-- Table structure for table `resources`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`resources`;
-CREATE TABLE  `${artifactId}Port`.`resources` (
+DROP TABLE IF EXISTS `resources`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resources` (
   `resid` varchar(16) NOT NULL,
   `restype` varchar(30) NOT NULL,
   `descr` varchar(260) NOT NULL,
@@ -333,23 +295,25 @@ CREATE TABLE  `${artifactId}Port`.`resources` (
   `masterfilename` varchar(100) NOT NULL,
   PRIMARY KEY (`resid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`resources`
+-- Dumping data for table `resources`
 --
 
-/*!40000 ALTER TABLE `resources` DISABLE KEYS */;
 LOCK TABLES `resources` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `resources` DISABLE KEYS */;
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`showletcatalog`
+-- Table structure for table `showletcatalog`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`showletcatalog`;
-CREATE TABLE  `${artifactId}Port`.`showletcatalog` (
+DROP TABLE IF EXISTS `showletcatalog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `showletcatalog` (
   `code` varchar(40) NOT NULL,
   `titles` longtext NOT NULL,
   `parameters` longtext,
@@ -360,29 +324,26 @@ CREATE TABLE  `${artifactId}Port`.`showletcatalog` (
   `maingroup` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`showletcatalog`
+-- Dumping data for table `showletcatalog`
 --
 
-/*!40000 ALTER TABLE `showletcatalog` DISABLE KEYS */;
 LOCK TABLES `showletcatalog` WRITE;
-INSERT INTO `${artifactId}Port`.`showletcatalog` VALUES  ('content_viewer','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Contents - Publish a Content</property>\n<property key=\"it\">Contenuti - Pubblica un Contenuto</property>\n</properties>','<config>\n	<parameter name=\"contentId\">Content ID</parameter>\n	<parameter name=\"modelId\">Content Model ID</parameter>\n	<action name=\"viewerConfig\"/>\n</config>','jacms',NULL,NULL,1,''),
- ('content_viewer_list','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Contents - Publish a List of Contents</property>\n<property key=\"it\">Contenuti - Pubblica una Lista di Contenuti</property>\n</properties>','<config>\n	<parameter name=\"contentType\">Content Type (mandatory)</parameter>\n	<parameter name=\"modelId\">Content Model</parameter>\n	<parameter name=\"userFilters\">Front-End user filter options</parameter>\n	<parameter name=\"category\">Content Category **deprecated**</parameter>\n	<parameter name=\"categories\">Content Category codes (comma separeted)</parameter>\n	<parameter name=\"maxElemForItem\">Contents for each page</parameter>\n	<parameter name=\"filters\" />\n	<parameter name=\"title_{lang}\">Showlet Title in lang {lang}</parameter>\n	<parameter name=\"pageLink\">The code of the Page to link</parameter>\n	<parameter name=\"linkDescr_{lang}\">Link description in lang {lang}</parameter>\n	<action name=\"listViewerConfig\"/>\n</config>','jacms',NULL,NULL,1,''),
- ('formAction','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Internal Servlet</property>\n<property key=\"it\">Invocazione di una Servlet Interna</property>\n</properties>','<config>\n	<parameter name=\"actionPath\">\n		Path to an action or to a JSP. You must prepend \'/ExtStr2\' to any Struts2 action path\n	</parameter>\n	<action name=\"configSimpleParameter\"/>\n</config>',NULL,NULL,NULL,1,''),
- ('login_form','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Login Form</property>\n<property key=\"it\">Form di Login</property>\n</properties>',NULL,NULL,NULL,NULL,1,''),
- ('messages_system','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">System Messages</property>\n<property key=\"it\">Messaggi di Sistema</property>\n</properties>',NULL,NULL,NULL,NULL,1,''),
- ('search_result','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Search - Search Result</property>\n<property key=\"it\">Ricerca - Risultati della Ricerca</property>\n</properties>',NULL,'jacms',NULL,NULL,1,'');
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `showletcatalog` DISABLE KEYS */;
+INSERT INTO `showletcatalog` VALUES ('content_viewer','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Contents - Publish a Content</property>\n<property key=\"it\">Contenuti - Pubblica un Contenuto</property>\n</properties>','<config>\n	<parameter name=\"contentId\">Content ID</parameter>\n	<parameter name=\"modelId\">Content Model ID</parameter>\n	<action name=\"viewerConfig\"/>\n</config>','jacms',NULL,NULL,1,''),('content_viewer_list','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Contents - Publish a List of Contents</property>\n<property key=\"it\">Contenuti - Pubblica una Lista di Contenuti</property>\n</properties>','<config>\n	<parameter name=\"contentType\">Content Type (mandatory)</parameter>\n	<parameter name=\"modelId\">Content Model</parameter>\n	<parameter name=\"userFilters\">Front-End user filter options</parameter>\n	<parameter name=\"category\">Content Category **deprecated**</parameter>\n	<parameter name=\"categories\">Content Category codes (comma separeted)</parameter>\n        <parameter name=\"orClauseCategoryFilter\" />\n	<parameter name=\"maxElemForItem\">Contents for each page</parameter>\n	<parameter name=\"filters\" />\n	<parameter name=\"title_{lang}\">Showlet Title in lang {lang}</parameter>\n	<parameter name=\"pageLink\">The code of the Page to link</parameter>\n	<parameter name=\"linkDescr_{lang}\">Link description in lang {lang}</parameter>\n	<action name=\"listViewerConfig\"/>\n</config>','jacms',NULL,NULL,1,''),('entando_apis','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">APIs</property>\n<property key=\"it\">APIs</property>\n</properties>\n',NULL,NULL,'formAction','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"actionPath\">/ExtStr2/do/Front/Api/Resource/list.action</property>\n</properties>\n',1,'free'),('formAction','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Internal Servlet</property>\n<property key=\"it\">Invocazione di una Servlet Interna</property>\n</properties>','<config>\n	<parameter name=\"actionPath\">\n		Path to an action or to a JSP. You must prepend \'/ExtStr2\' to any Struts2 action path\n	</parameter>\n	<action name=\"configSimpleParameter\"/>\n</config>',NULL,NULL,NULL,1,''),('login_form','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Login Form</property>\n<property key=\"it\">Form di Login</property>\n</properties>',NULL,NULL,NULL,NULL,1,''),('messages_system','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">System Messages</property>\n<property key=\"it\">Messaggi di Sistema</property>\n</properties>',NULL,NULL,NULL,NULL,1,''),('search_result','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<properties>\n<property key=\"en\">Search - Search Result</property>\n<property key=\"it\">Ricerca - Risultati della Ricerca</property>\n</properties>',NULL,'jacms',NULL,NULL,1,'');
 /*!40000 ALTER TABLE `showletcatalog` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`showletconfig`
+-- Table structure for table `showletconfig`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`showletconfig`;
-CREATE TABLE  `${artifactId}Port`.`showletconfig` (
+DROP TABLE IF EXISTS `showletconfig`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `showletconfig` (
   `pagecode` varchar(30) NOT NULL,
   `framepos` int(11) NOT NULL,
   `showletcode` varchar(40) NOT NULL,
@@ -393,96 +354,100 @@ CREATE TABLE  `${artifactId}Port`.`showletconfig` (
   CONSTRAINT `showletconfig_pagecode_fkey` FOREIGN KEY (`pagecode`) REFERENCES `pages` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `showletconfig_showletcode_fkey` FOREIGN KEY (`showletcode`) REFERENCES `showletcatalog` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`showletconfig`
+-- Dumping data for table `showletconfig`
 --
 
-/*!40000 ALTER TABLE `showletconfig` DISABLE KEYS */;
 LOCK TABLES `showletconfig` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `showletconfig` DISABLE KEYS */;
 /*!40000 ALTER TABLE `showletconfig` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`sysconfig`
+-- Table structure for table `sysconfig`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`sysconfig`;
-CREATE TABLE  `${artifactId}Port`.`sysconfig` (
+DROP TABLE IF EXISTS `sysconfig`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sysconfig` (
   `version` varchar(10) NOT NULL,
   `item` varchar(40) NOT NULL,
   `descr` varchar(100) DEFAULT NULL,
   `config` longtext,
   PRIMARY KEY (`version`,`item`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`sysconfig`
+-- Dumping data for table `sysconfig`
 --
 
-/*!40000 ALTER TABLE `sysconfig` DISABLE KEYS */;
 LOCK TABLES `sysconfig` WRITE;
-INSERT INTO `${artifactId}Port`.`sysconfig` VALUES  ('production','contentTypes','Definition of the Content Types','<contenttypes>\n</contenttypes>'),
- ('production','imageDimensions','Definition of the resized image dimensions','<Dimensions>\n	<Dimension>\n		<id>1</id>\n		<dimx>90</dimx>\n		<dimy>90</dimy>\n	</Dimension>\n	<Dimension>\n		<id>2</id>\n		<dimx>130</dimx>\n		<dimy>130</dimy>\n	</Dimension>\n	<Dimension>\n		<id>3</id>\n		<dimx>150</dimx>\n		<dimy>150</dimy>\n	</Dimension>\n</Dimensions>\n'),
- ('production','langs','Definition of the system languages','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Langs>\n	<Lang>\n		<code>it</code>\n		<descr>Italiano</descr>\n	</Lang>\n	<Lang>\n		<code>en</code>\n		<descr>English</descr>\n		<default>true</default>\n	</Lang>\n</Langs>\n\n'),
- ('production','params','Configuration params. Tags other than \"Param\" are ignored','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<Params>\r\n	<Param name=\"urlStyle\">classic</Param>\r\n	<Param name=\"hypertextEditor\">none</Param>\r\n	<Param name=\"treeStyle_page\">classic</Param>\r\n	<Param name=\"treeStyle_category\">classic</Param>\r\n	<Param name=\"startLangFromBrowser\">false</Param>\r\n	<SpecialPages>\r\n		<Param name=\"notFoundPageCode\">notfound</Param>\r\n		<Param name=\"homePageCode\">homepage</Param>\r\n		<Param name=\"errorPageCode\">errorpage</Param>\r\n		<Param name=\"loginPageCode\">login</Param>\r\n	</SpecialPages>\r\n	<ExtendendPrivacyModule>\r\n		<Param name=\"extendedPrivacyModuleEnabled\">false</Param>\r\n		<Param name=\"maxMonthsSinceLastAccess\">6</Param>\r\n		<Param name=\"maxMonthsSinceLastPasswordChange\">3</Param>        \r\n	</ExtendendPrivacyModule>\r\n</Params>\r\n'),
- ('production','subIndexDir','Name of the sub-directory containing content indexing files','index');
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `sysconfig` DISABLE KEYS */;
+INSERT INTO `sysconfig` VALUES ('production','contentTypes','Definition of the Content Types','<contenttypes>\n</contenttypes>'),('production','imageDimensions','Definition of the resized image dimensions','<Dimensions>\n	<Dimension>\n		<id>1</id>\n		<dimx>90</dimx>\n		<dimy>90</dimy>\n	</Dimension>\n	<Dimension>\n		<id>2</id>\n		<dimx>130</dimx>\n		<dimy>130</dimy>\n	</Dimension>\n	<Dimension>\n		<id>3</id>\n		<dimx>150</dimx>\n		<dimy>150</dimy>\n	</Dimension>\n</Dimensions>\n'),('production','langs','Definition of the system languages','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Langs>\n	<Lang>\n		<code>it</code>\n		<descr>Italiano</descr>\n	</Lang>\n	<Lang>\n		<code>en</code>\n		<descr>English</descr>\n		<default>true</default>\n	</Lang>\n</Langs>\n\n'),('production','params','Configuration params. Tags other than \"Param\" are ignored','<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<Params>\r\n	<Param name=\"urlStyle\">classic</Param>\r\n	<Param name=\"hypertextEditor\">none</Param>\r\n	<Param name=\"treeStyle_page\">classic</Param>\r\n	<Param name=\"treeStyle_category\">classic</Param>\r\n	<Param name=\"startLangFromBrowser\">false</Param>\r\n	<SpecialPages>\r\n		<Param name=\"notFoundPageCode\">notfound</Param>\r\n		<Param name=\"homePageCode\">homepage</Param>\r\n		<Param name=\"errorPageCode\">errorpage</Param>\r\n		<Param name=\"loginPageCode\">login</Param>\r\n	</SpecialPages>\r\n	<ExtendendPrivacyModule>\r\n		<Param name=\"extendedPrivacyModuleEnabled\">false</Param>\r\n		<Param name=\"maxMonthsSinceLastAccess\">6</Param>\r\n		<Param name=\"maxMonthsSinceLastPasswordChange\">3</Param>        \r\n	</ExtendendPrivacyModule>\r\n</Params>\r\n'),('production','subIndexDir','Name of the sub-directory containing content indexing files','index');
 /*!40000 ALTER TABLE `sysconfig` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`uniquekeys`
+-- Table structure for table `uniquekeys`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`uniquekeys`;
-CREATE TABLE  `${artifactId}Port`.`uniquekeys` (
+DROP TABLE IF EXISTS `uniquekeys`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `uniquekeys` (
   `id` int(11) NOT NULL DEFAULT '0',
   `keyvalue` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`uniquekeys`
+-- Dumping data for table `uniquekeys`
 --
 
-/*!40000 ALTER TABLE `uniquekeys` DISABLE KEYS */;
 LOCK TABLES `uniquekeys` WRITE;
-INSERT INTO `${artifactId}Port`.`uniquekeys` VALUES  (1,1);
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `uniquekeys` DISABLE KEYS */;
+INSERT INTO `uniquekeys` VALUES (1,1);
 /*!40000 ALTER TABLE `uniquekeys` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`workcontentrelations`
+-- Table structure for table `workcontentrelations`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`workcontentrelations`;
-CREATE TABLE  `${artifactId}Port`.`workcontentrelations` (
+DROP TABLE IF EXISTS `workcontentrelations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `workcontentrelations` (
   `contentid` varchar(16) NOT NULL,
   `refcategory` varchar(30) DEFAULT NULL,
   KEY `workcontentrelations_contentid_fkey` (`contentid`),
   KEY `workcontentrelations_refcategory_fkey` (`refcategory`),
   CONSTRAINT `workcontentrelations_contentid_fkey` FOREIGN KEY (`contentid`) REFERENCES `contents` (`contentid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`workcontentrelations`
+-- Dumping data for table `workcontentrelations`
 --
 
-/*!40000 ALTER TABLE `workcontentrelations` DISABLE KEYS */;
 LOCK TABLES `workcontentrelations` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `workcontentrelations` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workcontentrelations` ENABLE KEYS */;
-
+UNLOCK TABLES;
 
 --
--- Definition of table `${artifactId}Port`.`workcontentsearch`
+-- Table structure for table `workcontentsearch`
 --
 
-DROP TABLE IF EXISTS `${artifactId}Port`.`workcontentsearch`;
-CREATE TABLE  `${artifactId}Port`.`workcontentsearch` (
+DROP TABLE IF EXISTS `workcontentsearch`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `workcontentsearch` (
   `contentid` varchar(16) DEFAULT NULL,
   `attrname` varchar(30) NOT NULL,
   `textvalue` varchar(255) DEFAULT NULL,
@@ -492,18 +457,17 @@ CREATE TABLE  `${artifactId}Port`.`workcontentsearch` (
   KEY `workcontentsearch_contentid_fkey` (`contentid`),
   CONSTRAINT `workcontentsearch_contentid_fkey` FOREIGN KEY (`contentid`) REFERENCES `contents` (`contentid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `${artifactId}Port`.`workcontentsearch`
+-- Dumping data for table `workcontentsearch`
 --
 
-/*!40000 ALTER TABLE `workcontentsearch` DISABLE KEYS */;
 LOCK TABLES `workcontentsearch` WRITE;
-UNLOCK TABLES;
+/*!40000 ALTER TABLE `workcontentsearch` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workcontentsearch` ENABLE KEYS */;
-
-
-
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
@@ -511,4 +475,6 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-04-01 11:18:26
