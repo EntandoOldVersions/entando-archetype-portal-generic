@@ -61,6 +61,7 @@ h2.version {
 p {
 	margin: 0.5em 0;
 	padding: 0;
+	line-height: 1.4;
 }
 
 p, li {
@@ -189,6 +190,16 @@ h2.version {
 	<li>Username: <strong>admin</strong></li>
 	<li>Password: <strong>adminadmin</strong></li>
 </ul>
+
+<h2>Pro tip:</h2>
+<p>
+	Entando serves by default <a href="http://www.w3.org/TR/xhtml-media-types/#media-types">XHTML with the correct media type</a>: <em>application/xhtml+xml</em>.<br />
+	When the browser supports it, this can be less than comfortable during fast hacking / development cycles because if you miss a closing tag the browser will complain with its ugly XML errors.
+</p>
+<p>
+	<strong>Here's the tip:</strong> ovverride <em>src/main/webapp/WEB-INF/aps/jsp/system/main.jsp</em> by copying it from <em>entando-core-webapp</em> into your project folder.<br />
+	There you can find the custom tag Entando uses to perform content negotiation, and temporarily comment it or set it to something less restrictive like <em>text/html</em>.
+</p>
 
 <p>
 Have a good time with <strong>Entando</strong>!<br />
