@@ -8,7 +8,7 @@
 	<title><wp:currentPage param="title" /></title>
 </head>
 <body>
-<h1>Pagina di errore</h1>
+<h1><wp:currentPage param="title" /></h1>
 
 <a href="<wp:url page="homepage" />" >Home</a><br>
 <div><wp:show frame="0" /></div>
