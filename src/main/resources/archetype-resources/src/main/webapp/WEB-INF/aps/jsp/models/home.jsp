@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it">
 <head>
 	<title>
-		Entando| <wp:currentPage param="title" />
+		E&#179; - Entando Enterprise Edition| <wp:currentPage param="title" />
 	</title>
 
     <wp:outputHeadInfo type="CSS"> 
@@ -172,12 +172,12 @@ h2.version {
 
 
 <!-- START WELCOME -->
-<h1>It Worked!<br /> <strong>Entando</strong> is Installed on this host.</h1>
+<h1>It Worked!<br /> <strong>E&#179; - Entando Enterprise Edition</strong> is Installed on this host.</h1>
 <h2 class="version">Version <wp:info key="systemParam" paramName="version" /></h2>
 
 <p>
 	<img class="right logo" src="<wp:imgURL />/entando-logo_badge.png" alt="" />
-	If you can see this page, then the people who own this host have just installed <strong>Entando</strong> successfully.<br/>
+	If you can see this page, then the people who own this host have just installed <strong>E&#179; - Entando Enterprise Edition</strong> successfully.<br/>
 	They now have to replace this placeholder page or just its contents.
 </p>
 
