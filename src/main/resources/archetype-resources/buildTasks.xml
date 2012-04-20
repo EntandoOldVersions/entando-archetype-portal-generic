@@ -59,6 +59,11 @@
 			<arg line="-DskipTests"/>			
 			<arg line="-DskipDerby=false"/>
 		</exec>
+		<move todir="${dist.path}/standalone">
+			<fileset dir="${dist.path}">
+				<include name="${webappname}*war-exec*.jar"/>
+			</fileset>
+		</move>
 	</target>
 
 	<target name="WAR-undeploy">
