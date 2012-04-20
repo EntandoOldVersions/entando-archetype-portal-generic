@@ -1,0 +1,7 @@
+This version of Entando Community Edition demo portal is tested under Ubuntu Linux.
+To run the stand alone version of this portal you have to launch 
+
+startDemo.sh 
+
+Then open your browser and go to:
+http://localhost:8080/${profile.application.name}/

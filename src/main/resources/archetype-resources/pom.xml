@@ -383,6 +383,24 @@
 								</resource>
 							</resources>
 						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resources-standalone</id>
+						<!-- here the phase you need -->
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/standalone</outputDirectory>
+							<encoding>UTF-8</encoding>
+							<resources>
+								<resource>
+									<directory>src/main/config/standalone</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
 					</execution>					
 				</executions>
 			</plugin>
