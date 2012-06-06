@@ -410,6 +410,7 @@
 				<version>1.6</version><!--$NO-MVN-MAN-VER$ -->
 				<executions>
 					<execution>
+						<id>prepare-derby-db</id>
 						<phase>prepare-package</phase>
 						<configuration>
 							<target>
