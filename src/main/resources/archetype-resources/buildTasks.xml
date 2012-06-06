@@ -297,7 +297,7 @@
 	</target>
 
 	<target name="PG-db-restore-bundles" description="Execute the SQL queries necessary to properly install a Bundle">
-		<foreach target="PG-db-restore-bundles-helper" param="pluginDir">
+		<foreach target="PG-db-restore-bundles-helper-sql" param="pluginDir">
 			<path>
 				<dirset dir="${dist.path}/dependencies-unpacked/misc">
 					<include name="entando-misc-*"/>
@@ -307,9 +307,22 @@
 				</dirset>
 			</path>
 		</foreach>
+		<foreach target="PG-db-restore-bundles-helper-REST" param="pluginDir">
+			<path>
+				<dirset dir="${dist.path}/dependencies-unpacked/misc">
+					<include name="entando-content-*"/>
+				</dirset>
+			</path>
+		</foreach>
 	</target>
 
-	<target name="PG-db-restore-bundles-helper">
+	<target name="PG-db-restore-bundles-helper-REST">
+		<echo message="REST calls for Bundles...." />
+		<echo message="${pluginDir}" />
+		<ant antfile="${pluginDir}/rest/build.xml" useNativeBasedir="true" />
+	</target>
+
+	<target name="PG-db-restore-bundles-helper-sql">
 		<echo message="Restoring SQL for Bundles.... - Port" />
 		<echo message="${pluginDir}" />
 		<exec executable="${postgres.bin.path}/${postgres.bin.psql}" dir="${pluginDir}/sql/postgresql">
