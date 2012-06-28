@@ -43,7 +43,6 @@
 		<fileSet encoding="UTF-8">
 			<directory>src/main/db</directory>
 			<includes>
-				<include>**/*.bz2</include>
 				<include>**/*.sql</include>
 			</includes>
 			<excludes>
