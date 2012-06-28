@@ -60,5 +60,7 @@
 	<property name="test.marker" value="" />
 	<property name="tomcat.deploy.path" location="${tomcat.home.path}/webapps" />
 	<property name="project.src.branch" value="main" />
+	<property name="db.backup.tables.port" value="categories, contentmodels, contents, contentsearch, localstrings, pagemodels, pages, resources, resourcerelations, contentrelations, showletcatalog, showletconfig, sysconfig, uniquekeys, workcontentrelations, workcontentsearch" />
+	<property name="db.backup.tables.serv" value="api_oauth_consumers, api_oauth_tokens, apicatalog_methods, apicatalog_services, authgroups, authpermissions, authroles, authrolepermissions, authusers, authuserroles, authusergroups, authusershortcuts" />	
 
 </project>
