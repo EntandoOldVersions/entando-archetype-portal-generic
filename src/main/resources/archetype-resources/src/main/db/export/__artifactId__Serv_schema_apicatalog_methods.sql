@@ -24,7 +24,8 @@ CREATE TABLE apicatalog_methods (
     httpmethod character varying(6) NOT NULL,
     isactive smallint,
     authenticationrequired smallint,
-    authorizationrequired character varying(100)
+    authorizationrequired character varying(30),
+    ishidden smallint
 );
 
 
@@ -34,6 +35,14 @@ CREATE TABLE apicatalog_methods (
 
 ALTER TABLE ONLY apicatalog_methods
     ADD CONSTRAINT apicatalog_status_pkey PRIMARY KEY (resource, httpmethod);
+
+
+--
+-- Name: apicatalog_methods_authorizationrequired_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY apicatalog_methods
+    ADD CONSTRAINT apicatalog_methods_authorizationrequired_fkey FOREIGN KEY (authorizationrequired) REFERENCES authpermissions(permissionname);
 
 
 --

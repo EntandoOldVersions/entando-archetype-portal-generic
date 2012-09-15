@@ -27,8 +27,11 @@ CREATE TABLE apicatalog_services (
     tag character varying(100),
     freeparameters character varying,
     isactive smallint NOT NULL,
-    ispublic smallint NOT NULL,
-    myentando smallint NOT NULL
+    ishidden smallint NOT NULL,
+    myentando smallint NOT NULL,
+    authenticationrequired smallint,
+    requiredpermission character varying(30),
+    requiredgroup character varying(20)
 );
 
 
@@ -38,6 +41,22 @@ CREATE TABLE apicatalog_services (
 
 ALTER TABLE ONLY apicatalog_services
     ADD CONSTRAINT apicatalog_services_pkey PRIMARY KEY (servicekey);
+
+
+--
+-- Name: apicatalog_services_requiredgroup_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY apicatalog_services
+    ADD CONSTRAINT apicatalog_services_requiredgroup_fkey FOREIGN KEY (requiredgroup) REFERENCES authgroups(groupname);
+
+
+--
+-- Name: apicatalog_services_requiredpermission_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY apicatalog_services
+    ADD CONSTRAINT apicatalog_services_requiredpermission_fkey FOREIGN KEY (requiredpermission) REFERENCES authpermissions(permissionname);
 
 
 --
