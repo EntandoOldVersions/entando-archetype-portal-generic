@@ -85,10 +85,12 @@ DROP TABLE IF EXISTS `apicatalog_methods`;
 CREATE TABLE `apicatalog_methods` (
   `resource` varchar(100) NOT NULL,
   `httpmethod` varchar(6) NOT NULL,
-  `isactive` tinyint(4) DEFAULT NULL,
+  `isactive` tinyint(4) NOT NULL,
+  `ishidden` tinyint(4) NOT NULL,
   `authenticationrequired` tinyint(4) DEFAULT NULL,
   `authorizationrequired` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`resource`,`httpmethod`)
+  PRIMARY KEY (`resource`,`httpmethod`),
+  CONSTRAINT `apicatalog_methods_authorizationrequired_fkey` FOREIGN KEY (`authorizationrequired`) REFERENCES `authpermissions` (`permissionname`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -116,9 +118,14 @@ CREATE TABLE `apicatalog_services` (
   `tag` varchar(100) DEFAULT NULL,
   `freeparameters` longtext,
   `isactive` tinyint(4) NOT NULL,
-  `ispublic` tinyint(4) NOT NULL,
+  `ishidden` tinyint(4) NOT NULL,
   `myentando` tinyint(4) NOT NULL,
-  PRIMARY KEY (`servicekey`)
+  `authenticationrequired` tinyint(4),
+  `requiredpermission` varchar(30),
+  `requiredgroup` varchar(30),
+  PRIMARY KEY (`servicekey`),
+  CONSTRAINT `apicatalog_services_requiredpermission_fkey` FOREIGN KEY (`requiredpermission`) REFERENCES `authpermissions` (`permissionname`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `apicatalog_services_requiredgroup_fkey` FOREIGN KEY (`requiredgroup`) REFERENCES `authgroups` (`groupname`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
