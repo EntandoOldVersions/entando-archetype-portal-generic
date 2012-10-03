@@ -98,7 +98,7 @@
 		<test.database.basename>entando-core-engine</test.database.basename>
 		<test.database.basepath>${project.build.directory}/test/sql</test.database.basepath>
 		<skipDerby>true</skipDerby>
-		<entando.version>3.0.1-EEE-SNAPSHOT</entando.version>
+		<entando.version>3.0.1-EU-SNAPSHOT</entando.version>
 		<spring.version>3.0.6.RELEASE</spring.version>
 		<struts2.version>2.3.4.1</struts2.version>
 	</properties>
@@ -885,7 +885,17 @@
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
 						<version>5.1.18</version>
-					</dependency>					
+					</dependency>
+					<dependency>
+						<groupId>org.apache.derby</groupId>
+						<artifactId>derby</artifactId>
+						<version>10.8.2.2</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.derby</groupId>
+						<artifactId>derbyclient</artifactId>
+						<version>10.8.2.2</version>
+					</dependency>
 					<dependency>
 						<groupId>commons-dbcp</groupId>
 						<artifactId>commons-dbcp</artifactId>
