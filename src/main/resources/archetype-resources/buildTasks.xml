@@ -44,6 +44,7 @@
 		<echo message="========================================================================" />
 		<exec executable="mvn" dir="${basedir}">
 			<env key="MAVEN_WORKING_MODE" value="production"/>
+			<arg line="-P !windows"/>
 			<arg value="package"/>
 			<arg line="-DskipTests"/>
 		</exec>
@@ -55,6 +56,7 @@
 		<echo message="========================================================================" />
 		<exec executable="mvn" dir="${basedir}">
 			<env key="MAVEN_WORKING_MODE" value="exewar"/>
+			<arg line="-P !windows"/>
 			<arg value="package"/>
 			<arg line="-DskipTests"/>			
 			<arg line="-DskipDerby=false"/>
