@@ -20,7 +20,7 @@ SET default_with_oids = true;
 --
 
 CREATE TABLE authrolepermissions (
-    rolename character varying(30) NOT NULL,
+    rolename character varying(20) NOT NULL,
     permissionname character varying(30) NOT NULL
 );
 
