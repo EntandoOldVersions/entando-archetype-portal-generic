@@ -416,6 +416,7 @@
 						<id>prepare-derby-db</id>
 						<phase>prepare-package</phase>
 						<configuration>
+							<skip>${skipDerby}</skip>
 							<target>
 								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
 									classpathref="maven.plugin.classpath" />
@@ -520,6 +521,19 @@
 										
 									</then>
 								</if>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>concat-derby-db</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<skip>${skipDerby}</skip>
+							<target>
+							    <ant target="PG-db-concat" antfile="${basedir}/build.xml"/>
 							</target>
 						</configuration>
 						<goals>
