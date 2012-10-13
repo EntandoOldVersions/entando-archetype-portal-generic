@@ -90,13 +90,34 @@
 		</profile>
 	</profiles>
 	<properties>
+		
+		<!--
 		<test.database.driver>org.postgresql.Driver</test.database.driver>
 		<test.database.hostname>localhost</test.database.hostname>
 		<test.database.port>5432</test.database.port>
 		<test.database.username>agile</test.database.username>
 		<test.database.password>agile</test.database.password>
-		<test.database.basename>entando-core-engine</test.database.basename>
-		<test.database.basepath>${project.build.directory}/test/sql</test.database.basepath>
+		<test.database.port.url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/${project.artifactId}testPort</test.database.port.url>
+		<test.database.serv.url>jdbc:postgresql://${test.database.hostname}:${test.database.port}/${project.artifactId}testServ</test.database.serv.url>
+		-->
+		<!--
+		<test.database.driver>com.mysql.jdbc.Driver</test.database.driver>
+		<test.database.hostname>localhost</test.database.hostname>
+		<test.database.port>3306</test.database.port>
+		<test.database.username>root</test.database.username>
+		<test.database.password>agile</test.database.password>
+		<test.database.port.url>jdbc:mysql://${test.database.hostname}:${test.database.port}/${project.artifactId}testPort</test.database.port.url>
+		<test.database.serv.url>jdbc:mysql://${test.database.hostname}:${test.database.port}/${project.artifactId}testServ</test.database.serv.url>
+		-->
+		
+		<test.database.driver>org.apache.derby.jdbc.EmbeddedDriver</test.database.driver>
+		<test.database.hostname>localhost</test.database.hostname>
+		<test.database.port>1527</test.database.port>
+		<test.database.username>agile</test.database.username>
+		<test.database.password>agile</test.database.password>
+		<test.database.port.url>jdbc:derby:${project.artifactId}testPort;create=true</test.database.port.url>
+		<test.database.serv.url>jdbc:derby:${project.artifactId}testServ;create=true</test.database.serv.url>
+		
 		<skipDerby>true</skipDerby>
 		<entando.version>3.0.1-EU-SNAPSHOT</entando.version>
 		<spring.version>3.0.6.RELEASE</spring.version>
@@ -244,6 +265,7 @@
 							</resources>
 						</configuration>
 					</execution>
+					<!--
 					<execution>
 						<id>prepare-config-test-override-config</id>
 						<phase>process-test-classes</phase>
@@ -267,7 +289,6 @@
 					</execution>					
 					<execution>
 						<id>copy-resources-conf</id>
-						<!-- here the phase you need -->
 						<phase>validate</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -288,7 +309,6 @@
 					</execution>
 					<execution>
 						<id>copy-resources-webxml</id>
-						<!-- here the phase you need -->
 						<phase>validate</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -309,7 +329,6 @@
 					</execution>
 					<execution>
 						<id>copy-resources-contextxml</id>
-						<!-- here the phase you need -->
 						<phase>validate</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -330,7 +349,6 @@
 					</execution>
 					<execution>
 						<id>copy-resources-jettycontextxml</id>
-						<!-- here the phase you need -->
 						<phase>validate</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -349,9 +367,9 @@
 							</resources>
 						</configuration>
 					</execution>
+					-->
 					<execution>
 						<id>copy-resources-tld</id>
-						<!-- here the phase you need -->
 						<phase>validate</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -369,7 +387,8 @@
 								</resource>
 							</resources>
 						</configuration>
-					</execution> 
+					</execution>
+					<!--
 					<execution>
 						<id>derby-copy-sql</id>
 						<phase>prepare-package</phase>
@@ -389,7 +408,6 @@
 					</execution>
 					<execution>
 						<id>copy-resources-standalone</id>
-						<!-- here the phase you need -->
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -404,7 +422,8 @@
 								</resource>
 							</resources>
 						</configuration>
-					</execution>					
+					</execution>
+					-->
 				</executions>
 			</plugin>
 			<plugin>
@@ -552,6 +571,7 @@
 					</dependency>
 				</dependencies>
 				<executions>
+					<!--
 					<execution>
 						<id>drop-db-before-test-if-any-port</id>
 						<phase>process-test-classes</phase>
@@ -622,6 +642,8 @@
 							<sqlCommand>create database "${project.artifactId}testServ"</sqlCommand>
 						</configuration>
 					</execution>
+					-->
+					<!--
 					<execution>
 						<id>create-schema-port</id>
 						<phase>process-test-classes</phase>
@@ -758,6 +780,7 @@
 							</fileset>
 						</configuration>
 					</execution>
+					-->
 					<!-- Derby, for Tomcat Executable War -->
 					<execution>
 						<id>derby-create-schema-port</id>
@@ -1068,6 +1091,18 @@
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.8.2.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>10.8.2.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
