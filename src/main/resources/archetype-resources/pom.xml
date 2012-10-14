@@ -265,7 +265,6 @@
 							</resources>
 						</configuration>
 					</execution>
-					<!--
 					<execution>
 						<id>prepare-config-test-override-config</id>
 						<phase>process-test-classes</phase>
@@ -367,7 +366,6 @@
 							</resources>
 						</configuration>
 					</execution>
-					-->
 					<execution>
 						<id>copy-resources-tld</id>
 						<phase>validate</phase>
@@ -406,6 +404,7 @@
 							</resources>
 						</configuration>
 					</execution>
+					-->
 					<execution>
 						<id>copy-resources-standalone</id>
 						<phase>prepare-package</phase>
@@ -423,7 +422,6 @@
 							</resources>
 						</configuration>
 					</execution>
-					-->
 				</executions>
 			</plugin>
 			<plugin>
