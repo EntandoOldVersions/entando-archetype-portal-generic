@@ -65,6 +65,7 @@ INSERT INTO showletcatalog (code, titles, parameters, plugincode, parenttypecode
 	<parameter name="categories">Content Category codes (comma separeted)</parameter>
         <parameter name="orClauseCategoryFilter" />
 	<parameter name="maxElemForItem">Contents for each page</parameter>
+	<parameter name="maxElements">Number of contents</parameter>
 	<parameter name="filters" />
 	<parameter name="title_{lang}">Showlet Title in lang {lang}</parameter>
 	<parameter name="pageLink">The code of the Page to link</parameter>
