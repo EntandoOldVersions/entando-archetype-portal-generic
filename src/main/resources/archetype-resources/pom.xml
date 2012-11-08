@@ -424,10 +424,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.6</version><!--$NO-MVN-MAN-VER$ -->
+				<version>1.6</version>
 				<executions>
 					<execution>
 						<id>prepare-derby-db</id>
@@ -565,7 +566,8 @@
 						<version>20020829</version>
 					</dependency>
 				</dependencies>
-			</plugin>				
+			</plugin>
+			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sql-maven-plugin</artifactId>
