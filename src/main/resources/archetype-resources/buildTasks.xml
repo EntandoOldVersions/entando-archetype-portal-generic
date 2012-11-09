@@ -76,7 +76,149 @@
 	<target name="WAR-deploy" description="Copy the WAR to Tomcat">
 		<copy file="${dist.path}/${webappname}.war" todir="${tomcat.deploy.path}" />
 	</target>
+	
+	<target name="PG-db-backup-tar" description="PostgreSQL db backup in TAR format">
+		<echo message="Dumping ${webappname}${test.marker}Port...." />
+		<exec executable="${postgres.bin.path}/${postgres.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/tar">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg value="-i"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-F t"/>
+			<arg value="-b"/>
+			<arg value="-v"/>
+			<arg line="-f ${webappname}${test.marker}Port.backup"/>
+			<arg value="${webappname}${test.marker}Port"/>
+		</exec>
+		<echo message="${webappname}${test.marker}Port dumped. Compressing...." />
+		<bzip2 destfile="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Port.backup.bz2">
+			<fileset dir="${basedir}/src/${project.src.branch}/db/tar">
+				<include name="${webappname}${test.marker}Port.backup"/>
+			</fileset>
+		</bzip2>
+		<delete file="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Port.backup" />
 
+		<echo message="Dumping ${webappname}${test.marker}Serv...." />
+		<exec executable="${postgres.bin.path}/${postgres.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/tar">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg value="-i"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-F t"/>
+			<arg value="-b"/>
+			<arg value="-v"/>
+			<arg line="-f ${webappname}${test.marker}Serv.backup"/>
+			<arg value="${webappname}${test.marker}Serv"/>
+		</exec>
+		<echo message="${webappname}${test.marker}Serv dumped. Compressing...." />
+		<bzip2 destfile="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Serv.backup.bz2" >
+			<fileset dir="${basedir}/src/${project.src.branch}/db/tar">
+				<include name="${webappname}${test.marker}Serv.backup"/>
+			</fileset>
+		</bzip2>
+		<delete file="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Serv.backup" />
+	</target>
+
+	<target name="PG-db-export-SQL">
+		<echo message="Dumping ${webappname}${test.marker}Port...." />
+		<exec executable="${postgres.bin.path}/${postgres.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/export">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg value="-i"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-F p"/>
+			<arg value="-s"/>
+			<arg value="-s"/>
+			<arg value="-O"/>
+			<arg value="-D"/>
+			<arg value="-v"/>
+			<arg line="-f ${webappname}${test.marker}Port_schema.sql"/>
+			<arg value="${webappname}${test.marker}Port"/>
+		</exec>
+		<echo message="Dumping ${webappname}${test.marker}Serv...." />
+		<exec executable="${postgres.bin.path}/${postgres.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/export">
+			<arg value="-i"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-F p"/>
+			<arg value="-s"/>
+			<arg value="-s"/>
+			<arg value="-O"/>
+			<arg value="-v"/>
+			<arg line="-f ${webappname}${test.marker}Serv_schema.sql"/>
+			<arg value="${webappname}${test.marker}Serv"/>
+		</exec>
+		<echo message="Dumping ${webappname}${test.marker}Port...." />
+		<exec executable="${postgres.bin.path}/${postgres.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/export">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg value="-i"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-F p"/>
+			<arg line="-a"/>
+			<arg line="-D" />
+			<arg line="-v" />
+			<arg line="-f ${webappname}${test.marker}Port_data.sql"/>
+			<arg value="${webappname}${test.marker}Port"/>
+		</exec>
+		<echo message="Dumping ${webappname}${test.marker}Serv...." />
+		<exec executable="${postgres.bin.path}/${postgres.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/export">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg value="-i"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-F p"/>
+			<arg line="-a"/>
+			<arg line="-D" />
+			<arg line="-v" />
+			<arg line="-f ${webappname}${test.marker}Serv_data.sql"/>
+			<arg value="${webappname}${test.marker}Serv"/>
+		</exec>
+		<echo message="Database full backup in plain version done."/>
+	</target>
+
+	<target name="PG-db-restore-tar">
+		<echo message="Uncompressing ${webappname}${test.marker}Port...." />
+		<bunzip2 src="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Port.backup.bz2" />
+
+		<echo message="Restoring ${webappname}${test.marker}Port...." />
+		<exec executable="${postgres.bin.path}/${postgres.bin.restore}" dir="${basedir}/src/${project.src.branch}/db/tar">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg value="-i"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-d ${webappname}${test.marker}Port"/>
+			<arg value="${webappname}${test.marker}Port.backup"/>
+		</exec>
+		<delete file="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Port.backup" />
+
+		<echo message="Uncompressing ${webappname}${test.marker}Serv...." />
+		<bunzip2 src="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Serv.backup.bz2" />
+
+		<echo message="Restoring ${webappname}${test.marker}Serv...." />
+		<exec executable="${postgres.bin.path}/${postgres.bin.restore}" dir="${basedir}/src/${project.src.branch}/db/tar">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
+			<arg value="-i"/>
+			<arg line="-h ${postgres.hostname}"/>
+			<arg line="-p ${postgres.port}"/>
+			<arg line="-U ${postgres.username}"/>
+			<arg line="-d ${webappname}${test.marker}Serv"/>
+			<arg value="${webappname}${test.marker}Serv.backup"/>
+		</exec>
+		<delete file="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Serv.backup" />
+	</target>
+	
+	<target name="PG-db-full-update-tar" description="PostgreSQL db update from tar file" depends="PG-db-drop, PG-db-create, PG-db-restore-tar">
+		<echo message="Databases full update [done]" />
+	</target>
+	
 	<target name="PG-db-concat-one-table">
 		<echo message="|| ${fileToBeAppended} schema appended to ${db}" />
 		<concat destfile="${dist.path}/derby/sql/${webappname}${db}_schema.sql" append="true">
