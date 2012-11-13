@@ -5,9 +5,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it">
 <head>
-	<title>
-		E&#179; - Entando Enterprise Edition| <wp:currentPage param="title" />
-	</title>
+    <title>
+        <wp:currentPage param="title" /> - Entando
+    </title>
 
     <wp:outputHeadInfo type="CSS"> 
         <link href="resources/css/<wp:printHeadInfo />" type="text/css" rel="stylesheet" />
