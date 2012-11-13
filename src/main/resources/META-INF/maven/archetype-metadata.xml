@@ -34,20 +34,12 @@
 				<include>**/*.properties</include>
 			</includes>
 		</fileSet>
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>src/main/db/mysql</directory>
-			<includes>
-				<include>*.sql</include>
-			</includes>
-		</fileSet>		
 		<fileSet encoding="UTF-8">
 			<directory>src/main/db</directory>
 			<includes>
+				<include>**/placeholder.txt</include>
 				<include>**/*.sql</include>
 			</includes>
-			<excludes>
-				<exclude>src/main/db/mysql</exclude>
-			</excludes>
 		</fileSet>
 		<fileSet encoding="UTF-8">
 			<directory>src/main/ext-lib</directory>
