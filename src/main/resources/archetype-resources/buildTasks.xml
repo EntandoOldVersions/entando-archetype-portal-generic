@@ -404,56 +404,38 @@
 		</exec>
 	</target>
 
-	<target name="PG-db-restore-bundles" description="Execute the SQL queries necessary to properly install a Bundle">
-		<foreach target="PG-db-restore-bundles-helper-sql" param="pluginDir">
+	<target name="restore-bundles" description="Execute the REST calls necessary to properly install a Bundle">
+		<foreach target="restore-bundles-helper-REST" param="bundleDir">
 			<path>
 				<dirset dir="${dist.path}/dependencies-unpacked/misc">
 					<include name="entando-misc-*"/>
 					<include name="entando-content-*"/>
 					<include name="entando-page-*"/>
-					<include name="entando-showlet-*"/>					
-				</dirset>
-			</path>
-		</foreach>
-		<foreach target="PG-db-restore-bundles-helper-REST" param="pluginDir">
-			<path>
-				<dirset dir="${dist.path}/dependencies-unpacked/misc">
-					<include name="entando-content-*"/>
+					<include name="entando-showlet-*"/>
 				</dirset>
 			</path>
 		</foreach>
 	</target>
 
-	<target name="PG-db-restore-bundles-helper-REST">
-		<echo message="REST calls for Bundles...." />
-		<echo message="${pluginDir}" />
-		<ant antfile="${pluginDir}/rest/build.xml" useNativeBasedir="true" />
+	<target name="restore-bundles-helper-REST">
+		<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+			<classpath>
+				<pathelement location="/usr/share/java/ant-contrib.jar" />
+			</classpath>
+		</taskdef>
+		<if>
+			<and>
+				<resourceexists>
+					<file file="${bundleDir}/rest/build.xml" />
+				</resourceexists>
+			</and>
+			<then>
+				<echo message="REST calls for Bundles...." />
+				<echo message="${bundleDir}" />
+				<ant antfile="${bundleDir}/rest/build.xml" useNativeBasedir="true" />
+			</then>
+		</if>
 	</target>
-
-	<target name="PG-db-restore-bundles-helper-sql">
-		<echo message="Restoring SQL for Bundles.... - Port" />
-		<echo message="${pluginDir}" />
-		<exec executable="${postgres.bin.path}/${postgres.bin.psql}" dir="${pluginDir}/sql/postgresql">
-			<env key="PGPASSWORD" value="${postgres.password}"/>
-			<arg line="-h ${postgres.hostname}"/>
-			<arg line="-p ${postgres.port}"/>
-			<arg line="-U ${postgres.username}"/>
-			<arg line="-d ${webappname}Port"/>
-			<arg line="-f port.sql"/>
-		</exec>
-
-		<echo message="Restoring SQL for Bundles.... - Serv" />
-		<echo message="${pluginDir}" />		
-		<exec executable="${postgres.bin.path}/${postgres.bin.psql}" dir="${pluginDir}/sql/postgresql">
-			<env key="PGPASSWORD" value="${postgres.password}"/>
-			<arg line="-h ${postgres.hostname}"/>
-			<arg line="-p ${postgres.port}"/>
-			<arg line="-U ${postgres.username}"/>
-			<arg line="-d ${webappname}Serv"/>
-			<arg line="-f serv.sql"/>
-		</exec>
-	</target>
-
 
     <target name="Test-db-resources-check">
 		<taskdef resource="net/sf/antcontrib/antcontrib.properties">
@@ -461,7 +443,7 @@
 				<pathelement location="/usr/share/java/ant-contrib.jar" />
 			</classpath>
 		</taskdef>
-		
+
 		<if>
 			<and>
 				<resourceexists>
