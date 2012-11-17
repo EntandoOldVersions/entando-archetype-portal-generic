@@ -5,8 +5,8 @@
 	  <classpath>
 	    <pathelement location="${ant-contrib.jar.path}"/>
 	  </classpath>
-	</taskdef>		
-	
+	</taskdef>
+
 	<!-- Clean build area -->
 	<target name="clean" description="Clean the project">
 		<echo message="========================================================================" />
@@ -58,7 +58,7 @@
 			<env key="MAVEN_WORKING_MODE" value="exewar"/>
 			<arg line="-P !windows"/>
 			<arg value="package"/>
-			<arg line="-DskipTests"/>			
+			<arg line="-DskipTests"/>
 			<arg line="-DskipDerby=false"/>
 		</exec>
 		<move todir="${dist.path}/standalone">
@@ -76,7 +76,7 @@
 	<target name="WAR-deploy" description="Copy the WAR to Tomcat">
 		<copy file="${dist.path}/${webappname}.war" todir="${tomcat.deploy.path}" />
 	</target>
-	
+
 	<target name="PG-db-backup-tar" description="PostgreSQL db backup in TAR format">
 		<echo message="Dumping ${webappname}${test.marker}Port...." />
 		<exec executable="${postgres.bin.path}/${postgres.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/tar">
@@ -214,11 +214,11 @@
 		</exec>
 		<delete file="${basedir}/src/${project.src.branch}/db/tar/${webappname}${test.marker}Serv.backup" />
 	</target>
-	
+
 	<target name="PG-db-full-update-tar" description="PostgreSQL db update from tar file" depends="PG-db-drop, PG-db-create, PG-db-restore-tar">
 		<echo message="Databases full update [done]" />
 	</target>
-	
+
 	<target name="PG-db-concat-one-table">
 		<echo message="|| ${fileToBeAppended} schema appended to ${db}" />
 		<concat destfile="${dist.path}/derby/sql/${webappname}${db}_schema.sql" append="true">
@@ -299,7 +299,7 @@
 	</target>
 
 	<target name="PG-db-backup" description="PostgreSQL db backup in SQL format with referential integrity">
-		<echo message="Dumping ${webappname}${test.marker}Port...." />		
+		<echo message="Dumping ${webappname}${test.marker}Port...." />
 		<foreach target="PG-db-backup-one-table" param="tableToBeDumped" list="${db.backup.tables.port}" trim="true">
 			<param name="db" value="Port" />
 		</foreach>
@@ -307,11 +307,11 @@
 		<echo message="Dumping ${webappname}${test.marker}Serv...." />
 		<foreach target="PG-db-backup-one-table" param="tableToBeDumped" list="${db.backup.tables.serv}" trim="true">
 			<param name="db" value="Serv" />
-		</foreach>			
+		</foreach>
 	</target>
 
 	<target name="PG-db-restore" description="PostgreSQL db restore in SQL format with referential integrity">
-		<echo message="Restoring ${webappname}${test.marker}Port...." />		
+		<echo message="Restoring ${webappname}${test.marker}Port...." />
 		<foreach target="PG-db-restore-one-table" param="tableToBeRestored" list="${db.backup.tables.port}" trim="true">
 			<param name="db" value="Port" />
 		</foreach>
@@ -319,7 +319,7 @@
 		<echo message="Restoring ${webappname}${test.marker}Serv...." />
 		<foreach target="PG-db-restore-one-table" param="tableToBeRestored" list="${db.backup.tables.serv}" trim="true">
 			<param name="db" value="Serv" />
-		</foreach>			
+		</foreach>
 	</target>
 
 	<target name="PG-db-drop">
@@ -393,7 +393,7 @@
 		</exec>
 
 		<echo message="Restoring SQL for Plugins.... - Serv" />
-		<echo message="${pluginDir}" />		
+		<echo message="${pluginDir}" />
 		<exec executable="${postgres.bin.path}/${postgres.bin.psql}" dir="${pluginDir}/sql/postgresql">
 			<env key="PGPASSWORD" value="${postgres.password}"/>
 			<arg line="-h ${postgres.hostname}"/>
@@ -487,20 +487,20 @@
 					</resourceexists>
 					<resourceexists>
 						<file file="${basedir}/src/test/db/export/${webappname}testServ_data.sql" />
-					</resourceexists>					
+					</resourceexists>
 				</and>
 				<then>
 					<property name="test.database.resources" value="custom" />
 					<property name="test.database.basepath" value="${basedir}/src/test/db/export"/>
-					<property name="test.database.basename" value="${webappname}"/>		
+					<property name="test.database.basename" value="${webappname}"/>
 				</then>
 			</elseif>
 			<else>
 				<property name="test.database.resources" value="core" />
 			</else>
-		</if>		
+		</if>
     </target>
-	
+
 	<target name="Test-init" description="Use it to restore databases and compile classes for tests" depends="Test-db-resources-check">
 		<if>
 			<equals arg1="${test.database.resources}" arg2="tar" />
@@ -511,7 +511,7 @@
 				<echo message="========================================================================" />
 				<antcall target="PG-db-full-update">
 					<param name="test.marker" value="test" />
-					<param name="project.src.branch" value="test" />					
+					<param name="project.src.branch" value="test" />
 				</antcall>
 			</then>
 			<elseif>
@@ -524,7 +524,7 @@
 					<exec executable="mvn" dir="${basedir}">
 						<arg value="process-test-classes"/>
 						<arg line="-Dtest.database.basename=${test.database.basename}" />
-						<arg line="-Dtest.database.basepath=${test.database.basepath}" />					
+						<arg line="-Dtest.database.basepath=${test.database.basepath}" />
 					</exec>
 				</then>
 			</elseif>
@@ -533,7 +533,7 @@
 				<then>
 					<echo message="========================================================================" />
 					<echo message=".:[Maven] :: Getting ready for Tests" />
-					<echo message="          :: Using files from entando-core-engine" />				
+					<echo message="          :: Using files from entando-core-engine" />
 					<echo message="========================================================================" />
 					<exec executable="mvn" dir="${basedir}">
 						<arg value="process-test-classes"/>
@@ -546,9 +546,9 @@
 	<target name="Test-PG-db-backup" description="Test - PG db backup in TAR format">
 		<antcall target="PG-db-backup">
 			<param name="test.marker" value="test" />
-			<param name="project.src.branch" value="test" />			
-		</antcall>              
-	</target>	
+			<param name="project.src.branch" value="test" />
+		</antcall>
+	</target>
 
 	<target name="Test-PG-db-export-SQL" description="Test - PG db backup in plain SQL">
 		<antcall target="PG-db-export-SQL">
@@ -568,7 +568,7 @@
 				<exec executable="mvn" dir="${basedir}">
 					<arg value="test"/>
 					<arg line="-Dtest.database.basename=${test.database.basename}" />
-					<arg line="-Dtest.database.basepath=${test.database.basepath}" />					
+					<arg line="-Dtest.database.basepath=${test.database.basepath}" />
 				</exec>
 			</then>
 			<elseif>
@@ -576,7 +576,7 @@
 				<then>
 					<echo message="========================================================================" />
 					<echo message=".:[Maven] :: Running the Tests..." />
-					<echo message="          :: Using files from entando-core-engine" />				
+					<echo message="          :: Using files from entando-core-engine" />
 					<echo message="========================================================================" />
 					<exec executable="mvn" dir="${basedir}">
 						<arg value="test"/>
@@ -595,7 +595,7 @@
 			<arg value="site"/>
 		</exec>
 	</target>
-	
+
 	<!-- MySQL -->
 	<target name="MySql-db-backup" description="MySQL db backup">
 		<echo message="Dumping ${webappname}${test.marker}Port" />
@@ -673,5 +673,5 @@
 	<target name="MySql-db-full-update" description="MySql db update" depends="MySql-db-drop, MySql-db-restore">
 		<echo message="Databases full update [done]" />
 	</target>
-	
+
 </project>
