@@ -979,6 +979,23 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<excludeDefaultDirectories>true</excludeDefaultDirectories>
+						<followSymlinks>true</followSymlinks><!-- performance -->
+						<filesets>
+							<fileset>
+								<directory>${project.build.directory}</directory>
+								<excludes>
+									<exclude>**/derby/production/**</exclude>
+								</excludes>
+							</fileset>
+						</filesets>
+					</configuration>
+				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
