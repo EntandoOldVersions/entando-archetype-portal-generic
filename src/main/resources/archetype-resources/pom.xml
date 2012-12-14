@@ -187,6 +187,30 @@
 				<version>2.3</version><!--$NO-MVN-MAN-VER$ -->
 				<executions>
 					<execution>
+						<id>unpack-dependencies-jsp-frontend-core-webapp</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<skip>${core-webapp-cant-overwrite}</skip>
+							<verbose>true</verbose>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>false</overWriteIfNewer>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.entando.entando</groupId>
+									<artifactId>entando-core-webapp</artifactId>
+									<type>war</type>
+									<outputDirectory>src/main/webapp</outputDirectory>
+									<overWrite>false</overWrite>
+								</artifactItem>
+							</artifactItems>
+							<includes>WEB-INF/aps/jsp/internalservlet/api/**/*.jsp</includes>
+						</configuration>
+					</execution>
+					<execution>
 						<id>unpack-misc-dependencies</id>
 						<phase>process-resources</phase>
 						<goals>
@@ -424,134 +448,25 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.6</version>--><!--$NO-MVN-MAN-VER$ --><!--
+				<version>1.7</version><!--$NO-MVN-MAN-VER$ -->
 				<executions>
 					<execution>
-						<id>prepare-derby-db</id>
-						<phase>prepare-package</phase>
+						<id>decide-if-core-webapp-can-overwrite</id>
+						<phase>validate</phase>
 						<configuration>
-							<skip>${skipDerby}</skip>
+							<exportAntProperties>true</exportAntProperties>
 							<target>
 								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
 									classpathref="maven.plugin.classpath" />
 								<if>
-									<available file="${project.build.directory}/derby/sql" type="dir" />
+									<available file="src/main/webapp/WEB-INF/aps/jsp/internalservlet/api" type="dir" />
 									<then>
-										<replaceregexp byline="true">
-										  <regexp pattern="^SET.*$"/>
-										  <substitution expression=""/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="^REVOKE.*$"/>
-										  <substitution expression=""/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="^GRANT.*$"/>
-										  <substitution expression=""/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="ALTER TABLE ONLY"/>
-										  <substitution expression="ALTER TABLE"/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="CREATE PROCEDURAL LANGUAGE plpgsql;"/>
-										  <substitution expression=""/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="character varying "/>
-										  <substitution expression="LONG VARCHAR "/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="character varying,"/>
-										  <substitution expression="LONG VARCHAR,"/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="character varying$"/>
-										  <substitution expression="LONG VARCHAR"/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern=" USING btree"/>
-										  <substitution expression=""/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="timestamp without time zone"/>
-										  <substitution expression="timestamp"/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern="DEFAULT ''::LONG VARCHAR NOT NULL"/>
-										  <substitution expression="NOT NULL WITH DEFAULT ''"/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
-										<replaceregexp byline="true">
-										  <regexp pattern='"char",'/>
-										  <substitution expression="CHAR(2),"/>
-										  <fileset dir="${project.build.directory}/derby/sql">
-										    <include name="*.sql"/>
-										  </fileset>
-										</replaceregexp>
-
+										<property name="core-webapp-cant-overwrite" value="true"/>
 									</then>
 								</if>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>concat-derby-db</id>
-						<phase>prepare-package</phase>
-						<configuration>
-							<skip>${skipDerby}</skip>
-							<target>
-							    <ant target="PG-db-concat" antfile="${basedir}/build.xml"/>
 							</target>
 						</configuration>
 						<goals>
@@ -567,7 +482,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sql-maven-plugin</artifactId>
