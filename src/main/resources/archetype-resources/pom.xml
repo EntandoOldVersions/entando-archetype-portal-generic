@@ -210,6 +210,7 @@
 							<includes>WEB-INF/aps/jsp/internalservlet/api/**/*.jsp</includes>
 						</configuration>
 					</execution>
+					<!--
 					<execution>
 						<id>unpack-misc-dependencies</id>
 						<phase>process-resources</phase>
@@ -265,6 +266,7 @@
 							<includeScope>test</includeScope>
 						</configuration>
 					</execution>
+					-->
 				</executions>
 			</plugin>
 			<plugin>
@@ -1004,14 +1006,6 @@
 			<artifactId>entando-core-engine</artifactId>
 			<version>${entando.version}</version>
 			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.entando.entando</groupId>
-			<artifactId>entando-core-engine</artifactId>
-			<version>${entando.version}</version>
-			<type>zip</type>
-			<classifier>misc-test</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
