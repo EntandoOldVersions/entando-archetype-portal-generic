@@ -24,13 +24,13 @@
 		<developer>
 			<id>w.ghelfi</id>
 			<name>William Ghelfi</name>
-			<email>w.ghelfi@entando.com</email>		
+			<email>w.ghelfi@entando.com</email>
 		</developer>
 	</developers>
 	<organization>
 		<name>Entando S.r.l.</name>
 		<url>http://www.entando.com/</url>
-	</organization>	
+	</organization>
 	<!--
 	<distributionManagement>
 		<snapshotRepository>
@@ -84,7 +84,7 @@
 							</configuration>
 						</execution>
 					</executions>
-				</plugin>			
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
