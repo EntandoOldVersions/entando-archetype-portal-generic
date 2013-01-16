@@ -131,21 +131,19 @@
 			<arg line="-U ${postgres.username}"/>
 			<arg line="-F p"/>
 			<arg value="-s"/>
-			<arg value="-s"/>
 			<arg value="-O"/>
-			<arg value="-D"/>
 			<arg value="-v"/>
 			<arg line="-f ${webappname}${test.marker}Port_schema.sql"/>
 			<arg value="${webappname}${test.marker}Port"/>
 		</exec>
 		<echo message="Dumping ${webappname}${test.marker}Serv...." />
 		<exec executable="${postgres.bin.path}/${postgres.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/export">
+			<env key="PGPASSWORD" value="${postgres.password}"/>
 			<arg value="-i"/>
 			<arg line="-h ${postgres.hostname}"/>
 			<arg line="-p ${postgres.port}"/>
 			<arg line="-U ${postgres.username}"/>
 			<arg line="-F p"/>
-			<arg value="-s"/>
 			<arg value="-s"/>
 			<arg value="-O"/>
 			<arg value="-v"/>
