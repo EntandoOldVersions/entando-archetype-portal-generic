@@ -42,12 +42,6 @@
 			</includes>
 		</fileSet>
 		<fileSet encoding="UTF-8">
-			<directory>src/main/ext-lib</directory>
-			<includes>
-				<include>**/*</include>
-			</includes>
-		</fileSet>                      
-		<fileSet encoding="UTF-8">
 			<directory>src/main/webapp</directory>
 			<includes>
 				<include>**/*.jsp</include>
