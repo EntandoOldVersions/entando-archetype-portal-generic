@@ -30,6 +30,10 @@
         <filter-name>struts2</filter-name>
         <url-pattern>/do/*</url-pattern>
     </filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/struts/*</url-pattern>
+	</filter-mapping>
     <listener>
         <listener-class>com.agiletec.apsadmin.system.tiles.JapsStrutsTilesListener</listener-class>
     </listener>
