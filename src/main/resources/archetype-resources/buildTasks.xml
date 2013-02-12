@@ -452,10 +452,10 @@
 		</exec>
 		<echo message="...${webappname}${test.marker}Serv Restored." />
 	</target>
-
+	
 	<target name="MySql-db-drop" description="MySql db drop">
 		<echo message="Dropping ${webappname}${test.marker}Port..." />
-		<exec executable="${mysql.bin.path}/${mysql.bin.drop}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
 			<arg line=" -h${mysql.hostname}"/>
 			<arg line=" -P${mysql.port}"/>
 			<arg line=" -u${mysql.username}"/>
@@ -465,7 +465,7 @@
 		</exec>
 		<echo message="... ${webappname}${test.marker}Port dropped." />
 		<echo message="Dropping ${webappname}${test.marker}Serv" />
-		<exec executable="${mysql.bin.path}/${mysql.bin.drop}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
 			<arg line=" -h${mysql.hostname}"/>
 			<arg line=" -P${mysql.port}"/>
 			<arg line=" -u${mysql.username}"/>
@@ -475,7 +475,30 @@
 		</exec>
 		<echo message="... ${webappname}${test.marker}Serv dropped." />
 	</target>
-
+	
+	<target name="MySql-db-create" description="MySql db create">
+		<echo message="Creating ${webappname}${test.marker}Port..." />
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "create database ${webappname}${test.marker}Port;" '/>
+		</exec>
+		<echo message="... ${webappname}${test.marker}Port created" />
+		<echo message="Creating ${webappname}${test.marker}Serv" />
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "create database ${webappname}${test.marker}Serv;" '/>
+		</exec>
+		<echo message="... ${webappname}${test.marker}Serv created" />
+	</target>
+	
 	<target name="MySql-db-full-update" description="MySql db update" depends="MySql-db-drop, MySql-db-restore">
 		<echo message="Databases full update [done]" />
 	</target>
