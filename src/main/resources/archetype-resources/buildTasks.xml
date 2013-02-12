@@ -403,7 +403,7 @@
 	</target>
 
 	<!-- MySQL -->
-	<target name="MySql-db-backup" description="MySQL db backup">
+	<target name="MySQL-db-backup" description="MySQL db backup">
 		<echo message="Dumping ${webappname}${test.marker}Port" />
 		<exec executable="${mysql.bin.path}/${mysql.bin.dump}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
 			<arg line=" -h${mysql.hostname}"/>
@@ -430,7 +430,7 @@
 		<echo message="${webappname}${test.marker}Serv dumped." />
 	</target>
 
-	<target name="MySql-db-restore" description="MySQL db restore">
+	<target name="MySQL-db-restore" description="MySQL db restore">
 		<echo message="Restoring ${webappname}${test.marker}Port..." />
 		<exec executable="${mysql.bin.path}/${mysql.bin.restore}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
 			<arg line=" -h${mysql.hostname}"/>
@@ -452,10 +452,10 @@
 		</exec>
 		<echo message="...${webappname}${test.marker}Serv Restored." />
 	</target>
-
-	<target name="MySql-db-drop" description="MySql db drop">
+	
+	<target name="MySQL-db-drop" description="MySQL db drop">
 		<echo message="Dropping ${webappname}${test.marker}Port..." />
-		<exec executable="${mysql.bin.path}/${mysql.bin.drop}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
 			<arg line=" -h${mysql.hostname}"/>
 			<arg line=" -P${mysql.port}"/>
 			<arg line=" -u${mysql.username}"/>
@@ -465,7 +465,7 @@
 		</exec>
 		<echo message="... ${webappname}${test.marker}Port dropped." />
 		<echo message="Dropping ${webappname}${test.marker}Serv" />
-		<exec executable="${mysql.bin.path}/${mysql.bin.drop}" dir="${basedir}/src/${project.src.branch}/db/mysql/">
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
 			<arg line=" -h${mysql.hostname}"/>
 			<arg line=" -P${mysql.port}"/>
 			<arg line=" -u${mysql.username}"/>
@@ -475,8 +475,31 @@
 		</exec>
 		<echo message="... ${webappname}${test.marker}Serv dropped." />
 	</target>
-
-	<target name="MySql-db-full-update" description="MySql db update" depends="MySql-db-drop, MySql-db-restore">
+	
+	<target name="MySQL-db-create" description="MySQL db create">
+		<echo message="Creating ${webappname}${test.marker}Port..." />
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "create database ${webappname}${test.marker}Port;" '/>
+		</exec>
+		<echo message="... ${webappname}${test.marker}Port created" />
+		<echo message="Creating ${webappname}${test.marker}Serv" />
+		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
+			<arg line=" -h${mysql.hostname}"/>
+			<arg line=" -P${mysql.port}"/>
+			<arg line=" -u${mysql.username}"/>
+			<arg line=" -p${mysql.password}"/>
+			<arg line=" -e"/>
+			<arg line=' "create database ${webappname}${test.marker}Serv;" '/>
+		</exec>
+		<echo message="... ${webappname}${test.marker}Serv created" />
+	</target>
+	
+	<target name="MySQL-db-full-update" description="MySQL db update" depends="MySQL-db-drop, MySQL-db-restore">
 		<echo message="Databases full update [done]" />
 	</target>
 
