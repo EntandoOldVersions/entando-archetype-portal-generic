@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.entando.entando</groupId>
 	<artifactId>entando-archetype-portal-generic</artifactId>
-	<version>experiment-components-SNAPSHOT</version>
+	<version>3.2.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>Entando: Archetype for Generic Portal - Experiment Components</name>
 	<description>Generic Portal Archetype for Entando: an agile, modern and user-centric open source Portal platform.</description>
