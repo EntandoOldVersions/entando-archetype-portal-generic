@@ -27,34 +27,20 @@
 				<include>**/placeholder.txt</include>
 				<include>**/*.tld</include>
 			</includes>
-		</fileSet>		
+		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/main/filters</directory>
 			<includes>
 				<include>**/*.properties</include>
 			</includes>
 		</fileSet>
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>src/main/db/mysql</directory>
-			<includes>
-				<include>*.sql</include>
-			</includes>
-		</fileSet>		
 		<fileSet encoding="UTF-8">
 			<directory>src/main/db</directory>
 			<includes>
+				<include>**/placeholder.txt</include>
 				<include>**/*.sql</include>
 			</includes>
-			<excludes>
-				<exclude>src/main/db/mysql</exclude>
-			</excludes>
 		</fileSet>
-		<fileSet encoding="UTF-8">
-			<directory>src/main/ext-lib</directory>
-			<includes>
-				<include>**/*</include>
-			</includes>
-		</fileSet>                      
 		<fileSet encoding="UTF-8">
 			<directory>src/main/webapp</directory>
 			<includes>
@@ -96,25 +82,12 @@
 			<includes>
 				<include>**/*</include>
 			</includes>
-		</fileSet>			
-		<fileSet filtered="true" encoding="UTF-8">
-			<directory>.settings</directory>
-			<includes>
-				<include>**/*.prefs</include>
-				<include>**/*.component</include>
-				<include>**/*.container</include>
-				<include>**/*.jsdtscope</include>
-				<include>**/*.name</include>
-				<include>**/*.xml</include>
-			</includes>
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory></directory>
 			<includes>
 				<include>buildProperties.xml</include>
 				<include>build.xml</include>
-				<include>.project</include>
-				<include>.classpath</include>
 			</includes>
 		</fileSet>
 		<fileSet encoding="UTF-8">

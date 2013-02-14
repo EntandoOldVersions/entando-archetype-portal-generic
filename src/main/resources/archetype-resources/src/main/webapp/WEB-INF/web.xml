@@ -5,13 +5,14 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-		classpath:spring/systemConfig.xml 
-		classpath:spring/restServerConfig.xml 
-		classpath*:spring/aps/**/**.xml 
-		classpath*:spring/apsadmin/**/**.xml 
-		classpath*:spring/plugins/**/aps/**/**.xml 
-		classpath*:spring/plugins/**/apsadmin/**/**.xml 
-	</param-value>
+      classpath:spring/propertyPlaceholder.xml 
+	  classpath:spring/restServerConfig.xml 
+      classpath:spring/baseSystemConfig.xml 
+      classpath*:spring/aps/**/**.xml 
+      classpath*:spring/apsadmin/**/**.xml 
+      classpath*:spring/plugins/**/aps/**/**.xml 
+      classpath*:spring/plugins/**/apsadmin/**/**.xml 
+    </param-value>
   </context-param>
   <context-param>
     <param-name>Struts2Config</param-name>
@@ -28,6 +29,10 @@
   <filter-mapping>
     <filter-name>struts2</filter-name>
     <url-pattern>/do/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+	<filter-name>struts2</filter-name>
+	<url-pattern>/struts/*</url-pattern>
   </filter-mapping>
   <listener>
     <listener-class>com.agiletec.apsadmin.system.tiles.JapsStrutsTilesListener</listener-class>

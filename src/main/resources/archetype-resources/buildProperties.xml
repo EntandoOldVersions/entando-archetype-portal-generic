@@ -1,34 +1,34 @@
 <project>
-	
+
 	<property name="aps.base.dir" location="." />
-	<!-- 
+	<!--
 	# Note: comment out the previous line and use the following
 	# if you're going to use another project - e.g. Entando core - as
 	# a source for your aps.jar
 	#
-	# <property name="aps.base.dir" location="../Entando" /> 
+	# <property name="aps.base.dir" location="../Entando" />
 	-->
-	
+
 	<property name="webappname" value="${artifactId}" />
-	
+
 	<property name="postgres.hostname" value="localhost" />
 	<property name="postgres.port" value="5432" />
 	<property name="postgres.username" value="agile" />
 	<property name="postgres.password" value="agile" />
-	
+
 	<property name="mysql.hostname" value="localhost" />
 	<property name="mysql.port" value="3306" />
 	<property name="mysql.username" value="agile" />
 	<property name="mysql.password" value="agile" />
-	
+
 	<!-- Properties definitions for Windows machines START -->
 	<!--
 	<property name="tomcat.home.path" value="C:\\tomcat6" />
 	<property name="postgres.bin.path" location="C:\Programmi\PostgreSQL\8.3\bin" />
-	<property name="postgres.bin.psql" value="psql.exe" />	
-	<property name="postgres.bin.dump" value="pg_dump.exe" />	
-	<property name="postgres.bin.restore" value="pg_restore.exe" />	
-	<property name="postgres.bin.drop" value="dropdb.exe" />		
+	<property name="postgres.bin.psql" value="psql.exe" />
+	<property name="postgres.bin.dump" value="pg_dump.exe" />
+	<property name="postgres.bin.restore" value="pg_restore.exe" />
+	<property name="postgres.bin.drop" value="dropdb.exe" />
 	<property name="postgres.bin.create" value="createdb.exe" />
 	<property name="mysql.bin.path" location="C:\Programmi\MySQL\5\bin" />
 	<property name="mysql.bin.dump" value="mysqldump" />
@@ -38,7 +38,7 @@
 	<property name="ant-contrib.jar.path" location="C:\ant-contrib\ant-contrib.jar" />
 	-->
 	<!-- Properties definitions for Windows machines END -->
-	
+
 	<!-- Properties definitions for *nix machines START -->
 	<property name="tomcat.home.path" value="/opt/tomcat6" />
 	<property name="postgres.bin.path" location="/usr/bin" />
@@ -52,19 +52,13 @@
 	<property name="mysql.bin.restore" value="mysql" />
 	<property name="mysql.bin.create" value="mysql" />
 	<property name="mysql.bin.drop" value="mysql" />
-	<property name="ant-contrib.jar.path" location="/usr/share/java/ant-contrib.jar" />	
+	<property name="ant-contrib.jar.path" location="/usr/share/java/ant-contrib.jar" />
 	<!-- Properties definitions for *nix machines END -->
-	
+
 	<!-- You should never need to configure the properties below this line -->
 	<property name="dist.path" location="target" />
 	<property name="test.marker" value="" />
 	<property name="tomcat.deploy.path" location="${tomcat.home.path}/webapps" />
 	<property name="project.src.branch" value="main" />
-
-	<!-- List here all the tables of the *Port db, ordered the way you want them to be restored with referential integrity -->
-	<property name="db.backup.tables.port" value="categories,contentmodels,contents,contentsearch,localstrings,pagemodels,pages,resources,resourcerelations,contentrelations,showletcatalog,showletconfig,sysconfig,uniquekeys,workcontentrelations,workcontentsearch" />
-
-	<!-- List here all the tables of the *Serv db, ordered the way you want them to be restored with referential integrity -->
-	<property name="db.backup.tables.serv" value="api_oauth_consumers,api_oauth_tokens,authgroups,authpermissions,authroles,authrolepermissions,authusers,authuserroles,authusergroups,authusershortcuts,apicatalog_methods,apicatalog_services" />	
 
 </project>
