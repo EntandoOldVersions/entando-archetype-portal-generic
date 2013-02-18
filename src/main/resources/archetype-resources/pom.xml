@@ -218,23 +218,6 @@
 				<version>2.5</version>
 				<executions>
 					<execution>
-						<id>prepare-config-test</id>
-						<phase>process-test-classes</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>target/test</outputDirectory>
-							<encoding>UTF-8</encoding>
-							<resources>
-								<resource>
-									<directory>target/test/config</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
 						<id>prepare-config-test-override-config</id>
 						<phase>process-test-classes</phase>
 						<goals>
@@ -246,10 +229,7 @@
 							<overwrite>true</overwrite>
 							<resources>
 								<resource>
-									<directory>src/test/config</directory>
-									<includes>
-										<include>contextTestParams.properties</include>
-									</includes>
+									<directory>src/test/config/conf</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>
