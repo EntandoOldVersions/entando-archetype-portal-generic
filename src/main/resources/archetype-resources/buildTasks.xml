@@ -261,92 +261,34 @@
 		</exec>
 	</target>
 
-    <target name="Test-db-resources-check">
-		<taskdef resource="net/sf/antcontrib/antcontrib.properties">
-			<classpath>
-				<pathelement location="/usr/share/java/ant-contrib.jar" />
-			</classpath>
-		</taskdef>
+	<target name="Test-PG-db-init" description="Use it to restore databases for tests - PostgreSQL">
+		<echo message="========================================================================" />
+		<echo message=".:[Ant] :: Updating test DBs only" />
+		<echo message="        :: Using files in: ${basedir}/src/test/db/tar" />
+		<echo message="========================================================================" />
+		<antcall target="PG-db-drop">
+			<param name="test.marker" value="test" />
+			<param name="project.src.branch" value="test" />
+		</antcall>
+		<antcall target="PG-db-create">
+			<param name="test.marker" value="test" />
+			<param name="project.src.branch" value="test" />
+		</antcall>
+	</target>
 
-		<if>
-			<and>
-				<resourceexists>
-					<file file="${basedir}/src/test/db/tar/${webappname}testPort.backup.bz2" />
-				</resourceexists>
-				<resourceexists>
-					<file file="${basedir}/src/test/db/tar/${webappname}testServ.backup.bz2" />
-				</resourceexists>
-			</and>
-			<then>
-				<property name="test.database.resources" value="tar" />
-			</then>
-			<elseif>
-				<and>
-					<resourceexists>
-						<file file="${basedir}/src/test/db/export/${webappname}testPort_schema.sql" />
-					</resourceexists>
-					<resourceexists>
-						<file file="${basedir}/src/test/db/export/${webappname}testPort_data.sql" />
-					</resourceexists>
-					<resourceexists>
-						<file file="${basedir}/src/test/db/export/${webappname}testServ_schema.sql" />
-					</resourceexists>
-					<resourceexists>
-						<file file="${basedir}/src/test/db/export/${webappname}testServ_data.sql" />
-					</resourceexists>
-				</and>
-				<then>
-					<property name="test.database.resources" value="custom" />
-					<property name="test.database.basepath" value="${basedir}/src/test/db/export"/>
-					<property name="test.database.basename" value="${webappname}"/>
-				</then>
-			</elseif>
-			<else>
-				<property name="test.database.resources" value="core" />
-			</else>
-		</if>
-    </target>
-
-	<target name="Test-init" description="Use it to restore databases and compile classes for tests" depends="Test-db-resources-check">
-		<if>
-			<equals arg1="${test.database.resources}" arg2="tar" />
-			<then>
-				<echo message="========================================================================" />
-				<echo message=".:[Ant] :: Updating test DBs only" />
-				<echo message="        :: Using files in: ${basedir}/src/test/db/tar" />
-				<echo message="========================================================================" />
-				<antcall target="PG-db-full-update">
-					<param name="test.marker" value="test" />
-					<param name="project.src.branch" value="test" />
-				</antcall>
-			</then>
-			<elseif>
-				<equals arg1="${test.database.resources}" arg2="custom" />
-				<then>
-					<echo message="========================================================================" />
-					<echo message=".:[Maven] :: Getting ready for Tests" />
-					<echo message="          :: Using files in: ${basedir}/src/test/db/export" />
-					<echo message="========================================================================" />
-					<exec executable="mvn" dir="${basedir}">
-						<arg value="process-test-classes"/>
-						<arg line="-Dtest.database.basename=${test.database.basename}" />
-						<arg line="-Dtest.database.basepath=${test.database.basepath}" />
-					</exec>
-				</then>
-			</elseif>
-			<elseif>
-				<equals arg1="${test.database.resources}" arg2="core" />
-				<then>
-					<echo message="========================================================================" />
-					<echo message=".:[Maven] :: Getting ready for Tests" />
-					<echo message="          :: Using files from entando-core-engine" />
-					<echo message="========================================================================" />
-					<exec executable="mvn" dir="${basedir}">
-						<arg value="process-test-classes"/>
-					</exec>
-				</then>
-			</elseif>
-		</if>
+	<target name="Test-MySQL-db-init" description="Use it to restore databases for tests - MySQL">
+		<echo message="========================================================================" />
+		<echo message=".:[Ant] :: Updating test DBs only" />
+		<echo message="        :: Using files in: ${basedir}/src/test/db/mysql" />
+		<echo message="========================================================================" />
+		<antcall target="MySQL-db-drop">
+			<param name="test.marker" value="test" />
+			<param name="project.src.branch" value="test" />
+		</antcall>
+		<antcall target="MySQL-db-create">
+			<param name="test.marker" value="test" />
+			<param name="project.src.branch" value="test" />
+		</antcall>
 	</target>
 
 	<target name="Test-PG-db-backup" description="Test - PG db backup in TAR format">
@@ -361,35 +303,6 @@
 			<param name="test.marker" value="test" />
 			<param name="project.src.branch" value="test" />
 		</antcall>
-	</target>
-
-	<target name="Test" description="Run Unit Tests" depends="Test-db-resources-check">
-		<if>
-			<equals arg1="${test.database.resources}" arg2="custom" />
-			<then>
-				<echo message="========================================================================" />
-				<echo message=".:[Maven] :: Running the Tests..." />
-				<echo message="          :: Using files in: ${basedir}/src/test/db/export" />
-				<echo message="========================================================================" />
-				<exec executable="mvn" dir="${basedir}">
-					<arg value="test"/>
-					<arg line="-Dtest.database.basename=${test.database.basename}" />
-					<arg line="-Dtest.database.basepath=${test.database.basepath}" />
-				</exec>
-			</then>
-			<elseif>
-				<equals arg1="${test.database.resources}" arg2="core" />
-				<then>
-					<echo message="========================================================================" />
-					<echo message=".:[Maven] :: Running the Tests..." />
-					<echo message="          :: Using files from entando-core-engine" />
-					<echo message="========================================================================" />
-					<exec executable="mvn" dir="${basedir}">
-						<arg value="test"/>
-					</exec>
-				</then>
-			</elseif>
-		</if>
 	</target>
 
 	<!-- Generate Site -->
@@ -452,7 +365,7 @@
 		</exec>
 		<echo message="...${webappname}${test.marker}Serv Restored." />
 	</target>
-	
+
 	<target name="MySQL-db-drop" description="MySQL db drop">
 		<echo message="Dropping ${webappname}${test.marker}Port..." />
 		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
@@ -475,7 +388,7 @@
 		</exec>
 		<echo message="... ${webappname}${test.marker}Serv dropped." />
 	</target>
-	
+
 	<target name="MySQL-db-create" description="MySQL db create">
 		<echo message="Creating ${webappname}${test.marker}Port..." />
 		<exec executable="${mysql.bin.path}/${mysql.bin.drop}">
@@ -498,7 +411,7 @@
 		</exec>
 		<echo message="... ${webappname}${test.marker}Serv created" />
 	</target>
-	
+
 	<target name="MySQL-db-full-update" description="MySQL db update" depends="MySQL-db-drop, MySQL-db-restore">
 		<echo message="Databases full update [done]" />
 	</target>
