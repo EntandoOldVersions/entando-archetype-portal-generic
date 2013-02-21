@@ -90,7 +90,6 @@
 		</profile>
 	</profiles>
 	<properties>
-
 		<!--
 		<test.database.driver>org.postgresql.Driver</test.database.driver>
 		<test.database.hostname>localhost</test.database.hostname>
@@ -109,14 +108,13 @@
 		<test.database.port.url>jdbc:mysql://${test.database.hostname}:${test.database.port}/${project.artifactId}testPort</test.database.port.url>
 		<test.database.serv.url>jdbc:mysql://${test.database.hostname}:${test.database.port}/${project.artifactId}testServ</test.database.serv.url>
 		-->
-
 		<test.database.driver>org.apache.derby.jdbc.EmbeddedDriver</test.database.driver>
 		<test.database.hostname>localhost</test.database.hostname>
 		<test.database.port>1527</test.database.port>
 		<test.database.username>agile</test.database.username>
 		<test.database.password>agile</test.database.password>
-		<test.database.port.url>jdbc:derby:${project.artifactId}testPort;create=true</test.database.port.url>
-		<test.database.serv.url>jdbc:derby:${project.artifactId}testServ;create=true</test.database.serv.url>
+		<test.database.port.url>jdbc:derby:${project.build.directory}/test/db/${project.artifactId}testPort;create=true</test.database.port.url>
+		<test.database.serv.url>jdbc:derby:${project.build.directory}/test/db/${project.artifactId}testServ;create=true</test.database.serv.url>
 
 		<skipDerby>true</skipDerby>
 		<entando.version>3.2.0-SNAPSHOT</entando.version>
@@ -218,38 +216,18 @@
 				<version>2.5</version>
 				<executions>
 					<execution>
-						<id>prepare-config-test</id>
-						<phase>process-test-classes</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>target/test</outputDirectory>
-							<encoding>UTF-8</encoding>
-							<resources>
-								<resource>
-									<directory>target/test/config</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
 						<id>prepare-config-test-override-config</id>
 						<phase>process-test-classes</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>target/test/conf</outputDirectory>
+							<outputDirectory>${project.build.directory}/test/conf</outputDirectory>
 							<encoding>UTF-8</encoding>
 							<overwrite>true</overwrite>
 							<resources>
 								<resource>
-									<directory>src/test/config</directory>
-									<includes>
-										<include>contextTestParams.properties</include>
-									</includes>
+									<directory>src/test/config/conf</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>
