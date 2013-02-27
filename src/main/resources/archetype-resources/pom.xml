@@ -8,31 +8,6 @@
 	<version>${version}</version>
 	<name>${artifactId}</name>
 	<url>http://maven.apache.org/</url>
-	<repositories>
-		<repository>
-			<id>Apache Snapshots</id>
-			<url>https://repository.apache.org/content/groups/snapshots-group</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>Apache Snapshots</id>
-			<name>Apache Snapshots</name>
-			<url>https://repository.apache.org/content/groups/snapshots-group</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 	<profiles>
 		<profile>
 			<id>production</id>

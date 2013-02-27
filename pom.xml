@@ -6,7 +6,7 @@
 	<version>3.2.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>Entando: Archetype for Generic Portal</name>
-	<description>Generic Portal Archetype for Entando: an agile, modern and user-centric open source Portal platform.</description>
+	<description>Generic Portal Archetype for Entando: an agile, modern and user-centric open source portal-like platform.</description>
 	<url>http://www.entando.com/</url>
 	<licenses>
 		<license>
@@ -31,18 +31,6 @@
 		<name>Entando S.r.l.</name>
 		<url>http://www.entando.com/</url>
 	</organization>
-	<!--
-	<distributionManagement>
-		<snapshotRepository>
-			<id>entando-snapshots</id>
-			<url>dav:http://localhost/nexus/content/repositories/entando-snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>entando-releases</id>
-			<url>dav:http://localhost/nexus/content/repositories/entando-releases</url>
-		</repository>
-	</distributionManagement>
-	-->
 	<build>
 		<extensions>
 			<extension>
