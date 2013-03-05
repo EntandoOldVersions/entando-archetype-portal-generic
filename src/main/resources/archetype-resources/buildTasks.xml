@@ -44,7 +44,7 @@
 		<echo message="========================================================================" />
 		<exec executable="mvn" dir="${basedir}">
 			<env key="MAVEN_WORKING_MODE" value="production"/>
-			<arg line="-P !windows"/>
+			<arg line="-P !development-windows"/>
 			<arg value="package"/>
 			<arg line="-DskipTests"/>
 		</exec>
@@ -55,8 +55,8 @@
 		<echo message=".:[Maven] :: Packaging the standalone executable WAR..." />
 		<echo message="========================================================================" />
 		<exec executable="mvn" dir="${basedir}">
-			<env key="MAVEN_WORKING_MODE" value="exewar"/>
-			<arg line="-P !windows"/>
+			<env key="MAVEN_WORKING_MODE" value="standalone"/>
+			<arg line="-P !development-windows"/>
 			<arg value="package"/>
 			<arg line="-DskipTests"/>
 			<arg line="-DskipDerby=false"/>

@@ -22,16 +22,16 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>development</id>
+			<id>development-unix</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 				<property>
 					<name>env.MAVEN_WORKING_MODE</name>
-					<value>development</value>
+					<value>development-unix</value>
 				</property>
 			</activation>
 			<properties>
-				<env>development</env>
+				<env>development-unix</env>
 			</properties>
 		</profile>
 		<profile>
@@ -41,26 +41,26 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>exewar</id>
+			<id>standalone</id>
 			<activation>
 				<property>
 					<name>env.MAVEN_WORKING_MODE</name>
-					<value>exewar</value>
+					<value>standalone</value>
 				</property>
 			</activation>
 			<properties>
-				<env>exewar</env>
+				<env>standalone</env>
 			</properties>
 		</profile>
 		<profile>
-			<id>windows</id>
+			<id>development-windows</id>
 			<activation>
 				<os>
-					<family>windows</family>
+					<family>development-windows</family>
 				</os>
 			</activation>
 			<properties>
-				<env>windows</env>
+				<env>development-windows</env>
 			</properties>
 		</profile>
 	</profiles>
