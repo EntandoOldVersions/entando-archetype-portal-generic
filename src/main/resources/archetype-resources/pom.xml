@@ -319,11 +319,11 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/standalone</outputDirectory>
+							<outputDirectory>${project.build.directory}/${env}</outputDirectory>
 							<encoding>UTF-8</encoding>
 							<resources>
 								<resource>
-									<directory>src/main/config/standalone</directory>
+									<directory>src/main/config/${env}</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>
@@ -429,13 +429,15 @@
 				<version>2.0</version>
 				<executions>
 					<execution>
-						<id>tomcat-run</id>
+						<id>war-build-standalone</id>
 						<goals>
 							<goal>exec-war-only</goal>
 						</goals>
 						<phase>package</phase>
 						<configuration>
+							<buildDirectory>${project.build.directory}/${env}</buildDirectory>
 							<path>/${project.artifactId}</path>
+							<finalName>${project.artifactId}-${project.version}-${env}.jar</finalName>
 							<!-- Not working... waiting for the plugin...
 							<tomcatWebXml>${basedir}/src/main/config/tomcat-exewar-web.xml</tomcatWebXml>
 							-->
