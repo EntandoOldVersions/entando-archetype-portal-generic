@@ -59,7 +59,7 @@
 			<id>development-windows</id>
 			<activation>
 				<os>
-					<family>development-windows</family>
+					<family>windows</family>
 				</os>
 			</activation>
 			<properties>
