@@ -374,7 +374,7 @@
 			<arg line=" -u${mysql.username}"/>
 			<arg line=" -p${mysql.password}"/>
 			<arg line=" -e"/>
-			<arg line=' "drop database ${webappname}${test.marker}Port;" '/>
+			<arg line=' "drop `database ${webappname}${test.marker}Port`;" '/>
 		</exec>
 		<echo message="... ${webappname}${test.marker}Port dropped." />
 		<echo message="Dropping ${webappname}${test.marker}Serv" />
@@ -384,7 +384,7 @@
 			<arg line=" -u${mysql.username}"/>
 			<arg line=" -p${mysql.password}"/>
 			<arg line=" -e"/>
-			<arg line=' "drop database ${webappname}${test.marker}Serv;" '/>
+			<arg line=' "drop database `${webappname}${test.marker}Serv`;" '/>
 		</exec>
 		<echo message="... ${webappname}${test.marker}Serv dropped." />
 	</target>
@@ -397,7 +397,7 @@
 			<arg line=" -u${mysql.username}"/>
 			<arg line=" -p${mysql.password}"/>
 			<arg line=" -e"/>
-			<arg line=' "create database ${webappname}${test.marker}Port;" '/>
+			<arg line=' "create database `${webappname}${test.marker}Port`;" '/>
 		</exec>
 		<echo message="... ${webappname}${test.marker}Port created" />
 		<echo message="Creating ${webappname}${test.marker}Serv" />
@@ -407,7 +407,7 @@
 			<arg line=" -u${mysql.username}"/>
 			<arg line=" -p${mysql.password}"/>
 			<arg line=" -e"/>
-			<arg line=' "create database ${webappname}${test.marker}Serv;" '/>
+			<arg line=' "create database `${webappname}${test.marker}Serv`;" '/>
 		</exec>
 		<echo message="... ${webappname}${test.marker}Serv created" />
 	</target>
