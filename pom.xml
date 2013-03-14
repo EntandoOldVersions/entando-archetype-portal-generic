@@ -5,13 +5,13 @@
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
-	</parent>	
+	</parent>
 	<groupId>org.entando.entando</groupId>
 	<artifactId>entando-archetype-portal-generic</artifactId>
-	<version>3.0.0</version>
+	<version>3.2.0</version>
 	<packaging>maven-archetype</packaging>
 	<name>Entando: Archetype for Generic Portal</name>
-	<description>Generic Portal Archetype for Entando: an agile, modern and user-centric open source Portal platform.</description>
+	<description>Generic Portal Archetype for Entando: an agile, modern and user-centric open source portal-like platform.</description>
 	<url>http://www.entando.com/</url>
 	<licenses>
 		<license>
@@ -24,7 +24,8 @@
 		<connection>scm:git:git://github.com/entando/entando-archetype-portal-generic.git</connection>
 		<developerConnection>scm:git:git@github.com:entando/entando-archetype-portal-generic.git</developerConnection>
 		<url>https://github.com/entando/entando-archetype-portal-generic</url>
-	</scm>	
+	  <tag>v3.2.0</tag>
+  </scm>
 	<developers>
 		<developer>
 			<id>e.santoboni</id>
@@ -34,25 +35,13 @@
 		<developer>
 			<id>w.ghelfi</id>
 			<name>William Ghelfi</name>
-			<email>w.ghelfi@entando.com</email>		
+			<email>w.ghelfi@entando.com</email>
 		</developer>
 	</developers>
 	<organization>
 		<name>Entando S.r.l.</name>
 		<url>http://www.entando.com/</url>
-	</organization>	
-	<!--
-	<distributionManagement>
-		<snapshotRepository>
-			<id>entando-snapshots</id>
-			<url>dav:http://localhost/nexus/content/repositories/entando-snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>entando-releases</id>
-			<url>dav:http://localhost/nexus/content/repositories/entando-releases</url>
-		</repository>
-	</distributionManagement>
-	-->
+	</organization>
 	<build>
 		<extensions>
 			<extension>
@@ -68,6 +57,16 @@
 		</extensions>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<tagNameFormat>v@{project.version}</tagNameFormat>
+						<pushChanges>false</pushChanges>
+						<localCheckout>true</localCheckout>
+					</configuration>
+				</plugin>
 				<plugin>
 					<artifactId>maven-archetype-plugin</artifactId>
 					<version>2.0</version>
@@ -94,7 +93,7 @@
 							</configuration>
 						</execution>
 					</executions>
-				</plugin>			
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
