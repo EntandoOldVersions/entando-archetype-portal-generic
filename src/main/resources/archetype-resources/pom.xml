@@ -96,7 +96,7 @@
 		<test.database.serv.url>jdbc:derby:${project.build.directory}/test/db/${project.artifactId}testServ;create=true</test.database.serv.url>
 
 		<skipDerby>true</skipDerby>
-		<entando.version>3.2.0-SNAPSHOT</entando.version>
+		<entando.version>3.2.0</entando.version>
 		<spring.version>3.0.6.RELEASE</spring.version>
 		<struts2.version>2.3.4.1</struts2.version>
 	</properties>
