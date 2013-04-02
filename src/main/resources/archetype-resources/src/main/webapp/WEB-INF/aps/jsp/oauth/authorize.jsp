@@ -18,6 +18,8 @@
 	<script type="text/javascript" src="<wp:resourceURL />administration/common/js/mootools-core-1.3-full-compat-yc.js"></script>
 	<script type="text/javascript" src="<wp:resourceURL />administration/common/js/mootools-more-1.3-full-compat-yc.js"></script>
 	<script type="text/javascript" src="<wp:resourceURL />administration/common/js/login.js" ></script>	
+
+	<jsp:include page="/WEB-INF/aps/jsp/models/inc/lesscss-active/lesscss.jsp" />
 	
 </head>
 <body>
