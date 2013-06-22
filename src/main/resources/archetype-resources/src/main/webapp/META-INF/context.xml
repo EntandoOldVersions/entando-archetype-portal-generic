@@ -18,8 +18,6 @@
 	
 	<Environment name="indexDiskRootFolder" value="/home/wiz/git/target/temp/indexdir" type="java.lang.String" override="false" />
 	
-	<Environment name="cacheDiskRootFolder" value="/home/wiz/git/target/temp/cache" type="java.lang.String" override="false" />
-	
 	<Resource name="jdbc/portDataSource" auth="Container" 
 		type="javax.sql.DataSource" driverClassName="org.postgresql.Driver" 
 		maxActive="8" maxIdle="4" 

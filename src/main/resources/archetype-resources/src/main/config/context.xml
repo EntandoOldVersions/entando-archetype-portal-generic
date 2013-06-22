@@ -18,8 +18,6 @@
 	
 	<Environment name="indexDiskRootFolder" value="${profile.index.path}" type="java.lang.String" override="false" />
 	
-	<Environment name="cacheDiskRootFolder" value="${profile.cache.path}" type="java.lang.String" override="false" />
-	
 	<Resource name="jdbc/portDataSource" auth="Container" 
 		type="javax.sql.DataSource" driverClassName="${profile.database.driverClassName}" 
 		maxActive="8" maxIdle="4" 

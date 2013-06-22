@@ -84,16 +84,9 @@
 		<Arg>indexDiskRootFolder</Arg>
 		<Arg type="java.lang.String">${profile.index.path}</Arg>
 		<Arg type="boolean">false</Arg>
-	</New>	
+	</New>										
 
-	<New class="org.eclipse.jetty.plus.jndi.EnvEntry">
-		<Arg></Arg>
-		<Arg>cacheDiskRootFolder</Arg>
-		<Arg type="java.lang.String">${profile.cache.path}</Arg>
-		<Arg type="boolean">false</Arg>
-	</New>												
-
-<New id="portDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
+	<New id="portDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>java:comp/env/jdbc/portDataSource</Arg>
 		<Arg>
 			<New class="org.apache.commons.dbcp.BasicDataSource">
@@ -103,8 +96,9 @@
 				<Set name="password">${profile.database.password}</Set>
 			</New>
 		</Arg>
-</New>
-<New id="servDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
+	</New>
+	
+	<New id="servDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>java:comp/env/jdbc/servDataSource</Arg>
 		<Arg>
 			<New class="org.apache.commons.dbcp.BasicDataSource">
@@ -114,6 +108,6 @@
 				<Set name="password">${profile.database.password}</Set>
 			</New>
 		</Arg>
-</New>
+	</New>
 
 </Configure>
