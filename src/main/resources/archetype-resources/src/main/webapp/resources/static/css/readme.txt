@@ -3,6 +3,6 @@ It's strongly suggested to create subfolders for:
 
 - pagemodels/
 - contentmodels/
-- showlets/
+- widgets/
 
 The <wp:cssURL /> points to this folder.
