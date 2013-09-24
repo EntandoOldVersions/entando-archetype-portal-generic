@@ -1,2 +1,5 @@
-target
+target/
 nb-configuration.xml
+.project
+.settings/
+target/
