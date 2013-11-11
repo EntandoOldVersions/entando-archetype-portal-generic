@@ -2,3 +2,4 @@ target/
 nb-configuration.xml
 .project
 .settings/
+.DS_Store
