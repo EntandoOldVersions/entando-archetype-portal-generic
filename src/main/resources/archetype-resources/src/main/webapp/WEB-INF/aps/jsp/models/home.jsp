@@ -1,16 +1,15 @@
 <%@ taglib prefix="wp" uri="/aps-core" %>
-<wp:contentNegotiation mimeType="application/xhtml+xml" charset="utf-8"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>
         <wp:currentPage param="title" /> - Entando
     </title>
 
     <wp:outputHeadInfo type="CSS">
-        <link href="resources/css/<wp:printHeadInfo />" type="text/css" rel="stylesheet" />
+        <link href="<wp:resourceURL />static/css/<wp:printHeadInfo />" type="text/css" rel="stylesheet" />
     </wp:outputHeadInfo>
 
 <style type="text/css">
@@ -19,9 +18,9 @@ html {
 margin: 0;
 padding: 0;
 min-height: 100%;
-background-color: #f1f2f1;
+background-color: #ffffff;
 text-align: center;
-background-image: url("<wp:imgURL />/square_bg.png");
+background-image: url("<wp:resourceURL />static/img/grid_noise.png");
 }
 
 body {
@@ -32,9 +31,8 @@ min-width: 700px;
 max-width: 800px;
 font-size: 100.01%;
 background-color: #ffffff;
-border: 1px solid #dedede;
-background-image: url("<wp:imgURL />/px_by_Gre3g.png");
-color: #dedede;
+border: 1px solid #DAD7D7;
+color: #555555;
 }
 
 h1 {
@@ -42,8 +40,8 @@ font-size: 1.5em;
 text-align: left;
 margin: 1em 0 0.5em 0;
 padding: 0 0 0 1em;
-color: #B2E02E;
-border-bottom: 0.1em solid #dedede;
+color: #438ad7;
+border-bottom: 0.1em solid #555555;
 }
 
 h2 {
@@ -52,7 +50,7 @@ font-size: 0.9em;
 
 h2.version {
 font-weight: bold;
-color: #dedede;
+color: #555555;
 text-align: left;
 margin-bottom: 2em;
 text-align: right;
@@ -74,7 +72,7 @@ font-size: 1em;
 
 ul {
 list-style-type: square;
-color: #dedede;
+color: #555555;
 }
 
 li {
@@ -101,8 +99,8 @@ clear: both;
 }
 
 a:link, a:visited {
-color: #B2E02E;
-border-bottom: 0.1em solid #B2E02E;
+color: #438ad7;
+border-bottom: 0.1em solid #438ad7;
 text-decoration: none;
 }
 
@@ -123,7 +121,7 @@ border-radius: 8px;
 }
 
 h1 {
-text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.9);
+text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
 filter: dropshadow(color=#000000, offx=1, offy=0);
 }
 
@@ -165,7 +163,7 @@ h2.version {
 font-family: 'Droid Sans Mono', monospace;
 }
 </style>
- 
+
 </head>
 
 <body>
