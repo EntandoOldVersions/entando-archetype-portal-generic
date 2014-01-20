@@ -43,6 +43,9 @@
     <listener>
         <listener-class>com.agiletec.apsadmin.system.resource.JapsPluginLabelListener</listener-class>
     </listener>
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
     <servlet>
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>com.agiletec.aps.servlet.ControllerServlet</servlet-class>
