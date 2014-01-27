@@ -307,7 +307,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>src/main/webapp/WEB-INF</outputDirectory>
+							<outputDirectory>src/main/webapp/WEB-INF/tld</outputDirectory>
 							<encoding>UTF-8</encoding>
 							<resources>
 								<resource>
@@ -519,7 +519,7 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<packagingExcludes>WEB-INF/**.tld</packagingExcludes>
+					<packagingExcludes>WEB-INF/classes/**/*.tld</packagingExcludes>
 				</configuration>
 			</plugin>
 			<plugin>
