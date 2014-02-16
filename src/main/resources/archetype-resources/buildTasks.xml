@@ -60,6 +60,7 @@
 			<arg value="package"/>
 			<arg line="-DskipTests"/>
 			<arg line="-DskipDerby=false"/>
+			<arg line="-DskipStandalone=false"/>
 		</exec>
 		<move todir="${dist.path}/standalone">
 			<fileset dir="${dist.path}">
