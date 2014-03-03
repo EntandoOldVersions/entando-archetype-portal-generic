@@ -38,7 +38,7 @@
         <listener-class>com.agiletec.apsadmin.system.tiles.JapsStrutsTilesListener</listener-class>
     </listener>
     <listener>
-        <listener-class>com.agiletec.aps.servlet.StartupListener</listener-class>
+        <listener-class>org.entando.entando.aps.servlet.StartupListener</listener-class>
     </listener>
     <listener>
         <listener-class>com.agiletec.apsadmin.system.resource.JapsPluginLabelListener</listener-class>
@@ -48,7 +48,7 @@
 	</listener>
     <servlet>
         <servlet-name>ControllerServlet</servlet-name>
-        <servlet-class>com.agiletec.aps.servlet.ControllerServlet</servlet-class>
+        <servlet-class>org.entando.entando.aps.servlet.ControllerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
