@@ -99,7 +99,7 @@
 		<skipStandalone>true</skipStandalone>
 		<entando.version>4.0.1-SNAPSHOT</entando.version>
 		<spring.version>4.0.0.RELEASE</spring.version>
-		<struts2.version>2.3.16</struts2.version>
+		<struts2.version>2.3.16.2</struts2.version>
 		<cxf.version>2.7.5</cxf.version>
 	</properties>
 	<build>
