@@ -58,7 +58,7 @@
     </servlet>
     <servlet>
         <servlet-name>Struts2ExtServlet</servlet-name>
-        <servlet-class>com.agiletec.apsadmin.system.dispatcher.Struts2ServletDispatcher</servlet-class>
+        <servlet-class>org.entando.entando.aps.internalservlet.system.dispatcher.Struts2ServletDispatcher</servlet-class>
     </servlet>
     <servlet>
         <display-name>API Servlet</display-name>
