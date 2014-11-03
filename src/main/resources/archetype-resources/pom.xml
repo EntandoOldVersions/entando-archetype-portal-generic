@@ -94,7 +94,7 @@
 		<test.database.password>agile</test.database.password>
 		<test.database.port.url>jdbc:derby:${project.build.directory}/test/db/${project.artifactId}testPort;create=true</test.database.port.url>
 		<test.database.serv.url>jdbc:derby:${project.build.directory}/test/db/${project.artifactId}testServ;create=true</test.database.serv.url>
-		
+
 		<skipDerby>true</skipDerby>
 		<entando.version>4.0.0</entando.version>
 		<spring.version>3.2.3.RELEASE</spring.version>
@@ -431,16 +431,16 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>7.5.1.v20110908</version>
+				<version>7.6.16.v20140903</version>
 				<configuration>
 					<!-- <jettyConfig>${basedir}/src/main/config/jetty.xml</jettyConfig> -->
 					<scanIntervalSeconds>5</scanIntervalSeconds>
 					<webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
-					<webAppConfig>
+					<webApp>
 						<defaultsDescriptor>${basedir}/src/main/config/webdefault.xml</defaultsDescriptor>
 						<contextPath>/${project.artifactId}</contextPath>
 						<jettyEnvXml>${project.build.directory}/jetty/jetty-env.xml</jettyEnvXml>
-					</webAppConfig>
+					</webApp>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -448,11 +448,14 @@
 						<artifactId>postgresql</artifactId>
 						<version>9.1-901.jdbc4</version>
 					</dependency>
+					<!-- uncomment if you need -->
+					<!--
 					<dependency>
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
 						<version>5.1.18</version>
 					</dependency>
+					-->
 					<dependency>
 						<groupId>org.apache.derby</groupId>
 						<artifactId>derby</artifactId>
