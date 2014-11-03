@@ -10,6 +10,15 @@
 			<includes>
 				<include>**/placeholder.txt</include>
 				<include>**/*.xml</include>
+			</includes>
+			<excludes>
+				<exclude>**/*.java</exclude>
+				<exclude>**/*.properties</exclude>
+			</excludes>
+		</fileSet>
+		<fileSet filtered="false" packaged="false" encoding="UTF-8">
+			<directory>src/main/java</directory>
+			<includes>
 				<include>**/*.java</include>
 				<include>**/*.properties</include>
 			</includes>
