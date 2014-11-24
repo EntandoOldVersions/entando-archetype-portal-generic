@@ -272,7 +272,21 @@ public interface SystemConstants {
     
     public static final String CONFIG_PARAM_URL_STYLE_CLASSIC = "classic";
     
+    //----------------
+	
+	public static final String CONFIG_PARAM_BASE_URL = "baseUrl";
+	
+	public static final String CONFIG_PARAM_BASE_URL_RELATIVE = "relative";
+	
+	public static final String CONFIG_PARAM_BASE_URL_FROM_REQUEST = "request";
+	
+	public static final String CONFIG_PARAM_BASE_URL_STATIC = "static";
+	
+	public static final String CONFIG_PARAM_BASE_URL_CONTEXT = "baseUrlContext";
+	
     public static final String CONFIG_PARAM_USE_JSESSIONID = "useJsessionId";
+	
+	//-----------------
 	
     public static final String CONFIG_PARAM_START_LANG_FROM_BROWSER = "startLangFromBrowser";
     
