@@ -17,13 +17,12 @@
 */
 package com.agiletec.aps.tags;
 
+import com.agiletec.aps.system.ApsSystemUtils;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
 import org.apache.taglibs.standard.tag.common.core.OutSupport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.agiletec.aps.system.RequestContext;
 import com.agiletec.aps.system.SystemConstants;
@@ -46,8 +45,6 @@ import com.agiletec.aps.util.ApsWebApplicationUtils;
  */
 public class InfoTag extends OutSupport {
 
-	private static final Logger _logger = LoggerFactory.getLogger(InfoTag.class);
-	
 	@Override
 	public int doStartTag() throws JspException {
 		ServletRequest request =  this.pageContext.getRequest();
@@ -75,8 +72,7 @@ public class InfoTag extends OutSupport {
 				}
 			}
 		} catch (Throwable t) {
-			_logger.error("Error during tag initialization", t);
-			//ApsSystemUtils.logThrowable(t, this, "doStartTag");
+			ApsSystemUtils.logThrowable(t, this, "doStartTag");
 			throw new JspException("Error during tag initialization", t);
 		}
 		return EVAL_BODY_INCLUDE;
@@ -99,8 +95,7 @@ public class InfoTag extends OutSupport {
 				}
 			}
 		} catch (Throwable t) {
-			_logger.error("Error extracting start lang", t);
-			//ApsSystemUtils.logThrowable(t, this, "extractStartLang", "Error extracting start lang");
+			ApsSystemUtils.logThrowable(t, this, "extractStartLang", "Error extracting start lang");
 		} finally {
 			if (null == startLang) {
 				startLang = langManager.getDefaultLang();
@@ -117,7 +112,7 @@ public class InfoTag extends OutSupport {
 	@Override
 	public int doEndTag() throws JspException {
 		if (null == this._info) {
-			_logger.debug("Null information - key '{}' - parameter '{}'", this.getKey(), this.getParamName());
+			ApsSystemUtils.getLogger().debug("Null information - key " + this.getParamName() + " - parameter " + this.getParamName());
 			return super.doEndTag();
 		}
 		if (this._varName != null) {
@@ -130,8 +125,7 @@ public class InfoTag extends OutSupport {
 					this.pageContext.getOut().print(this._info);
 				}
 			} catch (Throwable t) {
-				_logger.error("Error closing tag", t);
-				//ApsSystemUtils.logThrowable(t, this, "doEndTag");
+				ApsSystemUtils.logThrowable(t, this, "doEndTag");
 				throw new JspException("Error closing tag", t);
 			}
 		}

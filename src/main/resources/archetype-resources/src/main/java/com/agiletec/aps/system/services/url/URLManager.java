@@ -17,12 +17,10 @@
 */
 package com.agiletec.aps.system.services.url;
 
+import com.agiletec.aps.system.ApsSystemUtils;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.agiletec.aps.system.RequestContext;
 import com.agiletec.aps.system.SystemConstants;
@@ -41,12 +39,10 @@ import javax.servlet.http.HttpServletRequest;
  * @author M.Diana - E.Santoboni
  */
 public class URLManager extends AbstractURLManager {
-
-	private static final Logger _logger = LoggerFactory.getLogger(URLManager.class);
 	
 	@Override
 	public void init() throws Exception {
-		_logger.debug("{} ready", this.getClass().getName());
+		ApsSystemUtils.getLogger().debug(this.getClass().getName() + ": initialized");
 	}
 
 	/**
@@ -101,7 +97,7 @@ public class URLManager extends AbstractURLManager {
 				return url;
 			}
 		} catch (Throwable t) {
-			_logger.error("Error creating url", t);
+			ApsSystemUtils.logThrowable(t, this, "getURLString", "Error creating url");
             throw new RuntimeException("Error creating url", t);
 		}
 	}
@@ -148,7 +144,7 @@ public class URLManager extends AbstractURLManager {
 			String queryString = this.createQueryString(params, escapeAmp);
 			url.append(queryString);
 		} catch (Throwable t) {
-			_logger.error("Error creating url", t);
+			ApsSystemUtils.logThrowable(t, this, "createUrl", "Error creating url");
             throw new ApsSystemException("Error creating url", t);
 		}
 		return url.toString();
